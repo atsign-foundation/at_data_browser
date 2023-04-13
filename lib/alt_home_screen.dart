@@ -5,14 +5,14 @@ import 'package:at_data_browser/screens/namespaces.dart';
 import 'package:flutter/material.dart';
 
 // * Once the onboarding process is completed you will be taken to this screen
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class AltHomeScreen extends StatefulWidget {
+  const AltHomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<AltHomeScreen> createState() => _AltHomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _AltHomeScreenState extends State<AltHomeScreen> {
   AtClientManager atClientManager = AtClientManager.getInstance();
 
   Future<List<AtKey>> _getKeys() async {
@@ -61,18 +61,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            const Text("Data Storage",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            const Text("Data Storage", style: TextStyle(fontWeight: FontWeight.bold)),
                             const SizedBox(height: 5),
                             GestureDetector(
-                              child: Text(
-                                  "items stored: ${snapshot.data!.length}"),
+                              child: Text("items stored: ${snapshot.data!.length}"),
                               onTap: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const LocalDataScreen()),
+                                  MaterialPageRoute(builder: (context) => const LocalDataScreen()),
                                 );
                               },
                             ),
@@ -87,9 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               onTap: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const NamespacesScreen()),
+                                  MaterialPageRoute(builder: (context) => const NamespacesScreen()),
                                 );
                               },
                             ),
@@ -104,9 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               onTap: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ConnectedAtSignsScreen()),
+                                  MaterialPageRoute(builder: (context) => const ConnectedAtSignsScreen()),
                                 );
                               },
                             ),

@@ -1,0 +1,66 @@
+PODS:
+  - at_file_saver (0.0.1):
+    - FlutterMacOS
+  - biometric_storage (0.0.1):
+    - FlutterMacOS
+  - file_selector_macos (0.0.1):
+    - FlutterMacOS
+  - FlutterMacOS (1.0.0)
+  - package_info_plus_macos (0.0.1):
+    - FlutterMacOS
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - share_plus_macos (0.0.1):
+    - FlutterMacOS
+  - shared_preferences_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - url_launcher_macos (0.0.1):
+    - FlutterMacOS
+
+DEPENDENCIES:
+  - at_file_saver (from `Flutter/ephemeral/.symlinks/plugins/at_file_saver/macos`)
+  - biometric_storage (from `Flutter/ephemeral/.symlinks/plugins/biometric_storage/macos`)
+  - file_selector_macos (from `Flutter/ephemeral/.symlinks/plugins/file_selector_macos/macos`)
+  - FlutterMacOS (from `Flutter/ephemeral`)
+  - package_info_plus_macos (from `Flutter/ephemeral/.symlinks/plugins/package_info_plus_macos/macos`)
+  - path_provider_foundation (from `Flutter/ephemeral/.symlinks/plugins/path_provider_foundation/macos`)
+  - share_plus_macos (from `Flutter/ephemeral/.symlinks/plugins/share_plus_macos/macos`)
+  - shared_preferences_foundation (from `Flutter/ephemeral/.symlinks/plugins/shared_preferences_foundation/macos`)
+  - url_launcher_macos (from `Flutter/ephemeral/.symlinks/plugins/url_launcher_macos/macos`)
+
+EXTERNAL SOURCES:
+  at_file_saver:
+    :path: Flutter/ephemeral/.symlinks/plugins/at_file_saver/macos
+  biometric_storage:
+    :path: Flutter/ephemeral/.symlinks/plugins/biometric_storage/macos
+  file_selector_macos:
+    :path: Flutter/ephemeral/.symlinks/plugins/file_selector_macos/macos
+  FlutterMacOS:
+    :path: Flutter/ephemeral
+  package_info_plus_macos:
+    :path: Flutter/ephemeral/.symlinks/plugins/package_info_plus_macos/macos
+  path_provider_foundation:
+    :path: Flutter/ephemeral/.symlinks/plugins/path_provider_foundation/macos
+  share_plus_macos:
+    :path: Flutter/ephemeral/.symlinks/plugins/share_plus_macos/macos
+  shared_preferences_foundation:
+    :path: Flutter/ephemeral/.symlinks/plugins/shared_preferences_foundation/macos
+  url_launcher_macos:
+    :path: Flutter/ephemeral/.symlinks/plugins/url_launcher_macos/macos
+
+SPEC CHECKSUMS:
+  at_file_saver: 1fc6ed722f17c7a20ce79cce168d1100fcad4b95
+  biometric_storage: 43caa6e7ef00e8e19c074216e7e1786dacda9e76
+  file_selector_macos: f1b08a781e66103e3ba279fd5d4024a2478b3af6
+  FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
+  package_info_plus_macos: f010621b07802a241d96d01876d6705f15e77c1c
+  path_provider_foundation: 37748e03f12783f9de2cb2c4eadfaa25fe6d4852
+  share_plus_macos: 853ee48e7dce06b633998ca0735d482dd671ade4
+  shared_preferences_foundation: 986fc17f3d3251412d18b0265f9c64113a8c2472
+  url_launcher_macos: c04e4fa86382d4f94f6b38f14625708be3ae52e2
+
+PODFILE CHECKSUM: 353c8bcc5d5b0994e508d035b5431cfe18c1dea7
+
+COCOAPODS: 1.11.3
