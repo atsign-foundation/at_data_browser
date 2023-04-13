@@ -50,14 +50,13 @@ class AtDataController extends StateNotifier<AsyncValue<List<AtData>>> {
       state.value!.where(
         (element) {
           switch (searchFormModel.filter) {
-            case 'Contains':
-              return element.atKey.key!.contains(searchFormModel.searchRequest!);
+            case 'atkey':
+              if (element.atKey.key != null) {
+                return element.atKey.key!.contains(searchFormModel.searchRequest!);
+              } else {
+                return false;
+              }
 
-            case 'Starts With':
-              return element.atKey.key!.startsWith(searchFormModel.searchRequest!);
-
-            case 'Ends With':
-              return element.atKey.key!.endsWith(searchFormModel.searchRequest!);
             case 'Namespace':
               if (element.atKey.namespace != null) {
                 return element.atKey.namespace!.contains(searchFormModel.searchRequest!);
@@ -65,9 +64,17 @@ class AtDataController extends StateNotifier<AsyncValue<List<AtData>>> {
                 return false;
               }
             case 'Shared With':
-              return element.atKey.sharedWith!.contains(searchFormModel.searchRequest!);
+              if (element.atKey.sharedWith != null) {
+                return element.atKey.sharedWith!.contains(searchFormModel.searchRequest!);
+              } else {
+                return false;
+              }
             case 'Shared By':
-              return element.atKey.sharedBy!.contains(searchFormModel.searchRequest!);
+              if (element.atKey.sharedBy != null) {
+                return element.atKey.sharedBy!.contains(searchFormModel.searchRequest!);
+              } else {
+                return false;
+              }
             default:
               return true;
           }

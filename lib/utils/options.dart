@@ -1,8 +1,6 @@
 class Options {
   static const filter = [
-    'Contains',
-    'Starts With',
-    'Ends With',
+    'atkey',
     'Namespace',
     'Shared With',
     'Shared By',
