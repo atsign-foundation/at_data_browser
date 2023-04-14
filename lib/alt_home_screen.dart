@@ -1,5 +1,5 @@
 import 'package:at_client_mobile/at_client_mobile.dart';
-import 'package:at_data_browser/screens/connected_atsigns.dart';
+import 'package:at_data_browser/screens/connected_atsigns_screen.dart';
 import 'package:at_data_browser/screens/local_data_browser.dart';
 import 'package:at_data_browser/screens/namespaces.dart';
 import 'package:flutter/material.dart';
@@ -98,7 +98,7 @@ class _AltHomeScreenState extends State<AltHomeScreen> {
                               onTap: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => const ConnectedAtSignsScreen()),
+                                  MaterialPageRoute(builder: (context) => const ConnectedAtsignsScreen()),
                                 );
                               },
                             ),

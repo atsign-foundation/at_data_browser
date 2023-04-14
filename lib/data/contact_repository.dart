@@ -21,8 +21,8 @@ class ContactsRepository {
   static var atContactService = ContactService();
 
   /// Fetch the current atsign contacts.
-  Future<List<AtContact>?> getContactList() {
-    return atContactService.fetchContacts();
+  Future<List<AtContact>?> getContactList() async {
+    return await atContactService.fetchContacts();
   }
 
   /// Fetch the current atsign profile image

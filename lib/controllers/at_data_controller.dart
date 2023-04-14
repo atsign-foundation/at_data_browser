@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:at_data_browser/controllers/filter_form_controller.dart';
 import 'package:at_data_browser/domain.dart/at_data.dart';
-import 'package:riverpod/riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/at_data_repository.dart';
 
