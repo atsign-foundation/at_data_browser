@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:at_app_flutter/at_app_flutter.dart' show AtEnv;
 import 'package:at_client_mobile/at_client_mobile.dart';
+import 'package:at_contacts_flutter/utils/init_contacts_service.dart';
 import 'package:at_data_browser/screens/connected_atsigns_screen.dart';
 import 'package:at_data_browser/screens/data_storage_screen.dart';
 import 'package:at_onboarding_flutter/at_onboarding_flutter.dart';
@@ -76,6 +77,7 @@ class _MyAppState extends State<MyApp> {
                 switch (onboardingResult.status) {
                   case AtOnboardingResultStatus.success:
                     _goLocalData(context);
+                    initializeContactsService(rootDomain: AtEnv.rootDomain);
                     break;
                   case AtOnboardingResultStatus.error:
                     _handleError(context);

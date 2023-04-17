@@ -70,7 +70,6 @@ class _DataStorageScreenState extends ConsumerState<DataStorageScreen> {
                                   ListTile(
                                     title: Text(state.value![index].atKey.key ?? ''),
                                     subtitle: Text(state.value![index].atKey.namespace ?? ''),
-                                    trailing: (Text(state.value![index].atKey.sharedBy ?? '')),
                                   ),
                                   const Divider()
                                 ],

@@ -5,15 +5,15 @@ import 'package:at_data_browser/widgets/search_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AtsignsScreen extends ConsumerStatefulWidget {
+class AppsScreen extends ConsumerStatefulWidget {
   static const route = '/atsigns';
-  const AtsignsScreen({super.key});
+  const AppsScreen({super.key});
 
   @override
-  ConsumerState<AtsignsScreen> createState() => _DataStorageScreenState();
+  ConsumerState<AppsScreen> createState() => _DataStorageScreenState();
 }
 
-class _DataStorageScreenState extends ConsumerState<AtsignsScreen> {
+class _DataStorageScreenState extends ConsumerState<AppsScreen> {
   final String _filter = Options.filter[0];
 
   @override
@@ -64,15 +64,16 @@ class _DataStorageScreenState extends ConsumerState<AtsignsScreen> {
                         topRight: Radius.circular(20),
                       )),
                       child: ListView.builder(
-                          itemCount: state.value!.length,
-                          itemBuilder: (context, index) => Column(
-                                children: [
-                                  ListTile(
-                                    title: Text(state.value![index]),
-                                  ),
-                                  const Divider()
-                                ],
-                              )),
+                        itemCount: state.value!.length,
+                        itemBuilder: (context, index) => Column(
+                          children: [
+                            ListTile(
+                              title: Text(state.value![index]),
+                            ),
+                            const Divider()
+                          ],
+                        ),
+                      ),
                     );
                   }
                 },

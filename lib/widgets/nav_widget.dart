@@ -1,3 +1,4 @@
+import 'package:at_data_browser/screens/connected_atsigns_screen.dart';
 import 'package:at_data_browser/utils/constants.dart';
 import 'package:at_data_browser/widgets/nav_container.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,9 @@ class _NavWidgetState extends ConsumerState<NavWidget> {
               titleCount: 'Connected atContacts',
               navWidgetModel: navWidgetModel,
               color: kAtSignColor,
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, ConnectedAtsignsScreen.route);
+              },
             ),
           ),
           Positioned(
