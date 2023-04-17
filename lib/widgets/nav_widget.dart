@@ -1,3 +1,4 @@
+import 'package:at_data_browser/screens/apps_screen.dart';
 import 'package:at_data_browser/screens/connected_atsigns_screen.dart';
 import 'package:at_data_browser/utils/constants.dart';
 import 'package:at_data_browser/widgets/nav_container.dart';
@@ -65,7 +66,9 @@ class _NavWidgetState extends ConsumerState<NavWidget> {
               titleCount: 'Namespaces',
               navWidgetModel: navWidgetModel,
               color: kAppsColor,
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, AppsScreen.route);
+              },
             ),
           ),
         ],
