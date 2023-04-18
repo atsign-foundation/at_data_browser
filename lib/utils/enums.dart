@@ -1,0 +1,4 @@
+enum NavPosition {
+  top,
+  bottom,
+}
