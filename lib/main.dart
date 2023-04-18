@@ -2,18 +2,13 @@ import 'dart:async';
 
 import 'package:at_app_flutter/at_app_flutter.dart' show AtEnv;
 import 'package:at_client_mobile/at_client_mobile.dart';
-import 'package:at_contacts_flutter/utils/init_contacts_service.dart';
-import 'package:at_data_browser/screens/apps_screen.dart';
-import 'package:at_data_browser/screens/connected_atsigns_screen.dart';
-import 'package:at_data_browser/screens/data_storage_screen.dart';
 import 'package:at_onboarding_flutter/at_onboarding_flutter.dart';
 import 'package:at_utils/at_logger.dart' show AtSignLogger;
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:path_provider/path_provider.dart' show getApplicationSupportDirectory;
+import 'package:path_provider/path_provider.dart'
+    show getApplicationSupportDirectory;
 
-import 'data/navigation_service.dart';
-import 'screens/home_screen.dart';
+import 'home_screen.dart';
 
 final AtSignLogger _logger = AtSignLogger(AtEnv.appNamespace);
 
@@ -25,7 +20,7 @@ Future<void> main() async {
   } catch (e) {
     _logger.finer('Environment failed to load from .env: ', e);
   }
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(const MyApp());
 }
 
 Future<AtClientPreference> loadAtClientPreference() async {
@@ -56,7 +51,6 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      navigatorKey: NavigationService.navKey,
       // * The onboarding screen (first screen)
       home: Scaffold(
         appBar: AppBar(
@@ -66,7 +60,8 @@ class _MyAppState extends State<MyApp> {
           builder: (context) => Center(
             child: ElevatedButton(
               onPressed: () async {
-                AtOnboardingResult onboardingResult = await AtOnboarding.onboard(
+                AtOnboardingResult onboardingResult =
+                    await AtOnboarding.onboard(
                   context: context,
                   config: AtOnboardingConfig(
                     atClientPreference: await futurePreference,
@@ -78,7 +73,6 @@ class _MyAppState extends State<MyApp> {
                 switch (onboardingResult.status) {
                   case AtOnboardingResultStatus.success:
                     _goLocalData(context);
-                    initializeContactsService(rootDomain: AtEnv.rootDomain);
                     break;
                   case AtOnboardingResultStatus.error:
                     _handleError(context);
@@ -92,17 +86,12 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
       ),
-      routes: {
-        HomeScreen.route: (_) => const HomeScreen(),
-        DataStorageScreen.route: (_) => const DataStorageScreen(),
-        ConnectedAtsignsScreen.route: (_) => const ConnectedAtsignsScreen(),
-        AppsScreen.route: (_) => const AppsScreen(),
-      },
     );
   }
 
   void _goLocalData(context) {
-    Navigator.push(context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+    Navigator.push(
+        context, MaterialPageRoute(builder: (_) => const HomeScreen()));
   }
 
   void _handleError(context) {

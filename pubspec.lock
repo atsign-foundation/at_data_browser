@@ -85,18 +85,18 @@ packages:
     dependency: transitive
     description:
       name: at_client
-      sha256: f2ebf1ceeb42eb6638ddf38c6a1f414e4af3186f2cf4bc245efcb54943e5072e
+      sha256: dfa96bf77ab3d1a0ae785ca89aad0700b83a29f25a6b7a18f537c41fe364d5e4
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.57"
+    version: "3.0.53"
   at_client_mobile:
     dependency: "direct main"
     description:
       name: at_client_mobile
-      sha256: f056674b02bdf13e5442725934e834f7757abcd7062d302ec2e65e46432ca134
+      sha256: "1a1c6ef8ebc3b29b81915a2c866efa2a877c041df3f212c53246377b74d16e61"
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.9"
+    version: "3.2.7"
   at_common_flutter:
     dependency: transitive
     description:
@@ -109,26 +109,10 @@ packages:
     dependency: transitive
     description:
       name: at_commons
-      sha256: "29e57e2f980557c9eca5332a1d6537b8f93eb3dd43592397356335817906ad2e"
+      sha256: ac55a111ebc9c154ca4fb0067ee151378d844f2d1a1a87a72727112054da7960
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.44"
-  at_contact:
-    dependency: transitive
-    description:
-      name: at_contact
-      sha256: "232a7dd140bd4c22f4d99c7866633338de57e50f0e1eb84e515dc1ed0f7b0fee"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.7"
-  at_contacts_flutter:
-    dependency: "direct main"
-    description:
-      name: at_contacts_flutter
-      sha256: "159656f0387d17471dfe90337d767a989f067de3da0bf74af0894191a4460cea"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.9"
+    version: "3.0.34"
   at_file_saver:
     dependency: transitive
     description:
@@ -157,18 +141,18 @@ packages:
     dependency: transitive
     description:
       name: at_persistence_secondary_server
-      sha256: a1b0e9819d6d22072caf15e52ea3bf459c8b161404ed92bb199bfd32f5ff63a9
+      sha256: fef24e2afb774c76b9991e48c8bf3076c5a6062330bf6223e51f44d6ba5be5e2
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.52"
+    version: "3.0.45"
   at_persistence_spec:
     dependency: transitive
     description:
       name: at_persistence_spec
-      sha256: "2ee8f0433783633d2375dba2acf27f8778bcbcd40dda8659bf54f80925db224f"
+      sha256: "7664d3e576936f0edef642821486594c4ab86fb2678c68998d97f778d5c2a63e"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.12"
+    version: "2.0.10"
   at_server_status:
     dependency: transitive
     description:
@@ -197,10 +181,10 @@ packages:
     dependency: "direct main"
     description:
       name: at_utils
-      sha256: a244ea7f6411b177ba2f011d36d23ec786b0d41b0e62b58bb0e8bf9ad61cf530
+      sha256: "57ce4684d59b58c58ee72e945a11de2c6bfdb5e0bb4011763d9ca786d0881387"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.12"
+    version: "3.0.11"
   biometric_storage:
     dependency: "direct main"
     description:
@@ -430,22 +414,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.7"
-  flutter_riverpod:
-    dependency: "direct main"
-    description:
-      name: flutter_riverpod
-      sha256: "812dfbb87af51e73e68ea038bcfd1c732078d6838d3388d03283db7dec0d1e5f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.3.4"
-  flutter_slidable:
-    dependency: transitive
-    description:
-      name: flutter_slidable
-      sha256: c7607eb808cdef19c8468246e95a133308aeaeb3971cdd9edfb9d5e31cedfbe9
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.6.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -520,14 +488,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0+1"
-  intl:
-    dependency: transitive
-    description:
-      name: intl
-      sha256: "910f85bce16fb5c6f614e117efa303e85a1731bb0081edf3604a2ae6e9a3cc91"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.17.0"
   io:
     dependency: transitive
     description:
@@ -840,14 +800,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
-  riverpod:
-    dependency: transitive
-    description:
-      name: riverpod
-      sha256: "77ab3bcd084bb19fa8717a526217787c725d7f5be938404c7839cd760fdf6ae5"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.3.4"
   share_plus:
     dependency: transitive
     description:
@@ -896,62 +848,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
-  shared_preferences:
-    dependency: "direct main"
-    description:
-      name: shared_preferences
-      sha256: "858aaa72d8f61637d64e776aca82e1c67e6d9ee07979123c5d17115031c1b13b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.0"
-  shared_preferences_android:
-    dependency: transitive
-    description:
-      name: shared_preferences_android
-      sha256: "8304d8a1f7d21a429f91dee552792249362b68a331ac5c3c1caf370f658873f6"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.0"
-  shared_preferences_foundation:
-    dependency: transitive
-    description:
-      name: shared_preferences_foundation
-      sha256: cf2a42fb20148502022861f71698db12d937c7459345a1bdaa88fc91a91b3603
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.0"
-  shared_preferences_linux:
-    dependency: transitive
-    description:
-      name: shared_preferences_linux
-      sha256: "9d387433ca65717bbf1be88f4d5bb18f10508917a8fa2fb02e0fd0d7479a9afa"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.0"
-  shared_preferences_platform_interface:
-    dependency: transitive
-    description:
-      name: shared_preferences_platform_interface
-      sha256: fb5cf25c0235df2d0640ac1b1174f6466bd311f621574997ac59018a6664548d
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.0"
-  shared_preferences_web:
-    dependency: transitive
-    description:
-      name: shared_preferences_web
-      sha256: "74083203a8eae241e0de4a0d597dbedab3b8fef5563f33cf3c12d7e93c655ca5"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.0"
-  shared_preferences_windows:
-    dependency: transitive
-    description:
-      name: shared_preferences_windows
-      sha256: "5e588e2efef56916a3b229c3bfe81e6a525665a454519ca51dbcc4236a274173"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.0"
   shelf:
     dependency: transitive
     description:
@@ -1029,14 +925,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
-  state_notifier:
-    dependency: transitive
-    description:
-      name: state_notifier
-      sha256: "8fe42610f179b843b12371e40db58c9444f8757f8b69d181c97e50787caed289"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.7.2+1"
   stream_channel:
     dependency: transitive
     description:
@@ -1173,14 +1061,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
-  version:
-    dependency: transitive
-    description:
-      name: version
-      sha256: "3d4140128e6ea10d83da32fef2fa4003fccbf6852217bb854845802f04191f94"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.2"
   vm_service:
     dependency: transitive
     description:
