@@ -1,5 +1,6 @@
 import 'package:at_data_browser/controllers/home_screen_controller.dart';
 import 'package:at_data_browser/data/authentication_repository.dart';
+import 'package:at_data_browser/screens/browse_screen.dart';
 import 'package:at_data_browser/utils/constants.dart';
 import 'package:at_data_browser/utils/sizes.dart';
 import 'package:at_data_browser/widgets/nav_widget.dart';
@@ -32,7 +33,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.grey.shade50,
+        backgroundColor: Colors.white54,
         actions: const [
           Icon(
             Icons.settings_outlined,
@@ -51,11 +52,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
                 gapH64,
                 NotificationListTile.notify(
-                  subTitle: '${homeScreenControllerModel?.workingKeys ?? 0} keys does not require your attention',
+                  subTitle:
+                      '${homeScreenControllerModel?.workingKeys.length ?? 0} keys does not require your attention',
                 ),
                 gapH16,
                 NotificationListTile.warning(
-                  subTitle: '${homeScreenControllerModel?.malformedKeys ?? 0} Keys require your attention',
+                  subTitle: '${homeScreenControllerModel?.malformedKeys.length ?? 0} Keys require your attention',
                 ),
                 gapH64,
                 SizedBox(
@@ -63,7 +65,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   height: 63,
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(backgroundColor: kBrowserColor),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(BrowseScreen.route);
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [

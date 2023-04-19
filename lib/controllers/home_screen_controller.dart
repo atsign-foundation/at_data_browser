@@ -2,6 +2,7 @@ import 'package:at_client_mobile/at_client_mobile.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/at_data_repository.dart';
+import '../domain.dart/at_data.dart';
 
 /// A Dude class that controls the UI update when the [AtDataRepository] methods are called.
 class HomeScreenController extends StateNotifier<AsyncValue<HomeScreenControllerModel>> {
@@ -18,9 +19,9 @@ class HomeScreenController extends StateNotifier<AsyncValue<HomeScreenController
       final atData = await ref.watch(dataRepositoryProvider).getData();
       final homeScreenControllerModel = HomeScreenControllerModel(
           malformedKeys:
-              atData.where((element) => AtKey.getKeyType(element.atKey.key!) == KeyType.invalidKey).toList().length,
+              atData.where((element) => AtKey.getKeyType(element.atKey.toString()) == KeyType.invalidKey).toList(),
           workingKeys:
-              atData.where((element) => AtKey.getKeyType(element.atKey.key!) != KeyType.invalidKey).toList().length);
+              atData.where((element) => AtKey.getKeyType(element.atKey.toString()) != KeyType.invalidKey).toList());
       return homeScreenControllerModel;
     });
   }
@@ -28,8 +29,8 @@ class HomeScreenController extends StateNotifier<AsyncValue<HomeScreenController
 
 class HomeScreenControllerModel {
   HomeScreenControllerModel({required this.malformedKeys, required this.workingKeys});
-  final int workingKeys;
-  final int malformedKeys;
+  final List<AtData> workingKeys;
+  final List<AtData> malformedKeys;
 }
 
 final homeScreenControllerProvider = StateNotifierProvider<HomeScreenController, AsyncValue<HomeScreenControllerModel>>(
