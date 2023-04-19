@@ -71,6 +71,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           Icon(Icons.search),
                         ],
                       )),
+                ),
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      'Or',
+                      style: TextStyle(color: Colors.grey.shade300),
+                    ),
+                  ),
                 )
               ]),
             ),
