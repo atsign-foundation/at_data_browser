@@ -35,7 +35,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         backgroundColor: Colors.grey.shade50,
         actions: const [
           Icon(
-            Icons.settings,
+            Icons.settings_outlined,
             color: Colors.black,
           )
         ],

@@ -4,6 +4,7 @@ class NotificationListTile extends StatelessWidget {
   const NotificationListTile({
     Key? key,
     required this.title,
+    required this.titleColor,
     required this.icon,
     required this.color,
     required this.subTitle,
@@ -15,6 +16,7 @@ class NotificationListTile extends StatelessWidget {
     this.title = 'New Keys',
     this.icon,
     this.color = Colors.black,
+    this.titleColor = Colors.black,
   }) : super(key: key);
 
   const NotificationListTile.warning({
@@ -26,9 +28,11 @@ class NotificationListTile extends StatelessWidget {
       color: Colors.red,
     ),
     this.color = Colors.red,
+    this.titleColor = Colors.red,
   }) : super(key: key);
 
   final String title;
+  final Color titleColor;
   final Widget? icon;
   final Color color;
   final String subTitle;
@@ -64,7 +68,10 @@ class NotificationListTile extends StatelessWidget {
               ),
               leading: icon,
               tileColor: Colors.white,
-              title: Text(title),
+              title: Text(
+                title,
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(color: titleColor),
+              ),
               subtitle: Text(subTitle),
             ),
           ),

@@ -6,6 +6,7 @@ import 'package:at_contacts_flutter/utils/init_contacts_service.dart';
 import 'package:at_data_browser/screens/apps_screen.dart';
 import 'package:at_data_browser/screens/connected_atsigns_screen.dart';
 import 'package:at_data_browser/screens/data_storage_screen.dart';
+import 'package:at_data_browser/utils/theme.dart';
 import 'package:at_onboarding_flutter/at_onboarding_flutter.dart';
 import 'package:at_utils/at_logger.dart' show AtSignLogger;
 import 'package:flutter/material.dart';
@@ -57,6 +58,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorKey: NavigationService.navKey,
+      theme: AppTheme.light(),
       // * The onboarding screen (first screen)
       home: Scaffold(
         appBar: AppBar(
