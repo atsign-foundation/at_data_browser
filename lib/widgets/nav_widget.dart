@@ -63,7 +63,7 @@ class _NavWidgetState extends ConsumerState<NavWidget> {
             height: 75,
             child: NavContainer(
               name: 'Apps',
-              titleCount: 'Namespaces',
+              titleCount: 'Connected Apps',
               navWidgetModel: navWidgetModel,
               color: kAppsColor,
               onTap: () {

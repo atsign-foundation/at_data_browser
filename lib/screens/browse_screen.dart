@@ -13,7 +13,15 @@ import '../widgets/search_form.dart';
 
 class BrowseScreen extends ConsumerStatefulWidget {
   static const route = '/browse';
-  const BrowseScreen({super.key});
+  const BrowseScreen(
+      {this.appBarColor = kDataStorageColor,
+      this.backgroundColor = kDataStorageFadedColor,
+      this.textColor = Colors.white,
+      super.key});
+
+  final Color appBarColor;
+  final Color backgroundColor;
+  final Color textColor;
 
   @override
   ConsumerState<BrowseScreen> createState() => _DataStorageScreenState();
@@ -23,7 +31,7 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
   @override
   void initState() {
     WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) async {
-      await ref.watch(atDataControllerProvider.notifier).getData();
+      // await ref.watch(atDataControllerProvider.notifier).getData();
     });
     super.initState();
   }
@@ -38,17 +46,18 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
   Widget build(BuildContext context) {
     final state = ref.watch(atDataControllerProvider);
     return Scaffold(
-      backgroundColor: kBrowserFadedColor,
+      backgroundColor: widget.backgroundColor,
       appBar: AppBar(
+          iconTheme: Theme.of(context).iconTheme.copyWith(color: widget.textColor),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(20),
             ),
           ),
-          backgroundColor: kBrowserColor,
+          backgroundColor: widget.appBarColor,
           title: Text(
             'Browse',
-            style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.white),
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(color: widget.textColor),
           ),
           actions: [
             Column(
@@ -92,7 +101,13 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
             ]),
           ),
           Expanded(
-            child: AtDataListWidget(state: state),
+            child: RefreshIndicator(
+              child: AtDataListWidget(state: state),
+              onRefresh: () async {
+                // reset atData to show all data.
+                await ref.watch(atDataControllerProvider.notifier).getData();
+              },
+            ),
           )
         ],
       ),

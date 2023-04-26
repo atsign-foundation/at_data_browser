@@ -29,7 +29,7 @@ class NavContainer extends StatelessWidget {
       case 'Connected atContacts':
         return navWidgetModel!.atContactsCount;
 
-      case 'Namespaces':
+      case 'Connected Apps':
         return navWidgetModel!.namespacesCount;
       default:
         return "NA";

@@ -1,7 +1,5 @@
 import 'package:at_data_browser/controllers/home_screen_controller.dart';
 import 'package:at_data_browser/data/authentication_repository.dart';
-import 'package:at_data_browser/screens/browse_screen.dart';
-import 'package:at_data_browser/utils/constants.dart';
 import 'package:at_data_browser/utils/sizes.dart';
 import 'package:at_data_browser/widgets/nav_widget.dart';
 import 'package:at_data_browser/widgets/notification_list_tile.dart';
@@ -60,30 +58,30 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   subTitle: '${homeScreenControllerModel?.malformedKeys.length ?? 0} Keys require your attention',
                 ),
                 gapH64,
-                SizedBox(
-                  width: 343,
-                  height: 63,
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(backgroundColor: kBrowserColor),
-                      onPressed: () {
-                        Navigator.of(context).pushNamed(BrowseScreen.route);
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Text("Browse"),
-                          Icon(Icons.search),
-                        ],
-                      )),
-                ),
-                Expanded(
-                  child: Center(
-                    child: Text(
-                      'Or',
-                      style: TextStyle(color: Colors.grey.shade300),
-                    ),
-                  ),
-                )
+                // SizedBox(
+                //   width: 343,
+                //   height: 63,
+                //   child: ElevatedButton(
+                //       style: ElevatedButton.styleFrom(backgroundColor: kBrowserColor),
+                //       onPressed: () {
+                //         Navigator.of(context).pushNamed(BrowseScreen.route);
+                //       },
+                //       child: Row(
+                //         mainAxisAlignment: MainAxisAlignment.center,
+                //         children: const [
+                //           Text("Browse"),
+                //           Icon(Icons.search),
+                //         ],
+                //       )),
+                // ),
+                // Expanded(
+                //   child: Center(
+                //     child: Text(
+                //       'Or',
+                //       style: TextStyle(color: Colors.grey.shade300),
+                //     ),
+                //   ),
+                // )
               ]),
             ),
             const NavWidget(),

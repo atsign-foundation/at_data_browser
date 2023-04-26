@@ -1,8 +1,9 @@
+import 'dart:developer';
+
 import 'package:at_data_browser/domain.dart/at_data.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/at_data_repository.dart';
-import 'filter_form_controller.dart';
 
 /// A Dude class that controls the UI update when the [AtDataRepository] methods are called.
 class AppController extends StateNotifier<AsyncValue<List<String>>> {
@@ -46,21 +47,13 @@ class AppController extends StateNotifier<AsyncValue<List<String>>> {
     return state.value?.length.toString() ?? 'NA';
   }
 
-  Future<void> getFilteredConnectedApps() async {
-    var searchFormModel = ref.watch(searchFormProvider);
+  Future<void> getFilteredConnectedApps(String value) async {
+    log('filter called');
     await getData();
-
     state = AsyncValue.data(
       state.value!.where(
         (element) {
-          bool isMatch = false;
-          for (var search in searchFormModel.searchRequest) {
-            if (element.contains(search!)) {
-              isMatch = true;
-            }
-          }
-
-          return isMatch;
+          return element.contains(value);
         },
       ).toList(),
     );

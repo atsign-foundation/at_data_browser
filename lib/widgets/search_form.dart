@@ -14,7 +14,10 @@ import 'keyTypes_category_widget.dart';
 import 'sort_category_widget.dart';
 
 class SearchForm extends ConsumerStatefulWidget {
-  const SearchForm({required this.index, super.key});
+  const SearchForm({
+    required this.index,
+    super.key,
+  });
   final int index;
 
   @override
@@ -46,8 +49,8 @@ class _SearchFormState extends ConsumerState<SearchForm> {
           labelText: 'Date Range',
           index: widget.index,
         );
-      case Categories.app:
-        ref.watch(searchFormProvider).searchRequest[widget.index] = null;
+      case Categories.apps:
+        // ref.watch(searchFormProvider).searchRequest[widget.index] = null;
         Future(
           () async {
             await ref.read(appsController.notifier).getData();

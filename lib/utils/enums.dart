@@ -8,7 +8,7 @@ enum Categories {
   contains,
   dateCreated,
   dateModified,
-  app,
+  apps,
   atsign,
   keyTypes,
   sharedWith,

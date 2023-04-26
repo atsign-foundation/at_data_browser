@@ -23,7 +23,7 @@ class _SortCategoryWidgetState extends ConsumerState<AppCategoryWidget> {
         child: DropdownButton<String>(
           underline: const SizedBox(),
           value: ref.watch(searchFormProvider).searchRequest[widget.index],
-          hint: const Text('Category'),
+          hint: const Text('Apps'),
           items: ref
               .watch(appsController)
               .value
@@ -38,6 +38,8 @@ class _SortCategoryWidgetState extends ConsumerState<AppCategoryWidget> {
             setState(() {
               ref.watch(searchFormProvider).searchRequest[widget.index] = value!;
             });
+
+            // filter atData by conditions set in searchFormProvider
             ref.watch(atDataControllerProvider.notifier).getFilteredAtData();
           },
         ),
