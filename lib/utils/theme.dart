@@ -140,37 +140,37 @@ class AppTheme {
       ),
       // iconTheme: const IconThemeData(color: kPrimaryColor),
       // primaryIconTheme: const IconThemeData(color: kPrimaryColor),
-      inputDecorationTheme: const InputDecorationTheme().copyWith(
-        fillColor: const Color(0xFFF4F4F4),
-        filled: true,
-        constraints: const BoxConstraints(maxWidth: 336.6, maxHeight: 59.21),
-        enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white, width: 2),
-          borderRadius: BorderRadius.all(
-            Radius.circular(18),
-          ),
-        ),
-        focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white, width: 2),
-            borderRadius: BorderRadius.all(
-              Radius.circular(18),
-            )),
-        disabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white, width: 2),
-            borderRadius: BorderRadius.all(
-              Radius.circular(18),
-            )),
-        errorBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white, width: 2),
-            borderRadius: BorderRadius.all(
-              Radius.circular(18),
-            )),
-        focusedErrorBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white, width: 2),
-            borderRadius: BorderRadius.all(
-              Radius.circular(18),
-            )),
-      ),
+      // inputDecorationTheme: const InputDecorationTheme().copyWith(
+      //   fillColor: const Color(0xFFF4F4F4),
+      //   filled: true,
+      //   constraints: const BoxConstraints(maxWidth: 336.6, maxHeight: 59.21),
+      //   enabledBorder: const OutlineInputBorder(
+      //     borderSide: BorderSide(color: Colors.white, width: 2),
+      //     borderRadius: BorderRadius.all(
+      //       Radius.circular(18),
+      //     ),
+      //   ),
+      //   focusedBorder: const OutlineInputBorder(
+      //       borderSide: BorderSide(color: Colors.white, width: 2),
+      //       borderRadius: BorderRadius.all(
+      //         Radius.circular(18),
+      //       )),
+      //   disabledBorder: const OutlineInputBorder(
+      //       borderSide: BorderSide(color: Colors.white, width: 2),
+      //       borderRadius: BorderRadius.all(
+      //         Radius.circular(18),
+      //       )),
+      //   errorBorder: const OutlineInputBorder(
+      //       borderSide: BorderSide(color: Colors.white, width: 2),
+      //       borderRadius: BorderRadius.all(
+      //         Radius.circular(18),
+      //       )),
+      //   focusedErrorBorder: const OutlineInputBorder(
+      //       borderSide: BorderSide(color: Colors.white, width: 2),
+      //       borderRadius: BorderRadius.all(
+      //         Radius.circular(18),
+      //       )),
+      // ),
       cardTheme: const CardTheme(
         elevation: 0,
         surfaceTintColor: Colors.white,

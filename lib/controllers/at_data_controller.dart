@@ -1,7 +1,9 @@
 import 'dart:developer';
 
+import 'package:at_client_mobile/at_client_mobile.dart';
 import 'package:at_data_browser/controllers/filter_form_controller.dart';
 import 'package:at_data_browser/domain.dart/at_data.dart';
+import 'package:at_data_browser/utils/enums.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/at_data_repository.dart';
@@ -42,45 +44,116 @@ class AtDataController extends StateNotifier<AsyncValue<List<AtData>>> {
     state = await AsyncValue.guard(() async => await ref.watch(dataRepositoryProvider).getData());
   }
 
+  DateTime _getDate(DateTime dateTime) => DateTime(dateTime.year, dateTime.month, dateTime.day);
+
   Future<void> getFilteredAtData() async {
     var searchFormModel = ref.watch(searchFormProvider);
     await getData();
     log(searchFormModel.searchRequest.toString());
+    String sort = 'ascending';
     state = AsyncValue.data(
       state.value!.where(
         (element) {
-          switch (searchFormModel.filter) {
-            case 'atkey':
-              if (element.atKey.key != null) {
-                return element.atKey.key!.contains(searchFormModel.searchRequest!);
-              } else {
-                return false;
-              }
+          ref.watch(searchFormProvider).isConditionMet = [];
+          for (final filterOption in searchFormModel.filter) {
+            log("filter Option is : $filterOption");
+            // log("filter Option index is : ${filterOption!.index}");
+            final int filterOptionIndex = searchFormModel.filter.indexOf(filterOption);
+            log(filterOptionIndex.toString());
 
-            case 'Namespace':
-              if (element.atKey.namespace != null) {
-                return element.atKey.namespace!.contains(searchFormModel.searchRequest!);
-              } else {
-                return false;
-              }
-            case 'Shared With':
-              if (element.atKey.sharedWith != null) {
-                return element.atKey.sharedWith!.contains(searchFormModel.searchRequest!);
-              } else {
-                return false;
-              }
-            case 'Shared By':
-              if (element.atKey.sharedBy != null) {
-                return element.atKey.sharedBy!.contains(searchFormModel.searchRequest!);
-              } else {
-                return false;
-              }
-            default:
-              return true;
+            var searchContent = searchFormModel.searchRequest[filterOptionIndex].toString();
+            switch (filterOption) {
+              case Categories.sort:
+                log(searchContent);
+                sort = searchContent;
+
+                break;
+              case Categories.contains:
+                ref.watch(searchFormProvider).isConditionMet.add(element.atKey.toString().contains(searchContent));
+
+                break;
+              case Categories.dateCreated:
+                final createdAt = _getDate(element.atKey.metadata!.createdAt!);
+
+                log(createdAt.toString());
+                final startDate = _getDate(DateTime.parse(searchContent.split(' - ')[0]));
+                log(startDate.toString());
+                final endDate = _getDate(DateTime.parse(searchContent.split(' - ')[1]));
+                if (createdAt.isAtSameMomentAs(startDate) ||
+                    createdAt.isAtSameMomentAs(endDate) ||
+                    (createdAt.isAfter(startDate) && createdAt.isBefore(endDate))) {
+                  ref.watch(searchFormProvider).isConditionMet.add(true);
+                } else {
+                  ref.watch(searchFormProvider).isConditionMet.add(false);
+                }
+
+                break;
+              case Categories.dateModified:
+                log(searchContent);
+                if (element.atKey.metadata?.updatedAt != null) {
+                  if (element.atKey.metadata!.updatedAt!.isAfter(DateTime.parse(searchContent.split(' - ')[0])) &&
+                      element.atKey.metadata!.updatedAt!.isBefore(DateTime.parse(searchContent.split(' - ')[1]))) {
+                    ref.watch(searchFormProvider).isConditionMet.add(true);
+                  } else {
+                    ref.watch(searchFormProvider).isConditionMet.add(false);
+                  }
+                }
+
+                break;
+
+              case Categories.app:
+                if (element.atKey.namespace != null) {
+                  ref.watch(searchFormProvider).isConditionMet.add(element.atKey.namespace!.contains(searchContent));
+                } else {
+                  ref.watch(searchFormProvider).isConditionMet.add(false);
+                }
+                break;
+              case Categories.atsign:
+                if (element.atKey.key != null) {
+                  ref.watch(searchFormProvider).isConditionMet.add(element.atKey.key!.contains(searchContent));
+                } else {
+                  ref.watch(searchFormProvider).isConditionMet.add(false);
+                }
+                break;
+
+              case Categories.keyTypes:
+                if (AtKey.getKeyType(element.atKey.toString()).name == searchContent) {
+                  ref.watch(searchFormProvider).isConditionMet.add(true);
+                } else {
+                  ref.watch(searchFormProvider).isConditionMet.add(false);
+                }
+                break;
+              case Categories.sharedWith:
+                if (element.atKey.sharedWith != null) {
+                  ref.watch(searchFormProvider).isConditionMet.add(element.atKey.sharedWith!.contains(searchContent));
+                } else {
+                  ref.watch(searchFormProvider).isConditionMet.add(false);
+                }
+                break;
+              case Categories.sharedBy:
+                if (element.atKey.sharedBy != null) {
+                  ref.watch(searchFormProvider).isConditionMet.add(element.atKey.sharedBy!.contains(searchContent));
+                } else {
+                  ref.watch(searchFormProvider).isConditionMet.add(false);
+                }
+                break;
+              default:
+                ref.watch(searchFormProvider).isConditionMet.add(true);
+            }
           }
+          // Match found if all conditions are true
+          log(searchFormModel.isConditionMet.toString());
+          return ref.watch(searchFormProvider).isConditionMet.every((element) => element == true);
         },
       ).toList(),
     );
+
+    // sort the list
+    if (sort == 'ascending') {
+      state.value!.sort((a, b) => a.atKey.toString().compareTo(b.atKey.toString()));
+    } else if (sort == 'descending') {
+      state.value!.sort((a, b) => b.atKey.toString().compareTo(a.atKey.toString()));
+    }
   }
 }
 

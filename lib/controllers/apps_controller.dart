@@ -27,6 +27,17 @@ class AppController extends StateNotifier<AsyncValue<List<String>>> {
     });
   }
 
+  Future<List<String>> getNamespace() async {
+    final atDataList = await ref.watch(dataRepositoryProvider).getData();
+    List<String> nameSpaces = [];
+    for (var atData in atDataList) {
+      if (atData.atKey.namespace != null) {
+        nameSpaces.add(atData.atKey.namespace!);
+      }
+    }
+    return nameSpaces.toSet().toList();
+  }
+
   int itemsStoredCount(List<AtData> atDataList) {
     return state.value?.length ?? 0;
   }
@@ -42,7 +53,14 @@ class AppController extends StateNotifier<AsyncValue<List<String>>> {
     state = AsyncValue.data(
       state.value!.where(
         (element) {
-          return element.contains(searchFormModel.searchRequest!);
+          bool isMatch = false;
+          for (var search in searchFormModel.searchRequest) {
+            if (element.contains(search!)) {
+              isMatch = true;
+            }
+          }
+
+          return isMatch;
         },
       ).toList(),
     );

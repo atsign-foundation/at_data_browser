@@ -37,7 +37,8 @@ class ConnectedAtsignsController extends StateNotifier<AsyncValue<List<AtContact
       state.value!.where(
         (element) {
           if (element.atSign != null) {
-            return element.atSign!.contains(searchFormModel.searchRequest!);
+            return true;
+            // return element.atSign!.contains(searchFormModel.searchRequest!);
           } else {
             return false;
           }

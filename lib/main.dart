@@ -4,6 +4,7 @@ import 'package:at_app_flutter/at_app_flutter.dart' show AtEnv;
 import 'package:at_client_mobile/at_client_mobile.dart';
 import 'package:at_contacts_flutter/utils/init_contacts_service.dart';
 import 'package:at_data_browser/screens/apps_screen.dart';
+import 'package:at_data_browser/screens/browse_screen.dart';
 import 'package:at_data_browser/screens/connected_atsigns_screen.dart';
 import 'package:at_data_browser/screens/data_storage_screen.dart';
 import 'package:at_data_browser/utils/theme.dart';
@@ -99,6 +100,7 @@ class _MyAppState extends State<MyApp> {
         DataStorageScreen.route: (_) => const DataStorageScreen(),
         ConnectedAtsignsScreen.route: (_) => const ConnectedAtsignsScreen(),
         AppsScreen.route: (_) => const AppsScreen(),
+        BrowseScreen.route: (_) => const BrowseScreen(),
       },
     );
   }

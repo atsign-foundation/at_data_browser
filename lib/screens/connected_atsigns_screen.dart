@@ -1,5 +1,4 @@
 import 'package:at_data_browser/utils/constants.dart';
-import 'package:at_data_browser/utils/options.dart';
 import 'package:at_data_browser/widgets/search_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,8 +14,6 @@ class ConnectedAtsignsScreen extends ConsumerStatefulWidget {
 }
 
 class _DataStorageScreenState extends ConsumerState<ConnectedAtsignsScreen> {
-  final String _filter = Options.filter[0];
-
   @override
   void initState() {
     WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) async {
@@ -52,7 +49,9 @@ class _DataStorageScreenState extends ConsumerState<ConnectedAtsignsScreen> {
           padding: const EdgeInsets.only(top: 30.0),
           child: Column(
             children: [
-              const SearchForm(),
+              const SearchForm(
+                index: 0,
+              ),
               Expanded(child: Builder(
                 builder: (BuildContext context) {
                   if (state.isLoading) {
