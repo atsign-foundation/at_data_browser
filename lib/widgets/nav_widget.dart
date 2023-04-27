@@ -50,8 +50,8 @@ class _NavWidgetState extends ConsumerState<NavWidget> {
             height: 150,
             // top: 90,
             child: NavContainer(
-              name: 'AtContacts',
-              titleCount: 'Connected atContacts',
+              name: 'atSigns',
+              titleCount: 'Connected atSigns',
               navWidgetModel: navWidgetModel,
               color: kAtSignColor,
               onTap: () {

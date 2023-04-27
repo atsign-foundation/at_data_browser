@@ -19,3 +19,5 @@ enum SortOptions {
   ascending,
   descending,
 }
+
+enum SearchWidgetFilter { apps, atSigns }

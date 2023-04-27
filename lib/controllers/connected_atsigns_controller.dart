@@ -1,7 +1,4 @@
-import 'dart:developer';
-
 import 'package:at_contact/at_contact.dart';
-import 'package:at_data_browser/controllers/filter_form_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/at_data_repository.dart';
@@ -29,19 +26,12 @@ class ConnectedAtsignsController extends StateNotifier<AsyncValue<List<AtContact
     return state.value?.length ?? 0;
   }
 
-  Future<void> getFilteredConnectedAtsign() async {
-    var searchFormModel = ref.watch(searchFormProvider);
+  Future<void> getFilteredConnectedAtsign(String value) async {
     await getData();
-    log(searchFormModel.searchRequest.toString());
     state = AsyncValue.data(
       state.value!.where(
         (element) {
-          if (element.atSign != null) {
-            return true;
-            // return element.atSign!.contains(searchFormModel.searchRequest!);
-          } else {
-            return false;
-          }
+          return element.atSign!.contains(value);
         },
       ).toList(),
     );

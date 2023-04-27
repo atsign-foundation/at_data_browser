@@ -110,7 +110,7 @@ class AtDataController extends StateNotifier<AsyncValue<List<AtData>>> {
                 break;
               case Categories.atsign:
                 if (element.atKey.key != null) {
-                  ref.watch(searchFormProvider).isConditionMet.add(element.atKey.key!.contains(searchContent));
+                  ref.watch(searchFormProvider).isConditionMet.add(element.atKey.toString().contains(searchContent));
                 } else {
                   ref.watch(searchFormProvider).isConditionMet.add(false);
                 }

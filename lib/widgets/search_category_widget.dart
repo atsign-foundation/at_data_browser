@@ -12,12 +12,29 @@ class SearchCategoryWidget extends ConsumerStatefulWidget {
 }
 
 class _SearchCategroyWidgetState extends ConsumerState<SearchCategoryWidget> {
+  late TextEditingController textEditingController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    textEditingController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    textEditingController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    textEditingController.text = ref.watch(searchFormProvider).searchRequest[widget.index] ?? '';
+
     return Card(
       child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: TextField(
+            controller: textEditingController,
             onChanged: (value) {
               ref.watch(searchFormProvider).isConditionMet = [];
               ref.watch(searchFormProvider).searchRequest[widget.index] = value;

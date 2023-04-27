@@ -1,9 +1,14 @@
-import 'package:at_data_browser/utils/constants.dart';
-import 'package:at_data_browser/widgets/search_form.dart';
+import 'package:at_contact/at_contact.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../controllers/at_data_controller.dart';
 import '../controllers/connected_atsigns_controller.dart';
+import '../controllers/filter_form_controller.dart';
+import '../utils/constants.dart';
+import '../utils/enums.dart';
+import '../widgets/search_widget.dart';
+import 'browse_screen.dart';
 
 class ConnectedAtsignsScreen extends ConsumerStatefulWidget {
   static const route = '/connected_atsigns';
@@ -22,36 +27,57 @@ class _DataStorageScreenState extends ConsumerState<ConnectedAtsignsScreen> {
     super.initState();
   }
 
+  Future<void> _onTap({required AsyncValue<List<AtContact>?> state, required int index}) async {
+    // set the search request to the selected app
+    ref.watch(searchFormProvider).searchRequest[0] = state.value![index].atSign;
+
+    // set the filter to apps
+    ref.watch(searchFormProvider).filter[0] = Categories.atsign;
+    // filter atData by conditions set in searchFormProvider
+    await ref.watch(atDataControllerProvider.notifier).getFilteredAtData();
+
+    await Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => const BrowseScreen(
+              appBarColor: Colors.white,
+              backgroundColor: kAtSignFadedColor,
+              textColor: Colors.black,
+            )));
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(connectedAtsignsControllerProvider);
     return Scaffold(
-      backgroundColor: kDataStorageFadedColor,
+      backgroundColor: kAtSignFadedColor,
       appBar: AppBar(
+          titleTextStyle: Theme.of(context).textTheme.titleLarge!.copyWith(color: Colors.white),
+          toolbarTextStyle: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.white),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(20),
             ),
           ),
-          backgroundColor: kDataStorageColor,
-          title: const Text('Atsigns'),
+          backgroundColor: kAtSignColor,
+          title: const Text('atSigns'),
           actions: [
-            Column(
-              children: [
-                const Text('Connected Atsigns'),
-                state.isLoading
-                    ? const Center(child: CircularProgressIndicator())
-                    : Text(state.value!.length.toString())
-              ],
+            FittedBox(
+              child: Column(
+                children: [
+                  const Text(
+                    'Connected Atsigns',
+                  ),
+                  state.isLoading
+                      ? const Center(child: CircularProgressIndicator())
+                      : Text(state.value!.length.toString())
+                ],
+              ),
             )
           ]),
       body: Padding(
           padding: const EdgeInsets.only(top: 30.0),
           child: Column(
             children: [
-              const SearchForm(
-                index: 0,
-              ),
+              const SearchWidget(filter: SearchWidgetFilter.atSigns),
               Expanded(child: Builder(
                 builder: (BuildContext context) {
                   if (state.isLoading) {
@@ -67,10 +93,15 @@ class _DataStorageScreenState extends ConsumerState<ConnectedAtsignsScreen> {
                           itemCount: state.value!.length,
                           itemBuilder: (context, index) => Column(
                                 children: [
-                                  ListTile(
-                                    title: Text(state.value![index].atSign ?? ''),
+                                  GestureDetector(
+                                    child: ListTile(
+                                      title: Text(state.value![index].atSign ?? ''),
+                                    ),
+                                    onTap: () => _onTap(state: state, index: index),
                                   ),
-                                  const Divider()
+                                  Divider(
+                                    color: Colors.grey.withOpacity(0.2),
+                                  )
                                 ],
                               )),
                     );

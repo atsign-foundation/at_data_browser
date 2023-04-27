@@ -49,20 +49,23 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
       backgroundColor: widget.backgroundColor,
       appBar: AppBar(
           iconTheme: Theme.of(context).iconTheme.copyWith(color: widget.textColor),
+          titleTextStyle: Theme.of(context).textTheme.titleLarge!.copyWith(color: widget.textColor),
+          toolbarTextStyle: Theme.of(context).textTheme.titleMedium!.copyWith(color: widget.textColor),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(20),
             ),
           ),
           backgroundColor: widget.appBarColor,
-          title: Text(
+          title: const Text(
             'Browse',
-            style: Theme.of(context).textTheme.titleMedium!.copyWith(color: widget.textColor),
           ),
           actions: [
             Column(
               children: [
-                const Text('Items Stored'),
+                const Text(
+                  'Items Stored',
+                ),
                 state.isLoading
                     ? const Center(child: CircularProgressIndicator())
                     : Text(state.value!.length.toString())

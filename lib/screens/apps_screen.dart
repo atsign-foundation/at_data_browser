@@ -1,13 +1,13 @@
-import 'package:at_data_browser/controllers/apps_controller.dart';
-import 'package:at_data_browser/screens/browse_screen.dart';
-import 'package:at_data_browser/utils/constants.dart';
-import 'package:at_data_browser/utils/enums.dart';
-import 'package:at_data_browser/widgets/apps_search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../controllers/apps_controller.dart';
 import '../controllers/at_data_controller.dart';
 import '../controllers/filter_form_controller.dart';
+import '../utils/constants.dart';
+import '../utils/enums.dart';
+import '../widgets/search_widget.dart';
+import 'browse_screen.dart';
 
 class AppsScreen extends ConsumerStatefulWidget {
   static const route = '/atsigns';
@@ -26,6 +26,25 @@ class _DataStorageScreenState extends ConsumerState<AppsScreen> {
     super.initState();
   }
 
+  Future<void> _onTap({required AsyncValue<List<String>> state, required int index}) async {
+    // set the search request to the selected app
+    ref.watch(searchFormProvider).searchRequest[0] = state.value![index];
+    // set the filter to apps
+    ref.watch(searchFormProvider).filter[0] = Categories.apps;
+    // filter atData by conditions set in searchFormProvider
+    await ref.watch(atDataControllerProvider.notifier).getFilteredAtData();
+
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const BrowseScreen(
+          appBarColor: Colors.white,
+          backgroundColor: kAppsFadedColor,
+          textColor: Colors.black,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(appsController);
@@ -42,20 +61,24 @@ class _DataStorageScreenState extends ConsumerState<AppsScreen> {
           backgroundColor: kAppsColor,
           title: const Text('Apps'),
           actions: [
-            Column(
-              children: [
-                const Text('Connected Apps'),
-                state.isLoading
-                    ? const Center(child: CircularProgressIndicator())
-                    : Text(state.value!.length.toString())
-              ],
+            FittedBox(
+              child: Column(
+                children: [
+                  const Text('Connected Apps'),
+                  state.isLoading
+                      ? const Center(child: CircularProgressIndicator())
+                      : Text(state.value!.length.toString())
+                ],
+              ),
             )
           ]),
       body: Padding(
           padding: const EdgeInsets.only(top: 30.0),
           child: Column(
             children: [
-              const AppsSearchWidget(),
+              const SearchWidget(
+                filter: SearchWidgetFilter.apps,
+              ),
               Expanded(child: Builder(
                 builder: (BuildContext context) {
                   if (state.isLoading) {
@@ -75,21 +98,7 @@ class _DataStorageScreenState extends ConsumerState<AppsScreen> {
                               child: ListTile(
                                 title: Text(state.value![index]),
                               ),
-                              onTap: () async {
-                                // set the search request to the selected app
-                                ref.watch(searchFormProvider).searchRequest[0] = state.value![index];
-                                // set the filter to apps
-                                ref.watch(searchFormProvider).filter[0] = Categories.apps;
-                                // filter atData by conditions set in searchFormProvider
-                                await ref.watch(atDataControllerProvider.notifier).getFilteredAtData();
-
-                                await Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => const BrowseScreen(
-                                          appBarColor: Colors.white,
-                                          backgroundColor: kAppsFadedColor,
-                                          textColor: Colors.black,
-                                        )));
-                              },
+                              onTap: () => _onTap(state: state, index: index),
                             ),
                             Divider(
                               color: Colors.grey.withOpacity(0.2),

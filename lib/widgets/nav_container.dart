@@ -26,7 +26,7 @@ class NavContainer extends StatelessWidget {
       case 'Items Stored':
         return navWidgetModel!.dataStorageCount;
 
-      case 'Connected atContacts':
+      case 'Connected atSigns':
         return navWidgetModel!.atContactsCount;
 
       case 'Connected Apps':

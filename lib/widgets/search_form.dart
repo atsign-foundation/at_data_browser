@@ -59,7 +59,6 @@ class _SearchFormState extends ConsumerState<SearchForm> {
 
         return AppCategoryWidget(index: widget.index);
       case Categories.atsign:
-        ref.watch(searchFormProvider).searchRequest[widget.index] = null;
         return SearchCategoryWidget(
           index: widget.index,
         );
