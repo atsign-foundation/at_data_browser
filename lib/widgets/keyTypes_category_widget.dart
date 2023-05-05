@@ -1,5 +1,6 @@
 import 'package:at_client_mobile/at_client_mobile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recase/recase.dart';
 
@@ -25,7 +26,7 @@ class _SortCategoryWidgetState extends ConsumerState<KeyTypesCategoryWidget> {
           isExpanded: true,
           underline: const SizedBox(),
           value: ref.watch(searchFormProvider).searchRequest[widget.index],
-          hint: const Text('Key Type'),
+          hint: Text(AppLocalizations.of(context)!.keyType),
           items: KeyType.values
               .map(
                 (e) => DropdownMenuItem(

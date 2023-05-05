@@ -21,10 +21,13 @@ class AuthenticationController extends StateNotifier<AsyncValue<List<String>?>> 
   }
 
   Future<String?> getCurrentAtSign() async {
-    return await ref.watch(authenticationRepositoryProvider).getCurrentAtSign();
+    return ref.watch(authenticationRepositoryProvider).getCurrentAtSign();
   }
 
   Future<AtContact> getCurrentAtContact() async {
     return await ref.watch(authenticationRepositoryProvider).getCurrentAtContact();
   }
 }
+
+final authenticationController = StateNotifierProvider<AuthenticationController, AsyncValue<List<String>?>>(
+    (ref) => AuthenticationController(ref: ref));

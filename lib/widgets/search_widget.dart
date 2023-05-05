@@ -2,6 +2,7 @@ import 'package:at_data_browser/controllers/connected_atsigns_controller.dart';
 import 'package:at_data_browser/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../controllers/apps_controller.dart';
 import '../controllers/at_data_controller.dart';
@@ -40,7 +41,7 @@ class _SearchWidgetState extends ConsumerState<SearchWidget> {
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               decoration: InputDecoration(
-                hintText: 'Search',
+                hintText: AppLocalizations.of(context)!.search,
                 border: InputBorder.none,
                 suffixIcon: IconButton(
                   icon: const Icon(Icons.search),

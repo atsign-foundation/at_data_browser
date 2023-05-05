@@ -2,6 +2,7 @@ import 'package:at_data_browser/controllers/at_data_controller.dart';
 import 'package:at_data_browser/utils/constants.dart';
 import 'package:at_data_browser/widgets/search_form.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class DataStorageScreen extends ConsumerStatefulWidget {
@@ -23,6 +24,7 @@ class _DataStorageScreenState extends ConsumerState<DataStorageScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
     final state = ref.watch(atDataControllerProvider);
     return Scaffold(
       backgroundColor: kDataStorageFadedColor,
@@ -33,11 +35,11 @@ class _DataStorageScreenState extends ConsumerState<DataStorageScreen> {
             ),
           ),
           backgroundColor: kDataStorageColor,
-          title: const Text('Data Storage'),
+          title: Text(strings.dataStorage),
           actions: [
             Column(
               children: [
-                const Text('Items Stored'),
+                Text(strings.itemsStored),
                 state.isLoading
                     ? const Center(child: CircularProgressIndicator())
                     : Text(state.value!.length.toString())

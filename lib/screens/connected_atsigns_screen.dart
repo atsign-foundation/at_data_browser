@@ -1,5 +1,6 @@
 import 'package:at_contact/at_contact.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../controllers/at_data_controller.dart';
@@ -47,6 +48,7 @@ class _DataStorageScreenState extends ConsumerState<ConnectedAtsignsScreen> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(connectedAtsignsControllerProvider);
+    final strings = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: kAtSignFadedColor,
       appBar: AppBar(
@@ -58,13 +60,13 @@ class _DataStorageScreenState extends ConsumerState<ConnectedAtsignsScreen> {
             ),
           ),
           backgroundColor: kAtSignColor,
-          title: const Text('atSigns'),
+          title: Text(strings.atSigns),
           actions: [
             FittedBox(
               child: Column(
                 children: [
-                  const Text(
-                    'Connected Atsigns',
+                  Text(
+                    strings.connectedAtsigns,
                   ),
                   state.isLoading
                       ? const Center(child: CircularProgressIndicator())

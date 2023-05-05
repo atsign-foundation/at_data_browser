@@ -1,5 +1,6 @@
 import 'package:at_data_browser/controllers/apps_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../controllers/at_data_controller.dart';
@@ -23,7 +24,7 @@ class _SortCategoryWidgetState extends ConsumerState<AppCategoryWidget> {
         child: DropdownButton<String>(
           underline: const SizedBox(),
           value: ref.watch(searchFormProvider).searchRequest[widget.index],
-          hint: const Text('Apps'),
+          hint: Text(AppLocalizations.of(context)!.apps),
           items: ref
               .watch(appsController)
               .value

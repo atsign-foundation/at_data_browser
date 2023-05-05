@@ -5,6 +5,7 @@ import 'package:at_data_browser/utils/constants.dart';
 import 'package:at_data_browser/utils/enums.dart';
 import 'package:at_data_browser/utils/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../controllers/filter_form_controller.dart';
@@ -45,6 +46,7 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(atDataControllerProvider);
+    final strings = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: widget.backgroundColor,
       appBar: AppBar(
@@ -57,17 +59,15 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
             ),
           ),
           backgroundColor: widget.appBarColor,
-          title: const Text(
-            'Browse',
-          ),
+          title: Text(strings.browse),
           actions: [
             Column(
               children: [
-                const Text(
-                  'Items Stored',
+                Text(
+                  strings.itemsStored,
                 ),
                 state.isLoading
-                    ? const Center(child: CircularProgressIndicator())
+                    ? const Expanded(child: CircularProgressIndicator())
                     : Text(state.value!.length.toString())
               ],
             )
@@ -95,7 +95,7 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
                     });
                   },
                   icon: const Icon(Icons.add_circle_outline),
-                  label: const Text('Add Filter')),
+                  label: Text(strings.addFilter)),
               const Expanded(
                 child: Divider(
                   color: Colors.black,

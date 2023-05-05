@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 const kDataStorageColor = Color(0xFF57A8B5);
-const kDataStorageFadedColor = Color(0xFFA4CACD);
+const kDataStorageFadedColor = Color.fromARGB(255, 211, 236, 238);
 const kAtSignColor = Color(0xFFE46B48);
 const kAtSignFadedColor = Color.fromARGB(255, 252, 199, 184);
 const kAppsColor = Color(0xFFE8B74E);

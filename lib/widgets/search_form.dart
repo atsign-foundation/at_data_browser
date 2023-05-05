@@ -6,6 +6,7 @@ import 'package:at_data_browser/widgets/search_category_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recase/recase.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../controllers/apps_controller.dart';
 import '../controllers/filter_form_controller.dart';
@@ -82,6 +83,8 @@ class _SearchFormState extends ConsumerState<SearchForm> {
 
   @override
   Widget build(BuildContext context) {
+
+    
     return SizedBox(
       height: 50,
       child: Row(
@@ -94,7 +97,7 @@ class _SearchFormState extends ConsumerState<SearchForm> {
                 child: DropdownButton<Categories>(
                   underline: const SizedBox(),
                   value: ref.watch(searchFormProvider).filter[widget.index]!,
-                  hint: const Text('Category'),
+                  hint: Text(AppLocalizations.of(context)!.category),
                   items: Categories.values
                       .map(
                         (e) => DropdownMenuItem(

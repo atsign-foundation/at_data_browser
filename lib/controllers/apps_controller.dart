@@ -1,6 +1,8 @@
 import 'dart:developer';
 
+import 'package:at_data_browser/data/navigation_service.dart';
 import 'package:at_data_browser/domain.dart/at_data.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/at_data_repository.dart';
@@ -44,7 +46,7 @@ class AppController extends StateNotifier<AsyncValue<List<String>>> {
   }
 
   String getNameSpacesCountString(List<AtData> atDataList) {
-    return state.value?.length.toString() ?? 'NA';
+    return state.value?.length.toString() ?? AppLocalizations.of(NavigationService.navKey.currentContext!)!.na;
   }
 
   Future<void> getFilteredConnectedApps(String value) async {

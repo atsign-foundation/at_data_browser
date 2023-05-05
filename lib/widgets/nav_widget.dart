@@ -1,12 +1,13 @@
 import 'package:at_data_browser/screens/apps_screen.dart';
+import 'package:at_data_browser/screens/browse_screen.dart';
 import 'package:at_data_browser/screens/connected_atsigns_screen.dart';
 import 'package:at_data_browser/utils/constants.dart';
 import 'package:at_data_browser/widgets/nav_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../controllers/nav_widget_controller.dart';
-import '../screens/data_storage_screen.dart';
 
 class NavWidget extends ConsumerStatefulWidget {
   const NavWidget({super.key});
@@ -27,6 +28,7 @@ class _NavWidgetState extends ConsumerState<NavWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
     final navWidgetModel = ref.watch(navWidgetController).value;
     return SizedBox(
       height: 225,
@@ -37,12 +39,12 @@ class _NavWidgetState extends ConsumerState<NavWidget> {
           Positioned(
             height: 225,
             child: NavContainer(
-              name: 'Data Storage',
-              titleCount: 'Items Stored',
+              name: strings.dataStorage,
+              titleCount: strings.itemsStored,
               navWidgetModel: navWidgetModel,
               color: kDataStorageColor,
               onTap: () {
-                Navigator.pushNamed(context, DataStorageScreen.route);
+                Navigator.pushNamed(context, BrowseScreen.route);
               },
             ),
           ),
@@ -50,8 +52,8 @@ class _NavWidgetState extends ConsumerState<NavWidget> {
             height: 150,
             // top: 90,
             child: NavContainer(
-              name: 'atSigns',
-              titleCount: 'Connected atSigns',
+              name: strings.atSigns,
+              titleCount: strings.connectedAtsigns,
               navWidgetModel: navWidgetModel,
               color: kAtSignColor,
               onTap: () {
@@ -62,8 +64,8 @@ class _NavWidgetState extends ConsumerState<NavWidget> {
           Positioned(
             height: 75,
             child: NavContainer(
-              name: 'Apps',
-              titleCount: 'Connected Apps',
+              name: strings.apps,
+              titleCount: strings.connectedApps,
               navWidgetModel: navWidgetModel,
               color: kAppsColor,
               onTap: () {

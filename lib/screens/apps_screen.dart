@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../controllers/apps_controller.dart';
@@ -48,6 +49,7 @@ class _DataStorageScreenState extends ConsumerState<AppsScreen> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(appsController);
+    final strings = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: kAppsFadedColor,
       appBar: AppBar(
@@ -59,12 +61,12 @@ class _DataStorageScreenState extends ConsumerState<AppsScreen> {
             ),
           ),
           backgroundColor: kAppsColor,
-          title: const Text('Apps'),
+          title: Text(strings.apps),
           actions: [
             FittedBox(
               child: Column(
                 children: [
-                  const Text('Connected Apps'),
+                  Text(strings.connectedApps),
                   state.isLoading
                       ? const Center(child: CircularProgressIndicator())
                       : Text(state.value!.length.toString())

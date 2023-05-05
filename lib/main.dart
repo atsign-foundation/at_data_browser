@@ -7,10 +7,12 @@ import 'package:at_data_browser/screens/apps_screen.dart';
 import 'package:at_data_browser/screens/browse_screen.dart';
 import 'package:at_data_browser/screens/connected_atsigns_screen.dart';
 import 'package:at_data_browser/screens/data_storage_screen.dart';
+import 'package:at_data_browser/screens/settings_screen.dart';
 import 'package:at_data_browser/utils/theme.dart';
 import 'package:at_onboarding_flutter/at_onboarding_flutter.dart';
 import 'package:at_utils/at_logger.dart' show AtSignLogger;
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart' show getApplicationSupportDirectory;
 
@@ -59,48 +61,54 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorKey: NavigationService.navKey,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       theme: AppTheme.light(),
       // * The onboarding screen (first screen)
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('MyApp'),
-        ),
-        body: Builder(
-          builder: (context) => Center(
-            child: ElevatedButton(
-              onPressed: () async {
-                AtOnboardingResult onboardingResult = await AtOnboarding.onboard(
-                  context: context,
-                  config: AtOnboardingConfig(
-                    atClientPreference: await futurePreference,
-                    rootEnvironment: AtEnv.rootEnvironment,
-                    domain: AtEnv.rootDomain,
-                    appAPIKey: AtEnv.appApiKey,
-                  ),
-                );
-                switch (onboardingResult.status) {
-                  case AtOnboardingResultStatus.success:
-                    _goLocalData(context);
-                    initializeContactsService(rootDomain: AtEnv.rootDomain);
-                    break;
-                  case AtOnboardingResultStatus.error:
-                    _handleError(context);
-                    break;
-                  case AtOnboardingResultStatus.cancel:
-                    break;
-                }
-              },
-              child: const Text('Onboard an @sign'),
+      home: Builder(builder: (context) {
+        final strings = AppLocalizations.of(context)!;
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(strings.atDataBrowser),
+          ),
+          body: Builder(
+            builder: (context) => Center(
+              child: ElevatedButton(
+                onPressed: () async {
+                  AtOnboardingResult onboardingResult = await AtOnboarding.onboard(
+                    context: context,
+                    config: AtOnboardingConfig(
+                      atClientPreference: await futurePreference,
+                      rootEnvironment: AtEnv.rootEnvironment,
+                      domain: AtEnv.rootDomain,
+                      appAPIKey: AtEnv.appApiKey,
+                    ),
+                  );
+                  switch (onboardingResult.status) {
+                    case AtOnboardingResultStatus.success:
+                      _goLocalData(context);
+                      initializeContactsService(rootDomain: AtEnv.rootDomain);
+                      break;
+                    case AtOnboardingResultStatus.error:
+                      _handleError(context);
+                      break;
+                    case AtOnboardingResultStatus.cancel:
+                      break;
+                  }
+                },
+                child: Text(strings.onboardAnAtsign),
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      }),
       routes: {
         HomeScreen.route: (_) => const HomeScreen(),
         DataStorageScreen.route: (_) => const DataStorageScreen(),
         ConnectedAtsignsScreen.route: (_) => const ConnectedAtsignsScreen(),
         AppsScreen.route: (_) => const AppsScreen(),
         BrowseScreen.route: (_) => const BrowseScreen(),
+        SettingsScreen.route: (_) => const SettingsScreen(),
       },
     );
   }
@@ -111,9 +119,9 @@ class _MyAppState extends State<MyApp> {
 
   void _handleError(context) {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
+      SnackBar(
         backgroundColor: Colors.red,
-        content: Text('An error has occurred'),
+        content: Text(AppLocalizations.of(context)!.anErrorHasOccurred),
       ),
     );
   }

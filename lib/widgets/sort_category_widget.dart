@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recase/recase.dart';
 
@@ -18,13 +19,14 @@ class SortCategoryWidget extends ConsumerStatefulWidget {
 class _SortCategoryWidgetState extends ConsumerState<SortCategoryWidget> {
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: DropdownButton<String>(
           underline: const SizedBox(),
           value: ref.watch(searchFormProvider).searchRequest[widget.index],
-          hint: const Text('Sort By'),
+          hint: Text(strings.sortBy),
           items: SortOptions.values
               .map(
                 (e) => DropdownMenuItem(
