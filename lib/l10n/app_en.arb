@@ -26,7 +26,7 @@
     "keyType" : "Key Type",
     "isRef" : "isRef",
     "key" : "key",
-    "hashCode" : "hashCode",
+    "hashCodeCustom" : "hashCode",
     "isLocal" : "isLocal",
     "namespace" : "namespace",
     "runTimeType" : "runTimeType",

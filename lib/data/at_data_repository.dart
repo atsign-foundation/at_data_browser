@@ -8,7 +8,7 @@ import 'package:at_contacts_flutter/services/contact_service.dart';
 import 'package:at_data_browser/domain.dart/at_data.dart';
 import 'package:at_utils/at_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:riverpod/riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// A singleton that makes all the network calls to the @platform.
 class AtDataRepository {

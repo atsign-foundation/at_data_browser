@@ -1,5 +1,5 @@
 import 'package:at_contact/at_contact.dart';
-import 'package:riverpod/riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/authentication_repository.dart';
 import '../data/contact_repository.dart';

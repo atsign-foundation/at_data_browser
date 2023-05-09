@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:at_data_browser/controllers/at_data_controller.dart';
+import 'package:at_data_browser/controllers/home_screen_controller.dart';
+import 'package:at_data_browser/controllers/nav_widget_controller.dart';
 import 'package:at_data_browser/utils/constants.dart';
 import 'package:at_data_browser/utils/enums.dart';
 import 'package:at_data_browser/utils/sizes.dart';
@@ -109,6 +111,8 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
               onRefresh: () async {
                 // reset atData to show all data.
                 await ref.watch(atDataControllerProvider.notifier).getData();
+                await ref.watch(homeScreenControllerProvider.notifier).getData();
+                await ref.watch(navWidgetController.notifier).getData();
               },
             ),
           )
