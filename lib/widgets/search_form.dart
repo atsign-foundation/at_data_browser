@@ -4,14 +4,14 @@ import 'package:at_data_browser/widgets/app_category_widget.dart';
 import 'package:at_data_browser/widgets/data_range_category_widget.dart';
 import 'package:at_data_browser/widgets/search_category_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recase/recase.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../controllers/apps_controller.dart';
 import '../controllers/filter_form_controller.dart';
 import '../utils/enums.dart';
-import 'keyTypes_category_widget.dart';
+import 'key_types_category_widget.dart';
 import 'sort_category_widget.dart';
 
 class SearchForm extends ConsumerStatefulWidget {
@@ -83,8 +83,6 @@ class _SearchFormState extends ConsumerState<SearchForm> {
 
   @override
   Widget build(BuildContext context) {
-
-    
     return SizedBox(
       height: 50,
       child: Row(

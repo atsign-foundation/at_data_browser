@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/at_data_repository.dart';
 import '../data/contact_repository.dart';
 
-/// A Dude class that controls the UI update when the [AtDataRepository] methods are called.
+/// A controller class that controls the UI update when the [AtDataRepository] methods are called.
 class ConnectedAtsignsController extends StateNotifier<AsyncValue<List<AtContact>?>> {
   final Ref ref;
 
@@ -12,20 +12,23 @@ class ConnectedAtsignsController extends StateNotifier<AsyncValue<List<AtContact
     getData();
   }
 
-  /// Get dudes sent to the current astign.
+  /// Get list of atsigns associated with the current atsign.
   Future<void> getData() async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async => await ref.watch(contactRepositoryProvider).getContactList());
   }
 
+  /// Get the count of atsigns associated with the current atsign as a string.
   String connectedAtsignsCountString() {
     return state.value?.length.toString() ?? 'NA';
   }
 
+  /// Get the count of atsigns associated with the current atsign as an int.
   int connectedAtsignsCount() {
     return state.value?.length ?? 0;
   }
 
+  /// Get the contacts associated with the current atsign that contains the input.
   Future<void> getFilteredConnectedAtsign(String value) async {
     await getData();
     state = AsyncValue.data(
@@ -36,42 +39,9 @@ class ConnectedAtsignsController extends StateNotifier<AsyncValue<List<AtContact
       ).toList(),
     );
   }
-
-  // Future<void> deleteContact(String atSign) async {
-  //   bool result = await ContactsRepository().deleteContact(atSign);
-  //   result
-  //       ? await getContacts()
-  //       : SnackBars.errorSnackBar(
-  //           content: 'Contact not deleted',
-  //         );
-  //   notifyListeners();
-  // }
-
-  // /// Get favorite contacts for the current atsign.
-  // Future<void> getFavoriteContacts() async {
-  //   await getContacts();
-  //   _favoriteContacts = _contacts.where((contact) => contact.favourite == true).toList();
-  //   notifyListeners();
-  // }
-
-  // Future<void> addContacts(String atSign, String? nickname) async {
-  //   bool result = await ContactsRepository().addContact(atSign, nickname);
-  //   result
-  //       ? await getContacts()
-  //       : SnackBars.errorSnackBar(
-  //           content: 'Error adding atsign, atsign does no exist',
-  //         );
-  //   notifyListeners();
-  // }
-
-  // /// Mark AtContact favourite property as true or false
-  // Future<void> markUnmarkFavorites(AtContact contact) async {
-  //   bool result = await ContactsRepository().markUnmarkFavoriteContact(contact);
-  //   result ? await getFavoriteContacts() : SnackBars.errorSnackBar(content: 'Error adding atsign, atsign may no exist');
-  //   notifyListeners();
-  // }
 }
 
+/// A provider that exposes the [ConnectedAtsignsController] to the app.
 final connectedAtsignsControllerProvider =
     StateNotifierProvider<ConnectedAtsignsController, AsyncValue<List<AtContact>?>>(
         (ref) => ConnectedAtsignsController(ref: ref));

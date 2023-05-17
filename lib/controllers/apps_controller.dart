@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/at_data_repository.dart';
 
-/// A Dude class that controls the UI update when the [AtDataRepository] methods are called.
+/// A controller class that controls the UI update when the [AtDataRepository] methods are called.
 class AppController extends StateNotifier<AsyncValue<List<String>>> {
   final Ref ref;
 
@@ -15,7 +15,7 @@ class AppController extends StateNotifier<AsyncValue<List<String>>> {
     getData();
   }
 
-  /// Get dudes sent to the current astign.
+  /// Get unique list of app/namespaces associated with the current atsign.
   Future<void> getData() async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
@@ -30,25 +30,17 @@ class AppController extends StateNotifier<AsyncValue<List<String>>> {
     });
   }
 
-  Future<List<String>> getNamespace() async {
-    final atDataList = await ref.watch(dataRepositoryProvider).getData();
-    List<String> nameSpaces = [];
-    for (var atData in atDataList) {
-      if (atData.atKey.namespace != null) {
-        nameSpaces.add(atData.atKey.namespace!);
-      }
-    }
-    return nameSpaces.toSet().toList();
-  }
-
+  /// Get the count of apps/namespaces associated with the current atsign.
   int itemsStoredCount(List<AtData> atDataList) {
     return state.value?.length ?? 0;
   }
 
+  /// Get the number of apps/namespaces associated with the current atsign as a string.
   String getNameSpacesCountString(List<AtData> atDataList) {
     return state.value?.length.toString() ?? AppLocalizations.of(NavigationService.navKey.currentContext!)!.na;
   }
 
+  /// Get the apps/namespaces associated with the current atsign that contains the input.
   Future<void> getFilteredConnectedApps(String value) async {
     log('filter called');
     await getData();
@@ -62,4 +54,5 @@ class AppController extends StateNotifier<AsyncValue<List<String>>> {
   }
 }
 
+/// A provider that exposes the [AppController] to the app.
 final appsController = StateNotifierProvider<AppController, AsyncValue<List<String>>>((ref) => AppController(ref: ref));

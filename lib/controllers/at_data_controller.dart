@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/at_data_repository.dart';
 
-/// A Dude class that controls the UI update when the [AtDataRepository] methods are called.
+/// A Controller class that controls the UI update when the [AtDataRepository] methods are called.
 class AtDataController extends StateNotifier<AsyncValue<List<AtData>>> {
   final Ref ref;
 
@@ -16,36 +16,41 @@ class AtDataController extends StateNotifier<AsyncValue<List<AtData>>> {
     getData();
   }
 
-  /// Get dudes sent to the current astign.
+  /// Get list of [AtData] associated with the current astign.
   Future<void> getData() async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async => await ref.watch(dataRepositoryProvider).getData());
   }
 
+  /// Get the number of [AtData] associated with the current atsign as a string.
   String itemsStoredCountString() {
     return state.value?.length.toString() ?? 'NA';
   }
 
+  /// Get the number of [AtData] associated with the current atsign.
   int itemsStoredCount() {
     return state.value?.length ?? 0;
   }
 
-  /// Deletes dudes sent to the current atsign.
-  ///
-  Future<void> deleteData(AtData atData) async {
+  /// Deletes the [AtKey] associated with the [AtData].
+  Future<bool> delete(AtData atData) async {
     state = const AsyncValue.loading();
-    await ref.watch(dataRepositoryProvider).deleteData(atData);
+    final result = await ref.watch(dataRepositoryProvider).deleteData(atData);
     state = await AsyncValue.guard(() async => await ref.watch(dataRepositoryProvider).getData());
+    return result;
   }
 
+  /// Deletes all [AtData] associated with the current atsign.
   Future<void> deleteAllData() async {
     state = const AsyncValue.loading();
     await ref.watch(dataRepositoryProvider).deleteAllData();
     state = await AsyncValue.guard(() async => await ref.watch(dataRepositoryProvider).getData());
   }
 
+  /// Get date from the current [DateTime].
   DateTime _getDate(DateTime dateTime) => DateTime(dateTime.year, dateTime.month, dateTime.day);
 
+  /// Get the [AtData] associated with the current atsign that contains the input.
   Future<void> getFilteredAtData() async {
     var searchFormModel = ref.watch(searchFormProvider);
     await getData();
@@ -157,5 +162,6 @@ class AtDataController extends StateNotifier<AsyncValue<List<AtData>>> {
   }
 }
 
+/// A provider that exposes the [AtDataController] to the app.
 final atDataControllerProvider =
     StateNotifierProvider<AtDataController, AsyncValue<List<AtData>>>((ref) => AtDataController(ref: ref));

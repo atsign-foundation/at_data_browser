@@ -17,7 +17,7 @@ class DateRangeCategoryWidget extends ConsumerStatefulWidget {
   }) : super(key: key);
 
   final String labelText;
-  final index;
+  final int index;
   // final String? Function(String? value) validator;
   // final void Function(DateTime? value) onSaved;
   // final String? initialValue;

@@ -28,6 +28,7 @@ class _DataStorageScreenState extends ConsumerState<ConnectedAtsignsScreen> {
     super.initState();
   }
 
+  /// Navigate to browse screen showing atkeys filtered by the selected atsign.
   Future<void> _onTap({required AsyncValue<List<AtContact>?> state, required int index}) async {
     // set the search request to the selected app
     ref.watch(searchFormProvider).searchRequest[0] = state.value![index].atSign;
@@ -37,12 +38,14 @@ class _DataStorageScreenState extends ConsumerState<ConnectedAtsignsScreen> {
     // filter atData by conditions set in searchFormProvider
     await ref.watch(atDataControllerProvider.notifier).getFilteredAtData();
 
-    await Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const BrowseScreen(
-              appBarColor: Colors.white,
-              backgroundColor: kAtSignFadedColor,
-              textColor: Colors.black,
-            )));
+    if (context.mounted) {
+      await Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const BrowseScreen(
+                appBarColor: Colors.white,
+                backgroundColor: kAtSignFadedColor,
+                textColor: Colors.black,
+              )));
+    }
   }
 
   @override

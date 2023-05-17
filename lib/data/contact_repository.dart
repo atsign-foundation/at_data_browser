@@ -83,4 +83,5 @@ class ContactsRepository {
   }
 }
 
+/// A provider that exposes an instance of [ContactsRepository] to the app.
 final contactRepositoryProvider = Provider<ContactsRepository>((ref) => ContactsRepository());

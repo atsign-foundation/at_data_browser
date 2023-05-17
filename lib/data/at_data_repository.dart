@@ -1,5 +1,6 @@
 // 🎯 Dart imports:
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:at_app_flutter/at_app_flutter.dart';
 // ignore: implementation_imports
@@ -10,7 +11,7 @@ import 'package:at_utils/at_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-/// A singleton that makes all the network calls to the @platform.
+/// A singleton that makes network calls to the @platform to get data.
 class AtDataRepository {
   AtDataRepository();
   final AtSignLogger _logger = AtSignLogger(AtEnv.appNamespace);
@@ -20,20 +21,10 @@ class AtDataRepository {
 
   static var contactService = ContactService();
 
-  /// Receives all dudes sent to the current atsign.
+  /// Receives all [AtData] sent to the current atsign.
   Future<List<AtData>> getData() async {
-    // String? currentAtSign = atClient!.getCurrentAtSign();
-    // @blizzard30:some_uuid.at_skeleton_app@assault30
-    // @blizzard30:signing_privatekey@blizzard30
-    // List<String> sendersAtsignList = await getSenderAtsigns();
-    // for (var atsign in sendersAtsignList) {
-    //   atsign = atsign.replaceAll('@', '');
-    // }
     List<AtKey> receivedKeysList = [];
-    var key = await atClientManager.atClient.getAtKeys(
-        // regex: '^cached:.*@.+\$',
-        // sharedBy: atsign,
-        );
+    var key = await atClientManager.atClient.getAtKeys();
 
     receivedKeysList.addAll(key);
 
@@ -50,12 +41,11 @@ class AtDataRepository {
     return data;
   }
 
-  /// Delete dude sent to the current atsign.
+  /// Delete [AtKey] associated with the [AtData]
   Future<bool> deleteData(AtData atData) async {
     try {
-      List<AtKey> dudeAtKey = await atClientManager.atClient.getAtKeys(regex: atData.atKey.key);
-      bool isDeleted = await atClientManager.atClient.delete(dudeAtKey[0]);
-
+      bool isDeleted = await atClientManager.atClient.delete(atData.atKey);
+      log('isDeleted: $isDeleted');
       return isDeleted;
     } on AtClientException catch (atClientExcep) {
       _logger.severe('❌ AtClientException : ${atClientExcep.message}');
@@ -66,6 +56,7 @@ class AtDataRepository {
     }
   }
 
+  /// Delete all [AtKey]s associated with the current atsign.
   Future<bool> deleteAllData() async {
     // will delate all instances that match the key
 
@@ -79,4 +70,5 @@ class AtDataRepository {
   }
 }
 
+/// A provider that exposes the [AtDataRepository] to the app.
 final dataRepositoryProvider = Provider<AtDataRepository>((ref) => AtDataRepository());

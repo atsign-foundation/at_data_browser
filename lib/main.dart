@@ -86,11 +86,11 @@ class _MyAppState extends State<MyApp> {
                   );
                   switch (onboardingResult.status) {
                     case AtOnboardingResultStatus.success:
-                      _goLocalData(context);
+                      if (context.mounted) _goLocalData(context);
                       initializeContactsService(rootDomain: AtEnv.rootDomain);
                       break;
                     case AtOnboardingResultStatus.error:
-                      _handleError(context);
+                      if (context.mounted) _handleError(context);
                       break;
                     case AtOnboardingResultStatus.cancel:
                       break;
@@ -124,5 +124,6 @@ class _MyAppState extends State<MyApp> {
         content: Text(AppLocalizations.of(context)!.anErrorHasOccurred),
       ),
     );
+    const Dialog();
   }
 }

@@ -30,6 +30,7 @@ class _AtSignBottomSheetState extends ConsumerState<AtSignBottomSheet> {
   Widget build(BuildContext context) {
     final state = ref.watch(authenticationController);
     final strings = AppLocalizations.of(context)!;
+    SizeConfig().init(context);
     return Stack(
       children: [
         Positioned(
@@ -40,7 +41,7 @@ class _AtSignBottomSheetState extends ConsumerState<AtSignBottomSheet> {
               borderRadius: const BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
               child: Container(
                 height: 155.toHeight < 155 ? 155 : 150.toHeight,
-                width: MediaQuery.of(context).size.width,
+                width: SizeConfig().screenWidth,
                 color: Colors.white,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

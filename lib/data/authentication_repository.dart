@@ -152,6 +152,7 @@ class AuthenticationRepository {
   }
 }
 
+/// A provider that exposes an [AuthenticationRepository] instance to the app.
 final authenticationRepositoryProvider = Provider<AuthenticationRepository>((ref) {
   return AuthenticationRepository();
 });

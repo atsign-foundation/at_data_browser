@@ -27,6 +27,7 @@ class _DataStorageScreenState extends ConsumerState<AppsScreen> {
     super.initState();
   }
 
+  /// Navigate to browse screen showing atkeys filtered by the selected apps.
   Future<void> _onTap({required AsyncValue<List<String>> state, required int index}) async {
     // set the search request to the selected app
     ref.watch(searchFormProvider).searchRequest[0] = state.value![index];
@@ -35,15 +36,17 @@ class _DataStorageScreenState extends ConsumerState<AppsScreen> {
     // filter atData by conditions set in searchFormProvider
     await ref.watch(atDataControllerProvider.notifier).getFilteredAtData();
 
-    await Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const BrowseScreen(
-          appBarColor: Colors.white,
-          backgroundColor: kAppsFadedColor,
-          textColor: Colors.black,
+    if (context.mounted) {
+      await Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const BrowseScreen(
+            appBarColor: Colors.white,
+            backgroundColor: kAppsFadedColor,
+            textColor: Colors.black,
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
 
   @override

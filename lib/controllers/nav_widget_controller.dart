@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/at_data_repository.dart';
 
-/// A Dude class that controls the UI update when the [AtDataRepository] methods are called.
+/// A controller class that controls the UI update when the [AtDataRepository] methods are called.
 class NavWidgetController extends StateNotifier<AsyncValue<NavWidgetModel>> {
   final Ref ref;
 
@@ -12,7 +12,7 @@ class NavWidgetController extends StateNotifier<AsyncValue<NavWidgetModel>> {
     getData();
   }
 
-  /// Get dudes sent to the current astign.
+  /// Get [NavWidgetModel] associated the current atsign.
   Future<void> getData() async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
@@ -27,10 +27,12 @@ class NavWidgetController extends StateNotifier<AsyncValue<NavWidgetModel>> {
     });
   }
 
+  /// Get the number of [AtData] associated wit the current atsign.
   String itemsStoredCount(List<AtData> atDataList) {
     return atDataList.length.toString();
   }
 
+  /// Get the number of apps/namespaces associated with the current atsign as a string.
   String getNameSpacesCount(List<AtData> atDataList) {
     List<String?> nameSpaces = [];
     for (var atData in atDataList) {
@@ -40,6 +42,7 @@ class NavWidgetController extends StateNotifier<AsyncValue<NavWidgetModel>> {
   }
 }
 
+/// A class that holds the data for the [NavWidgetController].
 class NavWidgetModel {
   NavWidgetModel({required this.dataStorageCount, required this.atContactsCount, required this.namespacesCount});
   final String dataStorageCount;
@@ -47,5 +50,6 @@ class NavWidgetModel {
   final String namespacesCount;
 }
 
+/// A provider that exposes the [NavWidgetController] to the app.
 final navWidgetController =
     StateNotifierProvider<NavWidgetController, AsyncValue<NavWidgetModel>>((ref) => NavWidgetController(ref: ref));

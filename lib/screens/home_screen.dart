@@ -31,7 +31,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     super.initState();
   }
 
-  Future<void> _navigateToInvaldKey() async {
+  /// Navigate to screen to see invalid keys.
+  Future<void> _navigateToInvalidKey() async {
     // set the search request to the selected app
     ref.watch(searchFormProvider).searchRequest[0] = KeyType.invalidKey.name;
     // set the filter to apps
@@ -39,14 +40,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     // filter atData by conditions set in searchFormProvider
     await ref.watch(atDataControllerProvider.notifier).getFilteredAtData();
 
-    await Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const BrowseScreen(
-          appBarColor: Colors.white,
-          textColor: Colors.black,
+    if (context.mounted) {
+      await Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const BrowseScreen(
+            appBarColor: Colors.white,
+            textColor: Colors.black,
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
 
   @override
@@ -84,7 +87,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
                 gapH16,
                 GestureDetector(
-                  onTap: () async => _navigateToInvaldKey(),
+                  onTap: () async => _navigateToInvalidKey(),
                   child: NotificationListTile.warning(
                     subTitle: '${homeScreenControllerModel?.malformedKeys.length ?? 0} ${strings.invalidKeyMessage}',
                   ),
