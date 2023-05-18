@@ -34,7 +34,7 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
   @override
   void initState() {
     WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) async {
-      // await ref.watch(atDataControllerProvider.notifier).getData();
+      await ref.watch(atDataControllerProvider.notifier).getData();
     });
     super.initState();
   }
