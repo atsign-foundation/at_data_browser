@@ -1,4 +1,4 @@
-package com.example.at_data_browser
+package com.atsign.atDataBrowser
 
 import io.flutter.embedding.android.FlutterActivity
 
