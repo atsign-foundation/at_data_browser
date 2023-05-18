@@ -27,31 +27,28 @@ class SearchForm extends ConsumerStatefulWidget {
 
 class _SearchFormState extends ConsumerState<SearchForm> {
   Future<Widget> getCategoryWidget(Categories category) async {
+    // clear search request
+    ref.watch(searchFormProvider).searchRequest[widget.index] = null;
     switch (category) {
       case Categories.sort:
-        ref.watch(searchFormProvider).searchRequest[widget.index] = null;
         return SortCategoryWidget(
           index: widget.index,
         );
       case Categories.contains:
-        ref.watch(searchFormProvider).searchRequest[widget.index] = null;
         return SearchCategoryWidget(
           index: widget.index,
         );
       case Categories.dateCreated:
-        ref.watch(searchFormProvider).searchRequest[widget.index] = null;
         return DateRangeCategoryWidget(
           labelText: 'Date Range',
           index: widget.index,
         );
       case Categories.dateModified:
-        ref.watch(searchFormProvider).searchRequest[widget.index] = null;
         return DateRangeCategoryWidget(
           labelText: 'Date Range',
           index: widget.index,
         );
       case Categories.apps:
-        // ref.watch(searchFormProvider).searchRequest[widget.index] = null;
         Future(
           () async {
             await ref.read(appsController.notifier).getData();
@@ -64,17 +61,14 @@ class _SearchFormState extends ConsumerState<SearchForm> {
           index: widget.index,
         );
       case Categories.keyTypes:
-        ref.watch(searchFormProvider).searchRequest[widget.index] = null;
         return KeyTypesCategoryWidget(
           index: widget.index,
         );
       case Categories.sharedWith:
-        ref.watch(searchFormProvider).searchRequest[widget.index] = null;
         return SearchCategoryWidget(
           index: widget.index,
         );
       case Categories.sharedBy:
-        ref.watch(searchFormProvider).searchRequest[widget.index] = null;
         return SearchCategoryWidget(
           index: widget.index,
         );
