@@ -16,20 +16,23 @@ class SettingsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 300,
-      height: 53,
+      width: double.infinity,
+      height: 60,
       decoration: BoxDecoration(color: kBrowserColor, borderRadius: BorderRadius.circular(10)),
-      child: ListTile(
-        leading: Icon(
-          icon,
-          color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        child: ListTile(
+          leading: Icon(
+            icon,
+            color: Colors.white,
+          ),
+          title: Text(
+            title,
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 18, color: Colors.white),
+          ),
+          onTap: onTap,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         ),
-        title: Text(
-          title,
-          style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 18, color: Colors.white),
-        ),
-        onTap: onTap,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
     );
   }
