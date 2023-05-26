@@ -31,7 +31,10 @@ class SettingsScreen extends StatelessWidget {
           ),
         ),
         iconTheme: Theme.of(context).iconTheme.copyWith(color: kBrowserColor),
-        titleTextStyle: Theme.of(context).textTheme.titleLarge!.copyWith(color: kBrowserColor, fontWeight: FontWeight.w600),
+        titleTextStyle: Theme.of(context)
+            .textTheme
+            .titleLarge!
+            .copyWith(color: kBrowserColor, fontWeight: FontWeight.w600),
         title: Padding(
           padding: EdgeInsets.symmetric(vertical: appPadding),
           child: Text(
@@ -42,98 +45,101 @@ class SettingsScreen extends StatelessWidget {
       body: SafeArea(
           child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              // Text(
-              //   ContactService().currentAtsign,
-              //   style: Theme.of(context).textTheme.bodyLarge,
-              // ),
-              // Text(
-              //   ContactService().loggedInUserDetails!.tags!['name'] ?? '',
-              //   style: Theme.of(context).textTheme.displaySmall,
-              // ),
-              // const SizedBox(
-              //   height: 30,
-              // ),
-              // SettingsButton(
-              //   icon: Icons.block_outlined,
-              //   title: 'Blocked Contacts',
-              //   onTap: () {
-              //     Navigator.of(context).pushNamed(CustomBlockedScreen.routeName);
-              //   },
-              // ),
-              const SizedBox(
-                height: 59,
-              ),
-              SettingsButton(
-                icon: Icons.bookmark_outline,
-                title: strings.backupYourKeys,
-                onTap: () {
-            BackupKeyWidget(atsign: ContactService().currentAtsign).showBackupDialog(context);
-                },
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              SettingsButton(
-                icon: Icons.logout_rounded,
-                title: strings.switchAtsign,
-                onTap: () async {
-            await showModalBottomSheet(
-                context: NavigationService.navKey.currentContext!, builder: (context) => const AtSignBottomSheet());
-                },
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              const ResetAppButton(),
-              const SizedBox(
-                height: 34,
-              ),
-              SettingsButton(
-                icon: Icons.help_center_outlined,
-                title: strings.faq,
-                onTap: () async {
-            final Uri url = Uri.parse('https://atsign.com/faqs/');
-            if (!await launchUrl(url)) {
-              throw Exception('Could not launch $url');
-            }
-                },
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              SettingsButton(
-                icon: Icons.forum_outlined,
-                title: strings.contactUs,
-                onTap: () async {
-            Uri emailUri = Uri(
-              scheme: 'mailto',
-              path: 'atdude@atsign.com',
-            );
-            if (!await launchUrl(emailUri)) {
-              throw Exception('Could not launch $emailUri');
-            }
-                },
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              SettingsButton(
-                icon: Icons.account_balance_wallet_outlined,
-                title: strings.privacyPolicy,
-                onTap: () async {
-            final Uri url = Uri.parse('https://atsign.com/apps/atDude-privacy/');
-            if (!await launchUrl(url)) {
-              throw Exception('Could not launch $url');
-            }
-                },
-              ),
-            ],
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // Text(
+            //   ContactService().currentAtsign,
+            //   style: Theme.of(context).textTheme.bodyLarge,
+            // ),
+            // Text(
+            //   ContactService().loggedInUserDetails!.tags!['name'] ?? '',
+            //   style: Theme.of(context).textTheme.displaySmall,
+            // ),
+            // const SizedBox(
+            //   height: 30,
+            // ),
+            // SettingsButton(
+            //   icon: Icons.block_outlined,
+            //   title: 'Blocked Contacts',
+            //   onTap: () {
+            //     Navigator.of(context).pushNamed(CustomBlockedScreen.routeName);
+            //   },
+            // ),
+            const SizedBox(
+              height: 59,
             ),
-          )),
+            SettingsButton(
+              icon: Icons.bookmark_outline,
+              title: strings.backupYourKeys,
+              onTap: () {
+                BackupKeyWidget(atsign: ContactService().currentAtsign)
+                    .showBackupDialog(context);
+              },
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            SettingsButton(
+              icon: Icons.logout_rounded,
+              title: strings.switchAtsign,
+              onTap: () async {
+                await showModalBottomSheet(
+                    context: NavigationService.navKey.currentContext!,
+                    builder: (context) => const AtSignBottomSheet());
+              },
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            const ResetAppButton(),
+            const SizedBox(
+              height: 34,
+            ),
+            SettingsButton(
+              icon: Icons.help_center_outlined,
+              title: strings.faq,
+              onTap: () async {
+                final Uri url = Uri.parse('https://atsign.com/faqs/');
+                if (!await launchUrl(url)) {
+                  throw Exception('Could not launch $url');
+                }
+              },
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            SettingsButton(
+              icon: Icons.forum_outlined,
+              title: strings.contactUs,
+              onTap: () async {
+                Uri emailUri = Uri(
+                  scheme: 'mailto',
+                  path: 'atdude@atsign.com',
+                );
+                if (!await launchUrl(emailUri)) {
+                  throw Exception('Could not launch $emailUri');
+                }
+              },
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            SettingsButton(
+              icon: Icons.account_balance_wallet_outlined,
+              title: strings.privacyPolicy,
+              onTap: () async {
+                final Uri url =
+                    Uri.parse('https://atsign.com/apps/atDude-privacy/');
+                if (!await launchUrl(url)) {
+                  throw Exception('Could not launch $url');
+                }
+              },
+            ),
+          ],
+        ),
+      )),
     );
   }
 }
