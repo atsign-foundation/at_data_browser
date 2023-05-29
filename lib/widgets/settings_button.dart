@@ -1,4 +1,5 @@
 import 'package:at_data_browser/utils/constants.dart';
+import 'package:at_data_browser/utils/sizes.dart';
 import 'package:flutter/material.dart';
 
 class SettingsButton extends StatelessWidget {
@@ -20,7 +21,7 @@ class SettingsButton extends StatelessWidget {
       height: 60,
       decoration: BoxDecoration(color: kBrowserColor, borderRadius: BorderRadius.circular(10)),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
+        padding: const EdgeInsets.symmetric(horizontal: Sizes.p12),
         child: ListTile(
           leading: Icon(
             icon,

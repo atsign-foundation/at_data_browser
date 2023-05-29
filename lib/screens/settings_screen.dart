@@ -1,5 +1,6 @@
 import 'package:at_backupkey_flutter/at_backupkey_flutter.dart';
 import 'package:at_contacts_flutter/services/contact_service.dart';
+import 'package:at_data_browser/utils/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -13,7 +14,6 @@ import '../widgets/switch_atsign.dart';
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
   static String route = 'settingsScreen';
-  final appPadding = 20.0;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class SettingsScreen extends StatelessWidget {
       appBar: AppBar(
         toolbarHeight: 74,
         leading: Padding(
-          padding: EdgeInsets.all(appPadding),
+          padding: const EdgeInsets.all(Sizes.p20),
           child: IconButton(
             icon: const Icon(Icons.arrow_back_ios),
             onPressed: () {
@@ -36,7 +36,7 @@ class SettingsScreen extends StatelessWidget {
             .titleLarge!
             .copyWith(color: kBrowserColor, fontWeight: FontWeight.w600),
         title: Padding(
-          padding: EdgeInsets.symmetric(vertical: appPadding),
+          padding: const EdgeInsets.symmetric(vertical: Sizes.p20),
           child: Text(
             strings.settings,
           ),
@@ -44,7 +44,7 @@ class SettingsScreen extends StatelessWidget {
       ),
       body: SafeArea(
           child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: Sizes.p20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
