@@ -1,5 +1,6 @@
 import 'package:at_backupkey_flutter/at_backupkey_flutter.dart';
 import 'package:at_contacts_flutter/services/contact_service.dart';
+import 'package:at_data_browser/utils/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -19,16 +20,33 @@ class SettingsScreen extends StatelessWidget {
     final strings = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 74,
+        leading: Padding(
+          padding: const EdgeInsets.all(Sizes.p20),
+          child: IconButton(
+            icon: const Icon(Icons.arrow_back_ios),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
         iconTheme: Theme.of(context).iconTheme.copyWith(color: kBrowserColor),
-        titleTextStyle: Theme.of(context).textTheme.titleLarge!.copyWith(color: kBrowserColor),
-        title: Text(
-          strings.settings,
+        titleTextStyle: Theme.of(context)
+            .textTheme
+            .titleLarge!
+            .copyWith(color: kBrowserColor, fontWeight: FontWeight.w600),
+        title: Padding(
+          padding: const EdgeInsets.symmetric(vertical: Sizes.p20),
+          child: Text(
+            strings.settings,
+          ),
         ),
       ),
       body: SafeArea(
-          child: Center(
+          child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: Sizes.p20),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // Text(
@@ -50,13 +68,14 @@ class SettingsScreen extends StatelessWidget {
             //   },
             // ),
             const SizedBox(
-              height: 15,
+              height: 59,
             ),
             SettingsButton(
               icon: Icons.bookmark_outline,
               title: strings.backupYourKeys,
               onTap: () {
-                BackupKeyWidget(atsign: ContactService().currentAtsign).showBackupDialog(context);
+                BackupKeyWidget(atsign: ContactService().currentAtsign)
+                    .showBackupDialog(context);
               },
             ),
             const SizedBox(
@@ -67,7 +86,8 @@ class SettingsScreen extends StatelessWidget {
               title: strings.switchAtsign,
               onTap: () async {
                 await showModalBottomSheet(
-                    context: NavigationService.navKey.currentContext!, builder: (context) => const AtSignBottomSheet());
+                    context: NavigationService.navKey.currentContext!,
+                    builder: (context) => const AtSignBottomSheet());
               },
             ),
             const SizedBox(
@@ -75,7 +95,7 @@ class SettingsScreen extends StatelessWidget {
             ),
             const ResetAppButton(),
             const SizedBox(
-              height: 15,
+              height: 34,
             ),
             SettingsButton(
               icon: Icons.help_center_outlined,
@@ -110,7 +130,8 @@ class SettingsScreen extends StatelessWidget {
               icon: Icons.account_balance_wallet_outlined,
               title: strings.privacyPolicy,
               onTap: () async {
-                final Uri url = Uri.parse('https://atsign.com/apps/atDude-privacy/');
+                final Uri url =
+                    Uri.parse('https://atsign.com/apps/atDude-privacy/');
                 if (!await launchUrl(url)) {
                   throw Exception('Could not launch $url');
                 }
