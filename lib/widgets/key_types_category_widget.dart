@@ -39,7 +39,7 @@ class _SortCategoryWidgetState extends ConsumerState<KeyTypesCategoryWidget> {
             setState(() {
               ref.watch(searchFormProvider).searchRequest[widget.index] = value!;
             });
-            ref.watch(atDataControllerProvider.notifier).getFilteredAtData();
+            ref.watch(filterControllerProvider.notifier).getFilteredAtData();
           },
         ),
       ),

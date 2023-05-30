@@ -41,7 +41,7 @@ class _SortCategoryWidgetState extends ConsumerState<AppCategoryWidget> {
             });
 
             // filter atData by conditions set in searchFormProvider
-            ref.watch(atDataControllerProvider.notifier).getFilteredAtData();
+            ref.watch(filterControllerProvider.notifier).getFilteredAtData();
           },
         ),
       ),

@@ -38,7 +38,7 @@ class _SearchCategroyWidgetState extends ConsumerState<SearchCategoryWidget> {
             onChanged: (value) {
               ref.watch(searchFormProvider).isConditionMet = [];
               ref.watch(searchFormProvider).searchRequest[widget.index] = value;
-              ref.watch(atDataControllerProvider.notifier).getFilteredAtData();
+              ref.watch(filterControllerProvider.notifier).getFilteredAtData();
             },
           )),
     );
