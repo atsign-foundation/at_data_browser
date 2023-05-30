@@ -80,7 +80,9 @@ class AppTheme {
   // 3
   static ThemeData light() {
     return ThemeData(
+      fontFamily: 'Poppins',
       useMaterial3: true,
+      scaffoldBackgroundColor: const Color(0xFFF9F9F9),
       // primaryColor: kPrimaryColor,
       brightness: Brightness.light,
       colorScheme: const ColorScheme.light().copyWith(
@@ -113,7 +115,7 @@ class AppTheme {
         ),
       ),
       appBarTheme: AppBarTheme(
-          foregroundColor: Colors.white, backgroundColor: Colors.white, titleTextStyle: lightTextTheme.bodyMedium),
+          foregroundColor: Colors.white, backgroundColor: const Color(0xFFF9F9F9), titleTextStyle: lightTextTheme.bodyMedium),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         foregroundColor: Color(0xFFF8C630),
         backgroundColor: Colors.black,
@@ -139,12 +141,12 @@ class AppTheme {
         ),
       ),
       dialogTheme: const DialogTheme(
-        surfaceTintColor: Colors.white,
+        surfaceTintColor: Color(0xFFF9F9F9),
       ),
 
       cardTheme: const CardTheme(
         elevation: 0,
-        surfaceTintColor: Colors.white,
+        surfaceTintColor: Color(0xFFF9F9F9),
         color: Color(0xFFF4F4F4),
       ),
     );
