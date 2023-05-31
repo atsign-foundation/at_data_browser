@@ -1,3 +1,4 @@
+import 'package:at_data_browser/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 // 00b7ff
@@ -82,7 +83,7 @@ class AppTheme {
     return ThemeData(
       fontFamily: 'Poppins',
       useMaterial3: true,
-      scaffoldBackgroundColor: const Color(0xFFF9F9F9),
+      scaffoldBackgroundColor: kPrimaryColor,
       // primaryColor: kPrimaryColor,
       brightness: Brightness.light,
       colorScheme: const ColorScheme.light().copyWith(
@@ -115,7 +116,7 @@ class AppTheme {
         ),
       ),
       appBarTheme: AppBarTheme(
-          foregroundColor: Colors.white, backgroundColor: const Color(0xFFF9F9F9), titleTextStyle: lightTextTheme.bodyMedium),
+          foregroundColor: Colors.white, backgroundColor: kPrimaryColor, titleTextStyle: lightTextTheme.bodyMedium),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         foregroundColor: Color(0xFFF8C630),
         backgroundColor: Colors.black,
@@ -141,12 +142,12 @@ class AppTheme {
         ),
       ),
       dialogTheme: const DialogTheme(
-        surfaceTintColor: Color(0xFFF9F9F9),
+        surfaceTintColor: kPrimaryColor,
       ),
 
       cardTheme: const CardTheme(
         elevation: 0,
-        surfaceTintColor: Color(0xFFF9F9F9),
+        surfaceTintColor: kPrimaryColor,
         color: Color(0xFFF4F4F4),
       ),
     );
