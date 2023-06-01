@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:at_data_browser/widgets/at_data_expansion_panel_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,7 +13,7 @@ class AtDataListWidget extends StatefulWidget {
     required this.state,
   });
 
-  final AsyncValue<List<AtData>> state;
+  final AsyncValue<List<AtData>?> state;
 
   @override
   State<AtDataListWidget> createState() => _AtDataListWidgetState();
@@ -26,40 +28,47 @@ class _AtDataListWidgetState extends State<AtDataListWidget> {
         if (widget.state.isLoading) {
           return const Center(child: CircularProgressIndicator());
         } else {
-          return SingleChildScrollView(
-            child: Card(
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-              )),
-              child: ExpansionPanelList(
-                dividerColor: kDataStorageFadedColor,
-                elevation: 0,
-                expansionCallback: (int index, bool isExpanded) {
-                  setState(() {
-                    isExpandPanel[index] = !isExpanded;
-                  });
-                },
-                children: widget.state.value!.map((e) {
+          return Card(
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            )),
+            child: ListView.builder(
+                itemBuilder: (buildContext, builderIndex) {
                   isExpandPanel.add(false);
-                  return ExpansionPanel(
-                    canTapOnHeader: true,
-                    backgroundColor: Colors.transparent,
-                    headerBuilder: (BuildContext context, bool isExpanded) {
-                      return Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(e.atKey.toString(), style: Theme.of(context).textTheme.titleSmall),
-                        ),
-                      );
+                  return ExpansionPanelList(
+                    dividerColor: kDataStorageFadedColor,
+                    elevation: 0,
+                    expansionCallback: (int index, bool isExpanded) {
+                      log(isExpanded.toString());
+                      isExpandPanel[index] = !isExpanded;
+                      setState(() {
+                        log(isExpandPanel.toString());
+                      });
                     },
-                    body: AtDataExpansionPanelList(atData: widget.state.value![widget.state.value!.indexOf(e)]),
-                    isExpanded: isExpandPanel[widget.state.value!.indexOf(e)],
+                    children: [
+                      ExpansionPanel(
+                        canTapOnHeader: true,
+                        backgroundColor: Colors.transparent,
+                        headerBuilder: (BuildContext context, bool isExpanded) {
+                          isExpandPanel[0] = isExpanded;
+
+                          return Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(widget.state.value![builderIndex].atKey.toString(),
+                                  style: Theme.of(context).textTheme.titleSmall),
+                            ),
+                          );
+                        },
+                        body: AtDataExpansionPanelList(atData: widget.state.value![builderIndex]),
+                        isExpanded: isExpandPanel[0],
+                      )
+                    ],
                   );
-                }).toList(),
-              ),
-            ),
+                },
+                itemCount: widget.state.value!.length),
           );
         }
       },

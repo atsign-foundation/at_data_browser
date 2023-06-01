@@ -1,4 +1,5 @@
 import 'package:at_client_mobile/at_client_mobile.dart';
+import 'package:at_data_browser/controllers/at_data_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/at_data_repository.dart';
@@ -16,12 +17,14 @@ class HomeScreenController extends StateNotifier<AsyncValue<HomeScreenController
   Future<void> getData() async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
-      final atData = await ref.watch(dataRepositoryProvider).getData();
+      final atData = ref.watch(atDataControllerProvider);
       final homeScreenControllerModel = HomeScreenControllerModel(
-          malformedKeys:
-              atData.where((element) => AtKey.getKeyType(element.atKey.toString()) == KeyType.invalidKey).toList(),
-          workingKeys:
-              atData.where((element) => AtKey.getKeyType(element.atKey.toString()) != KeyType.invalidKey).toList());
+          malformedKeys: atData.value!
+              .where((element) => AtKey.getKeyType(element.atKey.toString()) == KeyType.invalidKey)
+              .toList(),
+          workingKeys: atData.value!
+              .where((element) => AtKey.getKeyType(element.atKey.toString()) != KeyType.invalidKey)
+              .toList());
       return homeScreenControllerModel;
     });
   }

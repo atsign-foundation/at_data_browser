@@ -12,14 +12,45 @@ import '../data/at_data_repository.dart';
 class AtDataController extends StateNotifier<AsyncValue<List<AtData>>> {
   final Ref ref;
 
-  AtDataController({required this.ref}) : super(const AsyncValue.loading()) {
-    getData();
-  }
+  AtDataController({required this.ref}) : super(const AsyncValue.loading());
 
   /// Get list of [AtData] associated with the current astign.
   Future<void> getData() async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async => await ref.watch(dataRepositoryProvider).getData());
+  }
+
+  /// Deletes the [AtKey] associated with the [AtData].
+  Future<bool> delete(AtData atData) async {
+    state = const AsyncValue.loading();
+    final result = await ref.watch(dataRepositoryProvider).deleteData(atData);
+    state = await AsyncValue.guard(() async => await ref.watch(dataRepositoryProvider).getData());
+    return result;
+  }
+
+  /// Deletes all [AtData] associated with the current atsign.
+  Future<void> deleteAllData() async {
+    state = const AsyncValue.loading();
+    await ref.watch(dataRepositoryProvider).deleteAllData();
+    state = await AsyncValue.guard(() async => await ref.watch(dataRepositoryProvider).getData());
+  }
+}
+
+/// A provider that exposes the [AtDataController] to the app.
+final atDataControllerProvider =
+    StateNotifierProvider<AtDataController, AsyncValue<List<AtData>>>((ref) => AtDataController(ref: ref));
+
+class FilterController extends StateNotifier<AsyncValue<List<AtData>>> {
+  final Ref ref;
+
+  FilterController({required this.ref}) : super(const AsyncValue.loading()) {
+    getData();
+  }
+
+  /// Get list of [AtData] associated with the current astign.
+
+  void getData() async {
+    state = ref.watch(atDataControllerProvider);
   }
 
   /// Get the number of [AtData] associated with the current atsign as a string.
@@ -53,9 +84,11 @@ class AtDataController extends StateNotifier<AsyncValue<List<AtData>>> {
   /// Get the [AtData] associated with the current atsign that contains the input.
   Future<void> getFilteredAtData() async {
     var searchFormModel = ref.watch(searchFormProvider);
-    await getData();
+
     log(searchFormModel.searchRequest.toString());
     String sort = 'ascending';
+    state = const AsyncValue.loading();
+    getData();
     state = AsyncValue.data(
       state.value!.where(
         (element) {
@@ -162,6 +195,6 @@ class AtDataController extends StateNotifier<AsyncValue<List<AtData>>> {
   }
 }
 
-/// A provider that exposes the [AtDataController] to the app.
-final atDataControllerProvider =
-    StateNotifierProvider<AtDataController, AsyncValue<List<AtData>>>((ref) => AtDataController(ref: ref));
+/// A provider that filters the [AtDataController] data.
+final filterControllerProvider =
+    StateNotifierProvider<FilterController, AsyncValue<List<AtData>?>>((ref) => FilterController(ref: ref));

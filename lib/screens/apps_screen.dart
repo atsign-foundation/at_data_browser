@@ -34,7 +34,7 @@ class _DataStorageScreenState extends ConsumerState<AppsScreen> {
     // set the filter to apps
     ref.watch(searchFormProvider).filter[0] = Categories.apps;
     // filter atData by conditions set in searchFormProvider
-    await ref.watch(atDataControllerProvider.notifier).getFilteredAtData();
+    await ref.watch(filterControllerProvider.notifier).getFilteredAtData();
 
     if (context.mounted) {
       await Navigator.of(context).push(

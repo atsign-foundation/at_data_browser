@@ -63,7 +63,7 @@ class _DateRangeCategoryWidgetState extends ConsumerState<DateRangeCategoryWidge
           setState(() {
             ref.watch(searchFormProvider).searchRequest[widget.index] = value.toString();
           });
-          ref.watch(atDataControllerProvider.notifier).getFilteredAtData();
+          ref.watch(filterControllerProvider.notifier).getFilteredAtData();
         }
       },
     );

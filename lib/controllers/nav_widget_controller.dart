@@ -1,3 +1,4 @@
+import 'package:at_data_browser/controllers/at_data_controller.dart';
 import 'package:at_data_browser/data/contact_repository.dart';
 import 'package:at_data_browser/domain.dart/at_data.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,7 +17,7 @@ class NavWidgetController extends StateNotifier<AsyncValue<NavWidgetModel>> {
   Future<void> getData() async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
-      final atDataList = await ref.watch(dataRepositoryProvider).getData();
+      final atDataList = ref.watch(atDataControllerProvider).value!;
 
       final atContact = await ref.watch(contactRepositoryProvider).getContactList();
 

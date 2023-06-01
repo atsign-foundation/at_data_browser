@@ -1,8 +1,8 @@
 import 'package:at_data_browser/controllers/connected_atsigns_controller.dart';
 import 'package:at_data_browser/utils/enums.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../controllers/apps_controller.dart';
 import '../controllers/at_data_controller.dart';
@@ -31,7 +31,7 @@ class _SearchWidgetState extends ConsumerState<SearchWidget> {
   }
 
   Future<void> _onPressed() async {
-    await ref.watch(atDataControllerProvider.notifier).getFilteredAtData();
+    await ref.watch(filterControllerProvider.notifier).getFilteredAtData();
   }
 
   @override
