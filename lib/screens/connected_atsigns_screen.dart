@@ -16,20 +16,23 @@ class ConnectedAtsignsScreen extends ConsumerStatefulWidget {
   const ConnectedAtsignsScreen({super.key});
 
   @override
-  ConsumerState<ConnectedAtsignsScreen> createState() => _DataStorageScreenState();
+  ConsumerState<ConnectedAtsignsScreen> createState() =>
+      _DataStorageScreenState();
 }
 
 class _DataStorageScreenState extends ConsumerState<ConnectedAtsignsScreen> {
   @override
   void initState() {
-    WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) async {
+    WidgetsFlutterBinding.ensureInitialized()
+        .addPostFrameCallback((timeStamp) async {
       await ref.watch(connectedAtsignsControllerProvider.notifier).getData();
     });
     super.initState();
   }
 
   /// Navigate to browse screen showing atkeys filtered by the selected atsign.
-  Future<void> _onTap({required AsyncValue<List<AtContact>?> state, required int index}) async {
+  Future<void> _onTap(
+      {required AsyncValue<List<AtContact>?> state, required int index}) async {
     // set the search request to the selected app
     ref.watch(searchFormProvider).searchRequest[0] = state.value![index].atSign;
 
@@ -38,10 +41,10 @@ class _DataStorageScreenState extends ConsumerState<ConnectedAtsignsScreen> {
     // filter atData by conditions set in searchFormProvider
     await ref.watch(atDataControllerProvider.notifier).getFilteredAtData();
 
-    if (context.mounted) {
+    if (mounted) {
       await Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => const BrowseScreen(
-                appBarColor: Colors.white,
+                appBarColor: Color(0Xff57A8B5),
                 backgroundColor: kAtSignFadedColor,
                 textColor: Colors.black,
               )));
@@ -55,8 +58,14 @@ class _DataStorageScreenState extends ConsumerState<ConnectedAtsignsScreen> {
     return Scaffold(
       backgroundColor: kAtSignFadedColor,
       appBar: AppBar(
-          titleTextStyle: Theme.of(context).textTheme.titleLarge!.copyWith(color: Colors.white),
-          toolbarTextStyle: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.white),
+          titleTextStyle: Theme.of(context)
+              .textTheme
+              .titleLarge!
+              .copyWith(color: Colors.white),
+          toolbarTextStyle: Theme.of(context)
+              .textTheme
+              .titleMedium!
+              .copyWith(color: Colors.white),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(20),
@@ -100,9 +109,11 @@ class _DataStorageScreenState extends ConsumerState<ConnectedAtsignsScreen> {
                                 children: [
                                   GestureDetector(
                                     child: ListTile(
-                                      title: Text(state.value![index].atSign ?? ''),
+                                      title: Text(
+                                          state.value![index].atSign ?? ''),
                                     ),
-                                    onTap: () => _onTap(state: state, index: index),
+                                    onTap: () =>
+                                        _onTap(state: state, index: index),
                                   ),
                                   Divider(
                                     color: Colors.grey.withOpacity(0.2),

@@ -8,5 +8,7 @@ const kAppsColor = Color(0xFFE8B74E);
 const kAppsFadedColor = Color.fromARGB(255, 248, 216, 147);
 const kBrowserColor = Color(0xFF363636);
 const kBrowserFadedColor = Color(0xFFA4A4A4);
+const kCardColor = Colors.white;
+const kBackgroundColor = Color(0xffEDF4F5);
 // const kAppsFaded = Color(0xFF);
 

@@ -25,7 +25,8 @@ class HomeScreen extends ConsumerStatefulWidget {
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void initState() {
-    WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) async {
+    WidgetsFlutterBinding.ensureInitialized()
+        .addPostFrameCallback((timeStamp) async {
       await ref.watch(homeScreenControllerProvider.notifier).getData();
     });
     super.initState();
@@ -40,11 +41,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     // filter atData by conditions set in searchFormProvider
     await ref.watch(atDataControllerProvider.notifier).getFilteredAtData();
 
-    if (context.mounted) {
+    if (mounted) {
       await Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => const BrowseScreen(
-            appBarColor: Colors.white,
+            appBarColor: Color(0Xff57A8B5),
             textColor: Colors.black,
           ),
         ),
@@ -54,10 +55,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final atsign = ref.watch(authenticationRepositoryProvider).getCurrentAtSign();
+    final atsign =
+        ref.watch(authenticationRepositoryProvider).getCurrentAtSign();
     final strings = AppLocalizations.of(context)!;
 
-    var homeScreenControllerModel = ref.watch(homeScreenControllerProvider).value;
+    var homeScreenControllerModel =
+        ref.watch(homeScreenControllerProvider).value;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -83,13 +86,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
                 gapH64,
                 NotificationListTile.notify(
-                  subTitle: '${homeScreenControllerModel?.workingKeys.length ?? 0} ${strings.validKeyMessage}',
+                  subTitle:
+                      '${homeScreenControllerModel?.workingKeys.length ?? 0} ${strings.validKeyMessage}',
                 ),
                 gapH16,
                 GestureDetector(
                   onTap: () async => _navigateToInvalidKey(),
                   child: NotificationListTile.warning(
-                    subTitle: '${homeScreenControllerModel?.malformedKeys.length ?? 0} ${strings.invalidKeyMessage}',
+                    subTitle:
+                        '${homeScreenControllerModel?.malformedKeys.length ?? 0} ${strings.invalidKeyMessage}',
                   ),
                 ),
                 gapH64,

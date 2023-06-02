@@ -4,8 +4,8 @@ enum NavPosition {
 }
 
 enum Categories {
-  sort,
   contains,
+  sort,
   dateCreated,
   dateModified,
   apps,

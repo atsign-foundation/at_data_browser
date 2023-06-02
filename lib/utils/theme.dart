@@ -113,7 +113,9 @@ class AppTheme {
         ),
       ),
       appBarTheme: AppBarTheme(
-          foregroundColor: Colors.white, backgroundColor: Colors.white, titleTextStyle: lightTextTheme.bodyMedium),
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.white,
+          titleTextStyle: lightTextTheme.bodyMedium),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         foregroundColor: Color(0xFFF8C630),
         backgroundColor: Colors.black,
@@ -134,13 +136,15 @@ class AppTheme {
               borderRadius: BorderRadius.circular(18.0),
             ),
           ),
-          backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF12DE26)),
-          foregroundColor: MaterialStateProperty.all<Color>(const Color(0xFFFFFFFF)),
+          backgroundColor:
+              MaterialStateProperty.all<Color>(const Color(0xFF12DE26)),
+          foregroundColor:
+              MaterialStateProperty.all<Color>(const Color(0xFFFFFFFF)),
         ),
       ),
       dialogTheme: const DialogTheme(
-        surfaceTintColor: Colors.white,
-      ),
+          // surfaceTintColor: Colors.white,
+          ),
 
       cardTheme: const CardTheme(
         elevation: 0,

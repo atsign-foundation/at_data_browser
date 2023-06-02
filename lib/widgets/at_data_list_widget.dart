@@ -28,6 +28,7 @@ class _AtDataListWidgetState extends State<AtDataListWidget> {
         } else {
           return SingleChildScrollView(
             child: Card(
+              color: Colors.white,
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20),
@@ -47,14 +48,22 @@ class _AtDataListWidgetState extends State<AtDataListWidget> {
                     canTapOnHeader: true,
                     backgroundColor: Colors.transparent,
                     headerBuilder: (BuildContext context, bool isExpanded) {
-                      return Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(e.atKey.toString(), style: Theme.of(context).textTheme.titleSmall),
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                            left: 29, right: 54, top: 14, bottom: 9),
+                        child: Text(
+                          e.atKey.toString(),
+                          style:
+                              Theme.of(context).textTheme.titleSmall!.copyWith(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                         ),
                       );
                     },
-                    body: AtDataExpansionPanelList(atData: widget.state.value![widget.state.value!.indexOf(e)]),
+                    body: AtDataExpansionPanelList(
+                        atData: widget
+                            .state.value![widget.state.value!.indexOf(e)]),
                     isExpanded: isExpandPanel[widget.state.value!.indexOf(e)],
                   );
                 }).toList(),

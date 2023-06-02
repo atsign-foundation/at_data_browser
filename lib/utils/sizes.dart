@@ -8,6 +8,8 @@ class Sizes {
   static const p16 = 16.0;
   static const p18 = 18.0;
   static const p20 = 20.0;
+  static const p27 = 27.0;
+
   static const p24 = 24.0;
   static const p32 = 32.0;
   static const p48 = 48.0;

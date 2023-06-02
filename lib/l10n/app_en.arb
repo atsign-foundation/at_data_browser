@@ -11,7 +11,7 @@
     "connectedAtsigns" : "Connected atSigns",
     "apps" : "Apps",
     "connectedApps" : "Connected Apps",
-    "browse" : "Browse",
+    "browse" : "Data Storage",
     "addFilter" : "Add Filter",
     "settings" : "Settings",
     "backupYourKeys" : "BackupYourKeys",
@@ -49,5 +49,6 @@
     "dataSignature" : "dataSignature",
     "sharedKeyStatus" : "sharedKeyStatus",
     "sharedKeyEnc" : "sharedKeyEnc",
-    "sharedKeyEnc" : "sharedKeyEnc"
+    "sharedKeyEnc" : "sharedKeyEnc",
+    "searchHintText":" Search"
 }
