@@ -144,12 +144,14 @@ class AppTheme {
       dialogTheme: const DialogTheme(
         surfaceTintColor: kPrimaryColor,
       ),
-
-      cardTheme: const CardTheme(
-        elevation: 0,
-        surfaceTintColor: kPrimaryColor,
-        color: Color(0xFFF4F4F4),
-      ),
+      cardTheme: CardTheme(
+          elevation: 0,
+          surfaceTintColor: kPrimaryColor,
+          color: const Color(0xFFF4F4F4),
+          shape: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5),
+            borderSide: BorderSide.none,
+          )),
     );
   }
 

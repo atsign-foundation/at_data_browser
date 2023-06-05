@@ -1,4 +1,4 @@
-import 'package:at_data_browser/controllers/apps_controller.dart';
+import 'package:at_data_browser/widgets/search_field_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,32 +18,35 @@ class AppCategoryWidget extends ConsumerStatefulWidget {
 class _SortCategoryWidgetState extends ConsumerState<AppCategoryWidget> {
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: DropdownButton<String>(
-          underline: const SizedBox(),
-          value: ref.watch(searchFormProvider).searchRequest[widget.index],
-          hint: Text(AppLocalizations.of(context)!.apps),
-          items: ref
-              .watch(appsController)
-              .value
-              ?.map(
-                (e) => DropdownMenuItem(
-                  value: e,
-                  child: Text(e),
-                ),
-              )
-              .toList(),
-          onChanged: (value) {
-            setState(() {
-              ref.watch(searchFormProvider).searchRequest[widget.index] = value!;
-            });
+    final searchList = ref.watch(searchFormProvider).searchRequest;
 
-            // filter atData by conditions set in searchFormProvider
-            ref.watch(filterControllerProvider.notifier).getFilteredAtData();
-          },
-        ),
+    return SearchFieldContainer(
+      child: DropdownButton<String>(
+        isExpanded: true,
+        underline: const SizedBox(),
+        value: searchList.isNotEmpty ? searchList[widget.index] : null,
+        hint: Text(AppLocalizations.of(context)!.apps),
+        items: ref
+            .watch(atDataControllerProvider.notifier.select((value) => value.apps))
+            .map(
+              (e) => DropdownMenuItem(
+                value: e,
+                child: Text(e),
+              ),
+            )
+            .toList(),
+        onChanged: (value) {
+          setState(() {
+            if (searchList.isNotEmpty) {
+              searchList[widget.index] = value!;
+            } else {
+              searchList.add(value!);
+            }
+          });
+
+          // filter atData by conditions set in searchFormProvider
+          ref.watch(filterControllerProvider.notifier).getFilteredAtData();
+        },
       ),
     );
   }

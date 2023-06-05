@@ -31,14 +31,6 @@ class BrowseScreen extends ConsumerStatefulWidget {
 }
 
 class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
-  @override
-  void initState() {
-    WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) async {
-      ref.watch(searchFormProvider).filter[0] = Categories.sort;
-    });
-    super.initState();
-  }
-
   final List<Widget> searchForms = [
     const SearchForm(
       index: 0,
@@ -48,6 +40,7 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(filterControllerProvider);
+    final searchRequest = ref.watch(searchFormProvider).searchRequest;
     final strings = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: widget.backgroundColor,
@@ -76,34 +69,37 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
           ]),
       body: Column(
         children: [
+          gapH24,
           ...searchForms,
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: Sizes.p32),
-            child: Row(children: [
-              const Expanded(
-                child: Divider(
-                  height: 2,
-                  color: Colors.black,
-                ),
-              ),
-              TextButton.icon(
-                  onPressed: () {
-                    setState(() {
-                      var a = searchForms.length;
-                      log('search form length: is ${a.toString()}');
-                      ref.watch(searchFormProvider).searchRequest.add(null);
-                      ref.watch(searchFormProvider).filter.add(Categories.sort);
-                      searchForms.add(SearchForm(index: searchForms.length));
-                    });
-                  },
-                  icon: const Icon(Icons.add_circle_outline),
-                  label: Text(strings.addFilter)),
-              const Expanded(
-                child: Divider(
-                  color: Colors.black,
-                ),
-              )
-            ]),
+            child: searchRequest.isNotEmpty
+                ? Row(children: [
+                    const Expanded(
+                      child: Divider(
+                        height: 2,
+                        color: Colors.black,
+                      ),
+                    ),
+                    TextButton.icon(
+                        onPressed: () {
+                          setState(() {
+                            var a = searchForms.length;
+                            log('search form length: is ${a.toString()}');
+                            ref.watch(searchFormProvider).searchRequest.add(null);
+                            ref.watch(searchFormProvider).filter.add(Categories.sort);
+                            searchForms.add(SearchForm(index: searchForms.length));
+                          });
+                        },
+                        icon: const Icon(Icons.add_circle_outline),
+                        label: Text(strings.addFilter)),
+                    const Expanded(
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    )
+                  ])
+                : gapH24,
           ),
           Expanded(
             child: RefreshIndicator(

@@ -14,6 +14,16 @@ class AtDataController extends StateNotifier<AsyncValue<List<AtData>>> {
 
   AtDataController({required this.ref}) : super(const AsyncValue.loading());
 
+  List<String> get apps {
+    List<String> nameSpaces = [];
+    for (var atData in state.value!) {
+      if (atData.atKey.namespace != null) {
+        nameSpaces.add(atData.atKey.namespace!);
+      }
+    }
+    return nameSpaces.toSet().toList();
+  }
+
   /// Get list of [AtData] associated with the current astign.
   Future<void> getData() async {
     state = const AsyncValue.loading();
