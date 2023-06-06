@@ -40,3 +40,18 @@ flutter:
   uses-material-design: true
   assets:
     - .env
+    - assets/images/
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins.ttf
+        - asset: assets/fonts/Poppins.ttf
+          weight: 400
+        - asset: assets/fonts/Poppins.ttf
+          weight: 500
+        - asset: assets/fonts/Poppins.ttf
+          weight: 600
+        - asset: assets/fonts/Poppins.ttf
+          weight: 800
+        
