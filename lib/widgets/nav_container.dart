@@ -41,22 +41,30 @@ class NavContainer extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 75,
+        height: 100,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             color: color,
             borderRadius: position == NavPosition.bottom
                 ? const BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10),
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
                   )
                 : const BorderRadius.only(
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10),
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
                   )),
         child: ListTile(
           leading: showIcon ? const Icon(Icons.menu) : null,
-          title: Text(name),
+          title: Padding(
+              padding: const EdgeInsets.only(left: 20.0, top: 20.0),
+              child: Text(
+                name, 
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold
+                  ),
+                ),
+              ),
           trailing: FittedBox(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
