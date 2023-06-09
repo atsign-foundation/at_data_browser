@@ -1,11 +1,9 @@
-import 'dart:developer';
-
+import 'package:at_data_browser/utils/constants.dart';
 import 'package:at_data_browser/widgets/at_data_expansion_panel_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../domain.dart/at_data.dart';
-import '../utils/constants.dart';
 
 class AtDataListWidget extends StatefulWidget {
   const AtDataListWidget({
@@ -37,34 +35,39 @@ class _AtDataListWidgetState extends State<AtDataListWidget> {
             child: ListView.builder(
                 itemBuilder: (buildContext, builderIndex) {
                   isExpandPanel.add(false);
-                  return ExpansionPanelList(
-                    dividerColor: kDataStorageFadedColor,
-                    elevation: 0,
-                    expansionCallback: (int index, bool isExpanded) {
-                      log(isExpanded.toString());
-                      isExpandPanel[index] = !isExpanded;
-                      setState(() {
-                        log(isExpandPanel.toString());
-                      });
-                    },
+                  return Column(
                     children: [
-                      ExpansionPanel(
-                        canTapOnHeader: true,
-                        backgroundColor: Colors.transparent,
-                        headerBuilder: (BuildContext context, bool isExpanded) {
-                          isExpandPanel[0] = isExpanded;
+                      ExpansionPanelList.radio(
+                        elevation: 0,
+                        // expansionCallback: (int index, bool isExpanded) {
+                        //   log(isExpanded.toString());
+                        //   isExpandPanel[index] = !isExpanded;
+                        //   setState(() {
+                        //     log(isExpandPanel.toString());
+                        //   });
+                        // },
+                        children: [
+                          ExpansionPanelRadio(
+                            value: builderIndex,
+                            canTapOnHeader: true,
+                            backgroundColor: Colors.transparent,
+                            headerBuilder: (BuildContext context, bool isExpanded) {
+                              // isExpandPanel[0] = isExpanded;
 
-                          return Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(widget.state.value![builderIndex].atKey.toString(),
-                                  style: Theme.of(context).textTheme.titleSmall),
-                            ),
-                          );
-                        },
-                        body: AtDataExpansionPanelList(atData: widget.state.value![builderIndex]),
-                        isExpanded: isExpandPanel[0],
-                      )
+                              return Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(widget.state.value![builderIndex].atKey.toString(),
+                                      style: Theme.of(context).textTheme.titleSmall),
+                                ),
+                              );
+                            },
+                            body: AtDataExpansionPanelList(atData: widget.state.value![builderIndex]),
+                            // isExpanded: isExpandPanel[0],
+                          ),
+                        ],
+                      ),
+                      const Divider(color: kDataStorageFadedColor, thickness: 1)
                     ],
                   );
                 },

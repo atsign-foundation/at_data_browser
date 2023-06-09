@@ -267,7 +267,7 @@ class _AtDataExpansionPanelListState extends ConsumerState<AtDataExpansionPanelL
           isDeletable(widget.atData.atKey.toString())
               ? ElevatedButton(
                   onPressed: () async {
-                    await ref.watch(atDataControllerProvider.notifier).delete(widget.atData);
+                    await ref.read(atDataControllerProvider.notifier).delete(widget.atData);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,

@@ -38,6 +38,14 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    ref.read(filterControllerProvider.notifier).getData();
+    ref.read(searchFormProvider).searchRequest = [];
+    ref.read(searchFormProvider).filter = [];
+  }
+
+  @override
   Widget build(BuildContext context) {
     final state = ref.watch(filterControllerProvider);
     final searchRequest = ref.watch(searchFormProvider).searchRequest;
