@@ -35,6 +35,7 @@ class AtDataController extends StateNotifier<AsyncValue<List<AtData>>> {
     state = const AsyncValue.loading();
     final result = await ref.watch(dataRepositoryProvider).deleteData(atData);
     state = await AsyncValue.guard(() async => await ref.watch(dataRepositoryProvider).getData());
+
     return result;
   }
 
@@ -55,6 +56,7 @@ class FilterController extends StateNotifier<AsyncValue<List<AtData>>> {
 
   FilterController({required this.ref}) : super(const AsyncValue.loading()) {
     getData();
+    getFilteredAtData();
   }
 
   /// Get list of [AtData] associated with the current astign.
@@ -92,7 +94,7 @@ class FilterController extends StateNotifier<AsyncValue<List<AtData>>> {
   DateTime _getDate(DateTime dateTime) => DateTime(dateTime.year, dateTime.month, dateTime.day);
 
   /// Get the [AtData] associated with the current atsign that contains the input.
-  Future<void> getFilteredAtData() async {
+  void getFilteredAtData() {
     var searchFormModel = ref.watch(searchFormProvider);
 
     log(searchFormModel.searchRequest.toString());
