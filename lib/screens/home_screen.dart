@@ -66,12 +66,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           Container(
             margin: const EdgeInsets.only(right: 16.0),
             child: IconButton(
-            icon: const Icon(Icons.settings_outlined),
-            color: Colors.black,
-            iconSize: 40,
-            onPressed: () {
-              Navigator.of(context).pushNamed(SettingsScreen.route);
-            },
+              icon: const Icon(Icons.settings_outlined),
+              color: Colors.black,
+              iconSize: 40,
+              onPressed: () {
+                Navigator.of(context).pushNamed(SettingsScreen.route);
+              },
             ),
           ),
         ],
@@ -82,22 +82,25 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             Expanded(
               child: Column(children: [
                 ListTile(
-                      title: const Padding(
-                        padding: EdgeInsets.only(left: 25.0),
-                        child: Row(
-                          children: [
-                            Text(
-                              'Data',
-                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-                            ),
-                            Text('Browser', style: TextStyle(fontSize: 30), ),
-                          ],
+                  title: Padding(
+                    padding: const EdgeInsets.only(left: 25.0),
+                    child: Row(
+                      children: const [
+                        Text(
+                          'Data',
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                         ),
-                      ),
-                      subtitle: Padding(
-                        padding: const EdgeInsets.only(left: 25.0),
-                        child: Text(atsign ?? ''),
-                      ),
+                        Text(
+                          'Browser',
+                          style: TextStyle(fontSize: 30),
+                        ),
+                      ],
+                    ),
+                  ),
+                  subtitle: Padding(
+                    padding: const EdgeInsets.only(left: 25.0),
+                    child: Text(atsign ?? ''),
+                  ),
                 ),
                 gapH64,
                 NotificationListTile.notify(
