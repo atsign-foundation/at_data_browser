@@ -31,13 +31,13 @@ class _NavWidgetState extends ConsumerState<NavWidget> {
     final strings = AppLocalizations.of(context)!;
     final navWidgetModel = ref.watch(navWidgetController).value;
     return SizedBox(
-      height: 225,
+      height: 270,
       width: MediaQuery.of(context).size.width,
       child: Stack(
         alignment: Alignment.bottomLeft,
         children: [
           Positioned(
-            height: 225,
+            height: 270,
             child: NavContainer(
               name: strings.dataStorage,
               titleCount: strings.itemsStored,
@@ -49,7 +49,7 @@ class _NavWidgetState extends ConsumerState<NavWidget> {
             ),
           ),
           Positioned(
-            height: 150,
+            height: 190,
             // top: 90,
             child: NavContainer(
               name: strings.atSigns,
@@ -62,7 +62,7 @@ class _NavWidgetState extends ConsumerState<NavWidget> {
             ),
           ),
           Positioned(
-            height: 75,
+            height: 100,
             child: NavContainer(
               name: strings.apps,
               titleCount: strings.connectedApps,

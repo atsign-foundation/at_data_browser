@@ -41,27 +41,50 @@ class NavContainer extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 75,
+        height: 100,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             color: color,
             borderRadius: position == NavPosition.bottom
                 ? const BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10),
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
                   )
                 : const BorderRadius.only(
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10),
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
                   )),
         child: ListTile(
           leading: showIcon ? const Icon(Icons.menu) : null,
-          title: Text(name),
-          trailing: FittedBox(
+          title: Padding(
+              padding: const EdgeInsets.only(left: 20.0, top: 20.0),
+              child: Text(
+                name, 
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold
+                  ),
+                ),
+              ),
+          trailing: SizedBox(
+            height: 200,
+            child: Container(
+              margin: const EdgeInsets.only(top: 20.0),
+              child: FittedBox(
+            fit: BoxFit.fitHeight,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(titleCount),
+                Container(
+                  constraints: const BoxConstraints(maxWidth: 150),
+                      child: Text(
+                        titleCount, 
+                        style: const TextStyle(
+                          fontSize: 20,
+                        ),
+                        maxLines: 2,
+                        textAlign: TextAlign.center,
+                      ),
+                  ),
                 navWidgetModel == null
                     ? const Center(
                         child: CircularProgressIndicator(),
@@ -69,14 +92,17 @@ class NavContainer extends StatelessWidget {
                     : Text(
                         getCount(titleCount),
                         style: const TextStyle(
-                          fontSize: 20,
+                          fontSize: 25,
                           fontWeight: FontWeight.bold,
                         ),
-                      ),
+                        textAlign: TextAlign.center,
+                ),
               ],
             ),
           ),
         ),
+          ),
+      ),
       ),
     );
   }
