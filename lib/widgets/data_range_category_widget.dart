@@ -1,3 +1,4 @@
+import 'package:at_data_browser/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -74,8 +75,9 @@ class _DateRangeCategoryWidgetState extends ConsumerState<DateRangeCategoryWidge
     return SizedBox(
       width: widget.width,
       child: Material(
-        elevation: 12,
-        borderRadius: const BorderRadius.all(Radius.circular(18)),
+        color: kSearchFieldColor,
+        elevation: 0,
+        borderRadius: const BorderRadius.all(Radius.circular(5)),
         child: TextFormField(
           style: const TextStyle(fontSize: 16),
           readOnly: true,
@@ -85,6 +87,7 @@ class _DateRangeCategoryWidgetState extends ConsumerState<DateRangeCategoryWidge
           autovalidateMode: AutovalidateMode.onUserInteraction,
           onChanged: (value) {},
           decoration: const InputDecoration(
+            border: InputBorder.none,
             suffixIcon: Icon(Icons.calendar_today_outlined),
           ),
           onTap: _showDatePicker,

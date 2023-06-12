@@ -1,5 +1,5 @@
 name: at_data_browser
-description: A new Flutter project
+description: All your contacts, data, shared data, apps, everything Atsign.
 version: 1.0.0+1
 
 environment:
@@ -7,7 +7,7 @@ environment:
 
 dependencies:
   at_app_flutter: ^5.0.1
-  at_client_mobile: ^3.2.6
+  at_client_mobile: ^3.2.9
   at_common_flutter: ^2.0.11
   at_contact: 3.0.6
   at_contacts_flutter: ^4.0.9
@@ -27,18 +27,47 @@ dependencies:
   recase: ^4.1.0
   shared_preferences: ^2.1.0
   url_launcher: ^6.1.11
+  flutter_native_splash: 2.0.0
+  
 
 dev_dependencies:
   flutter_lints: ^2.0.0
+  # flutter_launcher_icons: ^0.13.1
   flutter_test:
     sdk: flutter
 
 dependency_overrides:
   at_contact: 3.0.6
   intl: 0.18.1
+  # image: ^4.0.15
+
 
 flutter:
   generate: true
   uses-material-design: true
   assets:
     - .env
+    - assets/images/
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins.ttf
+        - asset: assets/fonts/Poppins.ttf
+          weight: 400
+        - asset: assets/fonts/Poppins.ttf
+          weight: 500
+        - asset: assets/fonts/Poppins.ttf
+          weight: 600
+        - asset: assets/fonts/Poppins.ttf
+          weight: 800
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/images/logo.png" 
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: "assets/images/logo.png"

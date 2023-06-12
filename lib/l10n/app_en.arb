@@ -1,6 +1,6 @@
 {
     "atDataBrowser" : "AtDataBrowser",
-    "onboardAnAtsign" : "Onboard an @sign",
+    "onboardAnAtsign" : "Browse my data",
     "anErrorHasOccurred" : "An error has occurred",
     "na": "NA",
     "validKeyMessage" : "keys successfully added",
@@ -49,5 +49,8 @@
     "dataSignature" : "dataSignature",
     "sharedKeyStatus" : "sharedKeyStatus",
     "sharedKeyEnc" : "sharedKeyEnc",
-    "sharedKeyEnc" : "sharedKeyEnc"
+    "sharedKeyEnc" : "sharedKeyEnc",
+    "onboardingTitle" : "Your data, all of it.",
+    "onboardingDesc" : "All your contacts, data, shared data, apps, everything Atsign",
+    "reset": "Reset"
 }

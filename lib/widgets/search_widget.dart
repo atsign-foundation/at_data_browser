@@ -23,15 +23,13 @@ class _SearchWidgetState extends ConsumerState<SearchWidget> {
         await ref.read(appsController.notifier).getFilteredConnectedApps(value);
         break;
       case SearchWidgetFilter.atSigns:
-        await ref
-            .read(connectedAtsignsControllerProvider.notifier)
-            .getFilteredConnectedAtsign(value);
+        await ref.read(connectedAtsignsControllerProvider.notifier).getFilteredConnectedAtsign(value);
         break;
     }
   }
 
   Future<void> _onPressed() async {
-    await ref.watch(filterControllerProvider.notifier).getFilteredAtData();
+    ref.watch(filterControllerProvider.notifier).getFilteredAtData();
   }
 
   @override

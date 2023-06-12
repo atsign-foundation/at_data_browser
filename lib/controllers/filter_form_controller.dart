@@ -12,5 +12,5 @@ class SearchFormModel {
 
 /// A provider that exposes the [SearchFormModel] to the app.
 final searchFormProvider = Provider<SearchFormModel>((ref) {
-  return SearchFormModel(filter: [Categories.sort], searchRequest: [null], isConditionMet: []);
+  return SearchFormModel(filter: [], searchRequest: [], isConditionMet: []);
 });

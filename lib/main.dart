@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:at_app_flutter/at_app_flutter.dart' show AtEnv;
-import 'package:at_client_mobile/at_client_mobile.dart';
 import 'package:at_contacts_flutter/utils/init_contacts_service.dart';
 import 'package:at_data_browser/screens/apps_screen.dart';
 import 'package:at_data_browser/screens/browse_screen.dart';
@@ -9,7 +8,9 @@ import 'package:at_data_browser/screens/connected_atsigns_screen.dart';
 import 'package:at_data_browser/screens/data_storage_screen.dart';
 import 'package:at_data_browser/screens/home_screen.dart';
 import 'package:at_data_browser/screens/settings_screen.dart';
+import 'package:at_data_browser/utils/sizes.dart';
 import 'package:at_data_browser/utils/theme.dart';
+import 'package:at_data_browser/widgets/reset_app_button.dart';
 import 'package:at_onboarding_flutter/at_onboarding_flutter.dart';
 import 'package:at_utils/at_logger.dart' show AtSignLogger;
 import 'package:flutter/material.dart';
@@ -29,6 +30,7 @@ Future<void> main() async {
   } catch (e) {
     _logger.finer('Environment failed to load from .env: ', e);
   }
+  AtSignLogger.root_level = 'finer';
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -59,7 +61,9 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    final textStyle = Theme.of(context).textTheme;
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       navigatorKey: NavigationService.navKey,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
@@ -68,12 +72,39 @@ class _MyAppState extends State<MyApp> {
       home: Builder(builder: (context) {
         final strings = AppLocalizations.of(context)!;
         return Scaffold(
-          appBar: AppBar(
-            title: Text(strings.atDataBrowser),
-          ),
-          body: Builder(
-            builder: (context) => Center(
-              child: ElevatedButton(
+          extendBody: true,
+          body: Column(
+            children: [
+              Container(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height * 0.6,
+                decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage(
+                          'assets/images/onboarding.gif',
+                        ))),
+              ),
+              gapH32,
+              Text(
+                strings.onboardingTitle,
+                style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.w600),
+              ),
+              gapH8,
+              SizedBox(
+                width: 300,
+                height: 75,
+                child: Text(
+                  strings.onboardingDesc,
+                  style: textStyle.bodyLarge!.copyWith(fontSize: Sizes.p18),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 24),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40))),
                 onPressed: () async {
                   AtOnboardingResult onboardingResult = await AtOnboarding.onboard(
                     context: context,
@@ -96,9 +127,16 @@ class _MyAppState extends State<MyApp> {
                       break;
                   }
                 },
-                child: Text(strings.onboardAnAtsign),
+                child: Text(
+                  strings.onboardAnAtsign,
+                  style: textStyle.titleLarge!.copyWith(fontWeight: FontWeight.w400, color: Colors.white),
+                ),
               ),
-            ),
+              gapH16,
+              const ResetAppButton(
+                isOnboardingScreen: true,
+              )
+            ],
           ),
         );
       }),
