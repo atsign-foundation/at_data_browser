@@ -50,5 +50,6 @@
     "sharedKeyStatus" : "sharedKeyStatus",
     "sharedKeyEnc" : "sharedKeyEnc",
     "sharedKeyEnc" : "sharedKeyEnc",
-    "searchHintText":" Search"
+    "searchHintText":" Search",
+    "date":"dates"
 }

@@ -6,7 +6,6 @@ import 'package:at_data_browser/widgets/data_range_category_widget.dart';
 import 'package:at_data_browser/widgets/search_category_widget.dart';
 import 'package:at_data_browser/widgets/sort_category_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recase/recase.dart';
 
@@ -83,69 +82,107 @@ class _SearchFormState extends ConsumerState<SearchForm> {
       child: SizedBox(
         height: 50,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Flexible(
-              flex: 1,
+              flex: 4,
               child: Card(
                 color: kCardColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  side: const BorderSide(
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                  side: BorderSide(
                     color: kCardColor,
                     width: 2,
                   ),
                 ),
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: DropdownButton<Categories>(
-                      underline: const SizedBox.shrink(),
-                      value:
-                          ref.watch(searchFormProvider).filter[widget.index]!,
-                      hint: Text(AppLocalizations.of(context)!.category),
-                      borderRadius: BorderRadius.circular(5),
-                      icon: const RotatedBox(
-                        quarterTurns: 3,
-                        child: Icon(
-                          Icons.arrow_back_ios_new_outlined,
-                          size: 15,
-                        ),
+                child: DropdownButtonFormField<Categories>(
+                  value: ref.watch(searchFormProvider).filter[widget.index]!,
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(5.0),
+                  ),
+                  decoration: const InputDecoration(
+                    contentPadding: EdgeInsets.all(10),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(5.0),
                       ),
-                      style: Theme.of(context).textTheme.labelMedium,
-                      items: Categories.values
-                          .map(
-                            (e) => DropdownMenuItem(
-                              value: e,
-                              child: Center(child: Text(e.name.titleCase)),
-                            ),
-                          )
-                          .toList(),
-                      onChanged: (value) {
-                        log('dropdown value is ${value.toString()}');
-                        setState(() {
-                          ref.watch(searchFormProvider).filter[widget.index] =
-                              value!;
-                          log(ref
-                                  .watch(searchFormProvider)
-                                  .filter[widget.index]
-                                  ?.name ??
-                              'null');
-                          log(ref
-                              .watch(searchFormProvider)
-                              .filter
-                              .length
-                              .toString());
-                          log('search form index is ${widget.index.toString()}');
-                        });
-                      },
                     ),
                   ),
+                  selectedItemBuilder: (context) => Categories.values
+                      .map(
+                        (e) => Center(
+                            child: Text(
+                          e.name.titleCase,
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelMedium!
+                              .copyWith(
+                                  fontWeight: FontWeight.w400,
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 12),
+                        )),
+                      )
+                      .toList(),
+                  items: Categories.values
+                      .map(
+                        (e) => DropdownMenuItem<Categories>(
+                          value: e,
+                          child: Container(
+                            margin: EdgeInsets.zero,
+                            padding: EdgeInsets.zero,
+                            decoration: BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground,
+                                  width: 1.0,
+                                ),
+                              ),
+                            ),
+                            child: Center(
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 8),
+                                child: Text(
+                                  e.name.titleCase,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelMedium!
+                                      .copyWith(
+                                          fontWeight: FontWeight.w400,
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 12),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) {
+                    log('dropdown value is ${value.toString()}');
+                    setState(() {
+                      ref.watch(searchFormProvider).filter[widget.index] =
+                          value!;
+                      log(ref
+                              .watch(searchFormProvider)
+                              .filter[widget.index]
+                              ?.name ??
+                          'null');
+                      log(ref
+                          .watch(searchFormProvider)
+                          .filter
+                          .length
+                          .toString());
+                      log('search form index is ${widget.index.toString()}');
+                    });
+                  },
                 ),
               ),
             ),
             Flexible(
-              flex: 2,
+              flex: 5,
               child: FutureBuilder(
                   builder: (context, AsyncSnapshot<Widget> snapshot) {
                     if (snapshot.hasData) {

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:at_data_browser/controllers/at_data_controller.dart';
 import 'package:at_data_browser/controllers/home_screen_controller.dart';
 import 'package:at_data_browser/controllers/nav_widget_controller.dart';
@@ -111,49 +109,7 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
       body: Column(
         children: [
           ...searchForms,
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: Sizes.p32),
-            child: Row(
-              children: [
-                const Expanded(
-                  child: Divider(
-                    thickness: 0,
-                    color: kDataStorageColor,
-                  ),
-                ),
-                TextButton.icon(
-                    onPressed: () {
-                      setState(() {
-                        var a = searchForms.length;
-                        log('search form length: is ${a.toString()}');
-                        ref.watch(searchFormProvider).searchRequest.add(null);
-                        ref
-                            .watch(searchFormProvider)
-                            .filter
-                            .add(Categories.sort);
-                        searchForms.add(SearchForm(index: searchForms.length));
-                      });
-                    },
-                    icon: const Icon(
-                      Icons.add_circle_outline,
-                      color: kDataStorageColor,
-                    ),
-                    label: Text(
-                      strings.addFilter,
-                      style: Theme.of(context)
-                          .textTheme
-                          .labelSmall!
-                          .copyWith(color: kDataStorageColor),
-                    )),
-                const Expanded(
-                  child: Divider(
-                    color: kDataStorageColor,
-                    thickness: 0,
-                  ),
-                )
-              ],
-            ),
-          ),
+          const SizedBox(height: 10),
           Expanded(
             child: RefreshIndicator(
               child: AtDataListWidget(state: state),

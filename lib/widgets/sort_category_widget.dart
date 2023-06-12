@@ -25,14 +25,24 @@ class _SortCategoryWidgetState extends ConsumerState<SortCategoryWidget> {
         padding: const EdgeInsets.all(8.0),
         child: DropdownButton<String>(
           underline: const SizedBox(),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(5.0),
+          ),
           value: ref.watch(searchFormProvider).searchRequest[widget.index],
           hint: Text(strings.sortBy),
+          style: Theme.of(context)
+              .textTheme
+              .labelMedium!
+              .copyWith(color: Colors.black.withOpacity(.5), fontSize: 14),
           items: SortOptions.values
               .map(
                 (e) => DropdownMenuItem(
                   value: e.name,
                   child: Center(
-                    child: Text(e.name.titleCase),
+                    child: Text(
+                      e.name.titleCase,
+                      style: Theme.of(context).textTheme.labelMedium,
+                    ),
                   ),
                 ),
               )
