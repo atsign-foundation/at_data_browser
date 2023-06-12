@@ -65,11 +65,26 @@ class NavContainer extends StatelessWidget {
                   ),
                 ),
               ),
-          trailing: FittedBox(
+          trailing: SizedBox(
+            height: 200,
+            child: Container(
+              margin: const EdgeInsets.only(top: 20.0),
+              child: FittedBox(
+            fit: BoxFit.fitHeight,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(titleCount),
+                Container(
+                  constraints: const BoxConstraints(maxWidth: 150),
+                      child: Text(
+                        titleCount, 
+                        style: const TextStyle(
+                          fontSize: 20,
+                        ),
+                        maxLines: 2,
+                        textAlign: TextAlign.center,
+                      ),
+                  ),
                 navWidgetModel == null
                     ? const Center(
                         child: CircularProgressIndicator(),
@@ -77,14 +92,17 @@ class NavContainer extends StatelessWidget {
                     : Text(
                         getCount(titleCount),
                         style: const TextStyle(
-                          fontSize: 20,
+                          fontSize: 25,
                           fontWeight: FontWeight.bold,
                         ),
-                      ),
+                        textAlign: TextAlign.center,
+                ),
               ],
             ),
           ),
         ),
+          ),
+      ),
       ),
     );
   }

@@ -3,7 +3,7 @@
     "onboardAnAtsign" : "Onboard an @sign",
     "anErrorHasOccurred" : "An error has occurred",
     "na": "NA",
-    "validKeyMessage" : "keys do not require your attention",
+    "validKeyMessage" : "keys successfully added",
     "invalidKeyMessage" : "keys require your attention",
     "dataStorage" : "Data Storage",
     "itemsStored" : "Items Stored",
