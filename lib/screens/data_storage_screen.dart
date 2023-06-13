@@ -16,7 +16,8 @@ class DataStorageScreen extends ConsumerStatefulWidget {
 class _DataStorageScreenState extends ConsumerState<DataStorageScreen> {
   @override
   void initState() {
-    WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) async {
+    WidgetsFlutterBinding.ensureInitialized()
+        .addPostFrameCallback((timeStamp) async {
       await ref.watch(atDataControllerProvider.notifier).getData();
     });
     super.initState();
@@ -29,23 +30,25 @@ class _DataStorageScreenState extends ConsumerState<DataStorageScreen> {
     return Scaffold(
       backgroundColor: kDataStorageFadedColor,
       appBar: AppBar(
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(20),
-            ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(20),
           ),
-          backgroundColor: kDataStorageColor,
-          title: Text(strings.dataStorage),
-          actions: [
-            Column(
-              children: [
-                Text(strings.itemsStored),
-                state.isLoading
-                    ? const Center(child: CircularProgressIndicator())
-                    : Text(state.value!.length.toString())
-              ],
-            )
-          ]),
+        ),
+        backgroundColor: kDataStorageColor,
+        title: Text(strings.dataStorage),
+        centerTitle: false,
+        actions: [
+          Column(
+            children: [
+              Text(strings.itemsStored),
+              state.isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : Text(state.value!.length.toString())
+            ],
+          )
+        ],
+      ),
       body: Padding(
           padding: const EdgeInsets.only(top: 30.0),
           child: Column(
@@ -69,8 +72,11 @@ class _DataStorageScreenState extends ConsumerState<DataStorageScreen> {
                           itemBuilder: (context, index) => Column(
                                 children: [
                                   ListTile(
-                                    title: Text(state.value![index].atKey.key ?? ''),
-                                    subtitle: Text(state.value![index].atKey.namespace ?? ''),
+                                    title: Text(
+                                        state.value![index].atKey.key ?? ''),
+                                    subtitle: Text(
+                                        state.value![index].atKey.namespace ??
+                                            ''),
                                   ),
                                   const Divider()
                                 ],

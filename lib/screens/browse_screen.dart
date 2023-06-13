@@ -19,7 +19,7 @@ class BrowseScreen extends ConsumerStatefulWidget {
   const BrowseScreen(
       {this.appBarColor = kDataStorageColor,
       this.backgroundColor = kDataStorageFadedColor,
-      this.textColor = Colors.white,
+      this.textColor = Colors.black,
       super.key});
 
   final Color appBarColor;
@@ -53,28 +53,60 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
     return Scaffold(
       backgroundColor: widget.backgroundColor,
       appBar: AppBar(
-          iconTheme: Theme.of(context).iconTheme.copyWith(color: widget.textColor),
-          titleTextStyle: Theme.of(context).textTheme.titleLarge!.copyWith(color: widget.textColor),
-          toolbarTextStyle: Theme.of(context).textTheme.titleMedium!.copyWith(color: widget.textColor),
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(20),
-            ),
+        iconTheme:
+            Theme.of(context).iconTheme.copyWith(color: widget.textColor),
+        titleTextStyle: Theme.of(context)
+            .textTheme
+            .titleLarge!
+            .copyWith(color: widget.textColor),
+        toolbarTextStyle: Theme.of(context)
+            .textTheme
+            .titleMedium!
+            .copyWith(color: widget.textColor),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(20),
           ),
-          backgroundColor: widget.appBarColor,
-          title: Text(strings.browse),
-          actions: [
-            Column(
+        ),
+        backgroundColor: widget.appBarColor,
+        title: Text(
+          strings.browse,
+          style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+                height: 30,
+              ),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: Sizes.p27),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelMedium!
+                      .copyWith(fontSize: 10, fontWeight: FontWeight.w400),
                   strings.itemsStored,
                 ),
                 state.isLoading
                     ? const Expanded(child: CircularProgressIndicator())
-                    : Text(state.value!.length.toString())
+                    : Text(
+                        state.value!.length.toString(),
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelMedium!
+                            .copyWith(
+                                fontSize: 10, fontWeight: FontWeight.w400),
+                      )
               ],
-            )
-          ]),
+            ),
+          )
+        ],
+        leading: const Icon(Icons.menu),
+      ),
       body: Column(
         children: [
           gapH24,
@@ -94,9 +126,16 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
                           setState(() {
                             var a = searchForms.length;
                             log('search form length: is ${a.toString()}');
-                            ref.watch(searchFormProvider).searchRequest.add(null);
-                            ref.watch(searchFormProvider).filter.add(Categories.sort);
-                            searchForms.add(SearchForm(index: searchForms.length));
+                            ref
+                                .watch(searchFormProvider)
+                                .searchRequest
+                                .add(null);
+                            ref
+                                .watch(searchFormProvider)
+                                .filter
+                                .add(Categories.sort);
+                            searchForms
+                                .add(SearchForm(index: searchForms.length));
                           });
                         },
                         icon: const Icon(Icons.add_circle_outline),
@@ -115,7 +154,9 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
               onRefresh: () async {
                 // reset atData to show all data.
                 await ref.watch(atDataControllerProvider.notifier).getData();
-                await ref.watch(homeScreenControllerProvider.notifier).getData();
+                await ref
+                    .watch(homeScreenControllerProvider.notifier)
+                    .getData();
                 await ref.watch(navWidgetController.notifier).getData();
               },
             ),

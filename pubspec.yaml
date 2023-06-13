@@ -28,7 +28,10 @@ dependencies:
   shared_preferences: ^2.1.0
   url_launcher: ^6.1.11
   flutter_native_splash: 2.0.0
+<<<<<<< HEAD
   
+=======
+>>>>>>> kelvin-storage-screen
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -40,7 +43,10 @@ dependency_overrides:
   at_contact: 3.0.6
   intl: 0.18.1
   # image: ^4.0.15
+<<<<<<< HEAD
 
+=======
+>>>>>>> kelvin-storage-screen
 
 flutter:
   generate: true
@@ -66,8 +72,16 @@ flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
   remove_alpha_ios: true
+<<<<<<< HEAD
   image_path: "assets/images/logo.png" 
 
 flutter_native_splash:
   color: "#ffffff"
   image: "assets/images/logo.png"
+=======
+  image_path: "assets/images/logo.png"
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: "assets/images/logo.png"
+>>>>>>> kelvin-storage-screen

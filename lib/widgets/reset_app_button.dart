@@ -61,12 +61,13 @@ class _ResetAppButtonState extends State<ResetAppButton> {
         atsignMap[atsign] = false;
       }
     }
-    if (context.mounted) {
+    if (mounted) {
       await showDialog(
           barrierDismissible: true,
           context: context,
           builder: (BuildContext context) {
-            return StatefulBuilder(builder: (BuildContext context, void Function(void Function()) stateSet) {
+            return StatefulBuilder(builder: (BuildContext context,
+                void Function(void Function()) stateSet) {
               return AlertDialog(
                   title: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -86,26 +87,30 @@ class _ResetAppButtonState extends State<ResetAppButton> {
                     ],
                   ),
                   content: atsignsList == null
-                      ? Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-                          const Text(AtOnboardingStrings.noAtsignToReset,
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.normal,
-                              )),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: const Text(AtOnboardingStrings.closeButton,
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      color: Color.fromARGB(255, 240, 94, 62),
-                                      fontWeight: FontWeight.normal,
-                                    ))),
-                          )
-                        ])
+                      ? Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                              const Text(AtOnboardingStrings.noAtsignToReset,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.normal,
+                                  )),
+                              Align(
+                                alignment: Alignment.bottomRight,
+                                child: TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text(
+                                        AtOnboardingStrings.closeButton,
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          color:
+                                              Color.fromARGB(255, 240, 94, 62),
+                                          fontWeight: FontWeight.normal,
+                                        ))),
+                              )
+                            ])
                       : SingleChildScrollView(
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
@@ -114,14 +119,17 @@ class _ResetAppButtonState extends State<ResetAppButton> {
                                 onChanged: (bool? value) {
                                   isSelectAll = value!;
                                   if (atsignMap.isNotEmpty) {
-                                    atsignMap.updateAll((String? key, bool? value1) => value1 = value);
+                                    atsignMap.updateAll(
+                                        (String? key, bool? value1) =>
+                                            value1 = value);
                                   }
                                   // atsignMap[atsign] = value;
                                   stateSet(() {});
                                 },
                                 value: isSelectAll,
                                 checkColor: Colors.white,
-                                activeColor: const Color.fromARGB(255, 240, 94, 62),
+                                activeColor:
+                                    const Color.fromARGB(255, 240, 94, 62),
                                 title: const Text('Select All',
                                     style: TextStyle(
                                       // fontSize: 14,
@@ -137,9 +145,12 @@ class _ResetAppButtonState extends State<ResetAppButton> {
                                     }
                                     stateSet(() {});
                                   },
-                                  value: atsignMap.isNotEmpty ? atsignMap[atsign] : true,
+                                  value: atsignMap.isNotEmpty
+                                      ? atsignMap[atsign]
+                                      : true,
                                   checkColor: Colors.white,
-                                  activeColor: const Color.fromARGB(255, 240, 94, 62),
+                                  activeColor:
+                                      const Color.fromARGB(255, 240, 94, 62),
                                   title: Text(atsign),
                                   // trailing: Checkbox,
                                 ),
@@ -165,9 +176,12 @@ class _ResetAppButtonState extends State<ResetAppButton> {
                               Row(children: <Widget>[
                                 TextButton(
                                   onPressed: () {
-                                    Map<String, bool?> tempAtsignMap = <String, bool>{};
+                                    Map<String, bool?> tempAtsignMap =
+                                        <String, bool>{};
                                     tempAtsignMap.addAll(atsignMap);
-                                    tempAtsignMap.removeWhere((String? key, bool? value) => value == false);
+                                    tempAtsignMap.removeWhere(
+                                        (String? key, bool? value) =>
+                                            value == false);
                                     if (tempAtsignMap.keys.toList().isEmpty) {
                                       isSelectAtsign = true;
                                       stateSet(() {});
@@ -176,7 +190,8 @@ class _ResetAppButtonState extends State<ResetAppButton> {
                                       _resetDevice(tempAtsignMap.keys.toList());
                                     }
                                   },
-                                  child: const Text(AtOnboardingStrings.removeButton,
+                                  child: const Text(
+                                      AtOnboardingStrings.removeButton,
                                       style: TextStyle(
                                         fontSize: 15,
                                         color: Color.fromARGB(255, 240, 94, 62),
@@ -188,7 +203,8 @@ class _ResetAppButtonState extends State<ResetAppButton> {
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    child: const Text(AtOnboardingStrings.cancelButton,
+                                    child: const Text(
+                                        AtOnboardingStrings.cancelButton,
                                         style: TextStyle(
                                           fontSize: 15,
                                           color: Colors.black,
@@ -216,7 +232,7 @@ class _ResetAppButtonState extends State<ResetAppButton> {
 
       List<String>? atsignsList = await SDKService().getAtsignList();
       if (atsignsList == null || atsignsList.length < 2) {
-        if (context.mounted) {
+        if (mounted) {
           await Navigator.of(context).pushReplacement(
             MaterialPageRoute<void>(
               builder: (BuildContext context) => const MyApp(),

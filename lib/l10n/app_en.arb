@@ -11,7 +11,7 @@
     "connectedAtsigns" : "Connected atSigns",
     "apps" : "Apps",
     "connectedApps" : "Connected Apps",
-    "browse" : "Browse",
+    "browse" : "Data Storage",
     "addFilter" : "Add Filter",
     "settings" : "Settings",
     "backupYourKeys" : "BackupYourKeys",
@@ -50,7 +50,6 @@
     "sharedKeyStatus" : "sharedKeyStatus",
     "sharedKeyEnc" : "sharedKeyEnc",
     "sharedKeyEnc" : "sharedKeyEnc",
-    "onboardingTitle" : "Your data, all of it.",
-    "onboardingDesc" : "All your contacts, data, shared data, apps, everything Atsign",
-    "reset": "Reset"
+    "searchHintText":" Search",
+    "date":"dates"
 }
