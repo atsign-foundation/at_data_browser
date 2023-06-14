@@ -152,7 +152,7 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
             child: RefreshIndicator(
               child: AtDataListWidget(state: state),
               onRefresh: () async {
-                // reset atData to show all data.
+                //reset atData to show all data.
                 await ref.watch(atDataControllerProvider.notifier).getData();
                 await ref
                     .watch(homeScreenControllerProvider.notifier)

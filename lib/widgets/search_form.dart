@@ -1,18 +1,18 @@
 import 'dart:developer';
-
-import 'package:at_data_browser/utils/constants.dart';
+import 'package:at_data_browser/utils/sizes.dart';
 import 'package:at_data_browser/widgets/app_category_widget.dart';
 import 'package:at_data_browser/widgets/data_range_category_widget.dart';
 import 'package:at_data_browser/widgets/search_category_widget.dart';
-import 'package:at_data_browser/widgets/sort_category_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recase/recase.dart';
-
 import '../controllers/apps_controller.dart';
 import '../controllers/filter_form_controller.dart';
 import '../utils/enums.dart';
 import 'key_types_category_widget.dart';
+import 'search_field_container.dart';
+import 'sort_category_widget.dart';
 
 class SearchForm extends ConsumerStatefulWidget {
   const SearchForm({
@@ -36,12 +36,12 @@ class _SearchFormState extends ConsumerState<SearchForm> {
     }
 
     switch (category) {
-      case Categories.contains:
-        return SearchCategoryWidget(
-          index: widget.index,
-        );
       case Categories.sort:
         return SortCategoryWidget(
+          index: widget.index,
+        );
+      case Categories.contains:
+        return SearchCategoryWidget(
           index: widget.index,
         );
       case Categories.dateCreated:
@@ -83,42 +83,31 @@ class _SearchFormState extends ConsumerState<SearchForm> {
 
   @override
   Widget build(BuildContext context) {
+    final filterList = ref.watch(searchFormProvider).filter;
     return Padding(
       padding: const EdgeInsets.only(top: 15, right: 14, left: 15),
       child: SizedBox(
         height: 50,
+        width: MediaQuery.of(context).size.width * 0.98,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Flexible(
-              flex: 4,
-              child: Card(
-                color: kCardColor,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                  side: BorderSide(
-                    color: kCardColor,
-                    width: 2,
-                  ),
+            CategoryContainer(
+              child: DropdownButtonFormField<Categories>(
+                isExpanded: true,
+                value: filterList.isNotEmpty ? filterList[widget.index] : null,
+                borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+                hint: Text(AppLocalizations.of(context)!.category),
+                alignment: Alignment.center,
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.all(0),
+                  border: InputBorder.none,
                 ),
-                child: DropdownButtonFormField<Categories>(
-                  value: ref.watch(searchFormProvider).filter[widget.index]!,
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(5.0),
-                  ),
-                  decoration: const InputDecoration(
-                    contentPadding: EdgeInsets.all(10),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(5.0),
-                      ),
-                    ),
-                  ),
-                  selectedItemBuilder: (context) => Categories.values
-                      .map(
-                        (e) => Center(
-                            child: Text(
+                selectedItemBuilder: (context) => Categories.values
+                    .map(
+                      (e) => Center(
+                        child: Text(
                           e.name.titleCase,
                           style: Theme.of(context)
                               .textTheme
@@ -127,78 +116,75 @@ class _SearchFormState extends ConsumerState<SearchForm> {
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
                                   fontSize: 12),
-                        )),
-                      )
-                      .toList(),
-                  items: Categories.values
-                      .map(
-                        (e) => DropdownMenuItem<Categories>(
-                          value: e,
-                          child: Container(
-                            margin: EdgeInsets.zero,
-                            padding: EdgeInsets.zero,
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .onBackground,
-                                  width: 1.0,
-                                ),
+                        ),
+                      ),
+                    )
+                    .toList(),
+                items: Categories.values
+                    .map(
+                      (e) => DropdownMenuItem(
+                        value: e,
+                        child: Container(
+                          margin: EdgeInsets.zero,
+                          padding: EdgeInsets.zero,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
+                                width: 1.0,
                               ),
                             ),
-                            child: Center(
-                              child: Padding(
-                                padding: const EdgeInsets.only(bottom: 8),
-                                child: Text(
-                                  e.name.titleCase,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .labelMedium!
-                                      .copyWith(
-                                          fontWeight: FontWeight.w400,
-                                          fontStyle: FontStyle.normal,
-                                          fontSize: 12),
-                                ),
+                          ),
+                          child: Center(
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 8),
+                              child: Text(
+                                e.name.titleCase,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelMedium!
+                                    .copyWith(
+                                        fontWeight: FontWeight.w400,
+                                        fontStyle: FontStyle.normal,
+                                        fontSize: 12),
                               ),
                             ),
                           ),
                         ),
-                      )
-                      .toList(),
-                  onChanged: (value) {
-                    log('dropdown value is ${value.toString()}');
-                    setState(() {
-                      ref.watch(searchFormProvider).filter[widget.index] =
-                          value!;
-                      log(ref
-                              .watch(searchFormProvider)
-                              .filter[widget.index]
-                              ?.name ??
-                          'null');
-                      log(ref
-                          .watch(searchFormProvider)
-                          .filter
-                          .length
-                          .toString());
-                      log('search form index is ${widget.index.toString()}');
-                    });
-                  },
-                ),
+                      ),
+                    )
+                    .toList(),
+                onChanged: (value) {
+                  log('dropdown value is ${value.toString()}');
+                  setState(() {
+                    if (filterList.isNotEmpty) {
+                      filterList[widget.index] = value!;
+                    } else {
+                      filterList.add(value!);
+                    }
+                    log(filterList[widget.index]?.name ?? 'null');
+                    log(filterList.length.toString());
+                    log('search form index is ${widget.index.toString()}');
+                  });
+                },
               ),
             ),
-            Flexible(
-              flex: 5,
-              child: FutureBuilder(
-                  builder: (context, AsyncSnapshot<Widget> snapshot) {
-                    if (snapshot.hasData) {
-                      return snapshot.data!;
-                    } else {
-                      return const SizedBox();
-                    }
-                  },
-                  future: getCategoryWidget(
-                      ref.watch(searchFormProvider).filter[widget.index]!)),
+            gapW12,
+            Expanded(
+              child: filterList.isNotEmpty
+                  ? FutureBuilder(
+                      builder: (context, AsyncSnapshot<Widget> snapshot) {
+                        if (snapshot.hasData) {
+                          return snapshot.data!;
+                        } else {
+                          return const SizedBox();
+                        }
+                      },
+                      future: getCategoryWidget(
+                          ref.watch(searchFormProvider).filter[widget.index]!),
+                    )
+                  : const SearchCategoryWidget(index: 0),
             ),
           ],
         ),

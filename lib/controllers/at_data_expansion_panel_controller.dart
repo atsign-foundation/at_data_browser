@@ -4,13 +4,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// A class that holds the [Color]s of the [AtDataExpansionPanel] widget.
 class AtDataExpansionPanelModel {
-  AtDataExpansionPanelModel({required this.primaryColor, required this.fadedColor});
+  AtDataExpansionPanelModel(
+      {required this.primaryColor, required this.fadedColor});
   Color primaryColor;
   Color fadedColor;
 }
 
 /// A Provider that provides the [AtDataExpansionPanelModel] to the [AtDataExpansionPanel] widget.
-final atDataExpansionPanelModelProvider = Provider<AtDataExpansionPanelModel>((ref) {
+final atDataExpansionPanelModelProvider =
+    Provider<AtDataExpansionPanelModel>((ref) {
   return AtDataExpansionPanelModel(
     primaryColor: kDataStorageColor,
     fadedColor: kDataStorageFadedColor,

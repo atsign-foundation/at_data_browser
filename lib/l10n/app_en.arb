@@ -51,5 +51,16 @@
     "sharedKeyEnc" : "sharedKeyEnc",
     "sharedKeyEnc" : "sharedKeyEnc",
     "searchHintText":" Search",
-    "date":"dates"
+    "onboardingTitle" : "Your data, all of it.",
+    "onboardingDesc" : "All your contacts, data, shared data, apps, everything Atsign",
+    "date":"dates",
+    "reset": "Reset",
+    "resetDescription":"This will remove the selected atSign and its details from this app only.",
+    "noAtsignToReset": "No atSigns are paired to reset.",
+    "closeButton":"Close",
+    "resetErrorText":"Please select atleast one atSign to reset",
+    "resetWarningText":"Warning: This action cannot be undone",
+    "removeButton":"Remove",
+    "cancelButton":"Cancel"
+
 }

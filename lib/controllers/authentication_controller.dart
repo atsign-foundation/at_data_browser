@@ -4,20 +4,25 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/authentication_repository.dart';
 
 /// A controller class that controls the UI update when the [AuthenticationRepository] methods are called.
-class AuthenticationController extends StateNotifier<AsyncValue<List<String>?>> {
+class AuthenticationController
+    extends StateNotifier<AsyncValue<List<String>?>> {
   final Ref ref;
-  AuthenticationController({required this.ref}) : super(const AsyncValue.loading());
+  AuthenticationController({required this.ref})
+      : super(const AsyncValue.loading());
 
   /// Get list of contacts atsign for the current atsign.
   Future<void> getAtSignList() async {
     state = const AsyncValue.loading();
 
-    state = await AsyncValue.guard(() async => await ref.watch(authenticationRepositoryProvider).getAtsignList());
+    state = await AsyncValue.guard(() async =>
+        await ref.watch(authenticationRepositoryProvider).getAtsignList());
   }
 
   /// Get the [AtContact] associated with the input atsign.
   Future<AtContact> getAtContact(String atSign) async {
-    return await ref.watch(authenticationRepositoryProvider).getAtContact(atSign);
+    return await ref
+        .watch(authenticationRepositoryProvider)
+        .getAtContact(atSign);
   }
 
   /// Get the current atsign.
@@ -27,10 +32,13 @@ class AuthenticationController extends StateNotifier<AsyncValue<List<String>?>> 
 
   /// Get the current atsign [AtContact].
   Future<AtContact> getCurrentAtContact() async {
-    return await ref.watch(authenticationRepositoryProvider).getCurrentAtContact();
+    return await ref
+        .watch(authenticationRepositoryProvider)
+        .getCurrentAtContact();
   }
 }
 
 /// A provider that exposes the [AuthenticationController] to the app.
-final authenticationController = StateNotifierProvider<AuthenticationController, AsyncValue<List<String>?>>(
-    (ref) => AuthenticationController(ref: ref));
+final authenticationController =
+    StateNotifierProvider<AuthenticationController, AsyncValue<List<String>?>>(
+        (ref) => AuthenticationController(ref: ref));

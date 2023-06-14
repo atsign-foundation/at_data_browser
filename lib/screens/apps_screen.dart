@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../controllers/apps_controller.dart';
 import '../controllers/at_data_controller.dart';
 import '../controllers/filter_form_controller.dart';
@@ -42,7 +41,7 @@ class _DataStorageScreenState extends ConsumerState<AppsScreen> {
       await Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => const BrowseScreen(
-            appBarColor: kBackgroundColor,
+            appBarColor: kAppsFadedColor,
             backgroundColor: kAppsFadedColor,
             textColor: Colors.black,
           ),

@@ -53,15 +53,10 @@ android {
         applicationId "com.atsign.atDataBrowser"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-<<<<<<< HEAD
         minSdkVersion 24
         multiDexEnabled true
         targetSdkVersion 31
        
-=======
-        minSdkVersion 23
-        targetSdkVersion flutter.targetSdkVersion
->>>>>>> kelvin-storage-screen
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }

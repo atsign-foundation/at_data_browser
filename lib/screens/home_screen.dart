@@ -27,7 +27,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   void initState() {
     WidgetsFlutterBinding.ensureInitialized()
         .addPostFrameCallback((timeStamp) async {
-      await ref.watch(homeScreenControllerProvider.notifier).getData();
+      await ref.read(atDataControllerProvider.notifier).getData();
     });
     super.initState();
   }
@@ -85,10 +85,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             Expanded(
               child: Column(children: [
                 ListTile(
-                  title: const Padding(
-                    padding: EdgeInsets.only(left: 25.0),
+                  title: Padding(
+                    padding: const EdgeInsets.only(left: 25.0),
                     child: Row(
-                      children: [
+                      children: const [
                         Text(
                           'Data',
                           style: TextStyle(
