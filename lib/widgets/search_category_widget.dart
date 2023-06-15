@@ -1,9 +1,11 @@
 import 'dart:developer';
+
 import 'package:at_data_browser/utils/sizes.dart';
 import 'package:at_data_browser/widgets/search_field_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../controllers/at_data_controller.dart';
 import '../controllers/filter_form_controller.dart';
 
@@ -11,8 +13,7 @@ class SearchCategoryWidget extends ConsumerStatefulWidget {
   const SearchCategoryWidget({required this.index, super.key});
   final int index;
   @override
-  ConsumerState<SearchCategoryWidget> createState() =>
-      _SearchCategroyWidgetState();
+  ConsumerState<SearchCategoryWidget> createState() => _SearchCategroyWidgetState();
 }
 
 class _SearchCategroyWidgetState extends ConsumerState<SearchCategoryWidget> {
@@ -46,18 +47,17 @@ class _SearchCategroyWidgetState extends ConsumerState<SearchCategoryWidget> {
       child: TextField(
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.all(Sizes.p8),
-          isCollapsed: true,
+          // isCollapsed: true,
           border: InputBorder.none,
           hintText: AppLocalizations.of(context)!.search,
-          alignLabelWithHint: true,
-          hintStyle: Theme.of(context)
-              .textTheme
-              .labelMedium!
-              .copyWith(color: Colors.black.withOpacity(.5), fontSize: 14),
-          suffixIcon: const Icon(
+          // alignLabelWithHint: true,
+          hintStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                color: Colors.black.withOpacity(.5),
+              ),
+          suffixIcon: Icon(
             Icons.search,
-            size:
-                14, //todo(kzawadi): icon size of 13.34 seems so small but that how its specified in figma document.
+            color: Colors.black.withOpacity(.5),
+            size: 20, //todo(kzawadi): icon size of 13.34 seems so small but that how its specified in figma document.
           ),
         ),
         controller: textEditingController,

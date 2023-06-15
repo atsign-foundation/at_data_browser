@@ -1,4 +1,5 @@
 import 'dart:developer';
+
 import 'package:at_data_browser/utils/sizes.dart';
 import 'package:at_data_browser/widgets/app_category_widget.dart';
 import 'package:at_data_browser/widgets/data_range_category_widget.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recase/recase.dart';
+
 import '../controllers/apps_controller.dart';
 import '../controllers/filter_form_controller.dart';
 import '../utils/enums.dart';
@@ -112,10 +114,7 @@ class _SearchFormState extends ConsumerState<SearchForm> {
                           style: Theme.of(context)
                               .textTheme
                               .labelMedium!
-                              .copyWith(
-                                  fontWeight: FontWeight.w400,
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 12),
+                              .copyWith(fontWeight: FontWeight.w400, fontStyle: FontStyle.normal, fontSize: 12),
                         ),
                       ),
                     )
@@ -130,8 +129,7 @@ class _SearchFormState extends ConsumerState<SearchForm> {
                           decoration: BoxDecoration(
                             border: Border(
                               bottom: BorderSide(
-                                color:
-                                    Theme.of(context).colorScheme.onBackground,
+                                color: Theme.of(context).colorScheme.onBackground,
                                 width: 1.0,
                               ),
                             ),
@@ -144,10 +142,7 @@ class _SearchFormState extends ConsumerState<SearchForm> {
                                 style: Theme.of(context)
                                     .textTheme
                                     .labelMedium!
-                                    .copyWith(
-                                        fontWeight: FontWeight.w400,
-                                        fontStyle: FontStyle.normal,
-                                        fontSize: 12),
+                                    .copyWith(fontWeight: FontWeight.w400, fontStyle: FontStyle.normal, fontSize: 12),
                               ),
                             ),
                           ),
@@ -181,8 +176,7 @@ class _SearchFormState extends ConsumerState<SearchForm> {
                           return const SizedBox();
                         }
                       },
-                      future: getCategoryWidget(
-                          ref.watch(searchFormProvider).filter[widget.index]!),
+                      future: getCategoryWidget(ref.watch(searchFormProvider).filter[widget.index]!),
                     )
                   : const SearchCategoryWidget(index: 0),
             ),
