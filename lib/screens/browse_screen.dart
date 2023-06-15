@@ -83,9 +83,7 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
                         strokeWidth: 2,
                         color: kBrowserColor,
                       ))
-                    : Text(state.value!.length.toString(), style: Theme.of(context).textTheme.bodyMedium!
-                        // .copyWith(fontSize: 10, fontWeight: FontWeight.w400),
-                        )
+                    : Text(state.value!.length.toString(), style: Theme.of(context).textTheme.bodyMedium!)
               ],
             ),
           )
