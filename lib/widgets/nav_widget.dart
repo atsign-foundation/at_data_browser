@@ -1,4 +1,3 @@
-import 'package:at_data_browser/screens/apps_screen.dart';
 import 'package:at_data_browser/screens/browse_screen.dart';
 import 'package:at_data_browser/screens/connected_atsigns_screen.dart';
 import 'package:at_data_browser/utils/constants.dart';
@@ -8,6 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../controllers/nav_widget_controller.dart';
+import '../screens/apps_screen.dart';
 
 class NavWidget extends ConsumerStatefulWidget {
   const NavWidget({super.key});
@@ -37,7 +37,7 @@ class _NavWidgetState extends ConsumerState<NavWidget> {
         alignment: Alignment.bottomLeft,
         children: [
           Positioned(
-            height: 270,
+            bottom: 160,
             child: NavContainer(
               name: strings.dataStorage,
               titleCount: strings.itemsStored,
@@ -49,8 +49,7 @@ class _NavWidgetState extends ConsumerState<NavWidget> {
             ),
           ),
           Positioned(
-            height: 190,
-            // top: 90,
+            bottom: 80,
             child: NavContainer(
               name: strings.atSigns,
               titleCount: strings.connectedAtsigns,
@@ -62,10 +61,9 @@ class _NavWidgetState extends ConsumerState<NavWidget> {
             ),
           ),
           Positioned(
-            height: 100,
             child: NavContainer(
-              name: strings.apps,
-              titleCount: strings.connectedApps,
+              name: strings.namespaces,
+              titleCount: strings.namespaces,
               navWidgetModel: navWidgetModel,
               color: kAppsColor,
               onTap: () {

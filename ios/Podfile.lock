@@ -9,6 +9,8 @@ PODS:
     - Flutter
   - biometric_storage (0.0.1):
     - Flutter
+  - device_info_plus (0.0.1):
+    - Flutter
   - DKImagePickerController/Core (4.3.4):
     - DKImagePickerController/ImageDataManager
     - DKImagePickerController/Resource
@@ -52,7 +54,7 @@ PODS:
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
-  - permission_handler_apple (9.0.4):
+  - permission_handler_apple (9.1.0):
     - Flutter
   - qr_code_scanner (0.2.0):
     - Flutter
@@ -77,6 +79,7 @@ DEPENDENCIES:
   - at_file_saver (from `.symlinks/plugins/at_file_saver/ios`)
   - at_onboarding_flutter (from `.symlinks/plugins/at_onboarding_flutter/ios`)
   - biometric_storage (from `.symlinks/plugins/biometric_storage/ios`)
+  - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - Flutter (from `Flutter`)
   - flutter_keychain (from `.symlinks/plugins/flutter_keychain/ios`)
@@ -108,6 +111,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/at_onboarding_flutter/ios"
   biometric_storage:
     :path: ".symlinks/plugins/biometric_storage/ios"
+  device_info_plus:
+    :path: ".symlinks/plugins/device_info_plus/ios"
   file_picker:
     :path: ".symlinks/plugins/file_picker/ios"
   Flutter:
@@ -137,6 +142,7 @@ SPEC CHECKSUMS:
   at_file_saver: c0e052c72d8c0296318bd70f2ae7f510887014ce
   at_onboarding_flutter: e8219b6d0bfb236d3837ec3528871aebdcc56e8d
   biometric_storage: 1400f1382af3a4cc2bf05340e13c3d8de873ceb9
+  device_info_plus: e5c5da33f982a436e103237c0c85f9031142abed
   DKImagePickerController: b512c28220a2b8ac7419f21c491fc8534b7601ac
   DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
   file_picker: ce3938a0df3cc1ef404671531facef740d03f920
@@ -145,7 +151,7 @@ SPEC CHECKSUMS:
   MTBBarcodeScanner: f453b33c4b7dfe545d8c6484ed744d55671788cb
   package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
   path_provider_foundation: eaf5b3e458fc0e5fbb9940fb09980e853fe058b8
-  permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
+  permission_handler_apple: 8f116445eff3c0e7c65ad60f5fef5490aa94b4e4
   qr_code_scanner: bb67d64904c3b9658ada8c402e8b4d406d5d796e
   SDWebImage: e5cc87bf736e60f49592f307bdf9e157189298a3
   share_plus: 056a1e8ac890df3e33cb503afffaf1e9b4fbae68

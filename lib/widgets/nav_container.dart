@@ -1,4 +1,5 @@
 import 'package:at_data_browser/controllers/nav_widget_controller.dart';
+import 'package:at_data_browser/utils/constants.dart';
 import 'package:at_data_browser/utils/enums.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,7 @@ class NavContainer extends StatelessWidget {
       required this.onTap,
       this.showIcon = false,
       this.position = NavPosition.bottom,
+      this.height = 100,
       super.key});
 
   final String name;
@@ -20,16 +22,17 @@ class NavContainer extends StatelessWidget {
   final VoidCallback? onTap;
   final bool showIcon;
   final NavPosition position;
+  final double height;
 
   String getCount(String titleCount) {
     switch (titleCount) {
       case 'Items Stored':
         return navWidgetModel!.dataStorageCount;
 
-      case 'Connected atSigns':
+      case 'Connected\natSigns':
         return navWidgetModel!.atContactsCount;
 
-      case 'Connected Apps':
+      case 'Namespaces':
         return navWidgetModel!.namespacesCount;
       default:
         return "NA";
@@ -41,69 +44,70 @@ class NavContainer extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 100,
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-            color: color,
-            borderRadius: position == NavPosition.bottom
-                ? const BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                  )
-                : const BorderRadius.only(
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20),
-                  )),
-        child: ListTile(
-          leading: showIcon ? const Icon(Icons.menu) : null,
-          title: Padding(
-              padding: const EdgeInsets.only(left: 20.0, top: 20.0),
-              child: Text(
-                name, 
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold
-                  ),
+          height: height,
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+              color: color,
+              borderRadius: position == NavPosition.bottom
+                  ? const BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    )
+                  : const BorderRadius.only(
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20),
+                    )),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 20.0,
+                ),
+                child: Text(
+                  name,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
-          trailing: SizedBox(
-            height: 200,
-            child: Container(
-              margin: const EdgeInsets.only(top: 20.0),
-              child: FittedBox(
-            fit: BoxFit.fitHeight,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  constraints: const BoxConstraints(maxWidth: 150),
-                      child: Text(
-                        titleCount, 
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 20.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        titleCount,
                         style: const TextStyle(
-                          fontSize: 20,
-                        ),
+                            // fontSize: 20,
+                            ),
                         maxLines: 2,
                         textAlign: TextAlign.center,
                       ),
+                      navWidgetModel == null
+                          ? const SizedBox(
+                              height: 12,
+                              width: 12,
+                              child: CircularProgressIndicator(
+                                color: kBrowserColor,
+                                strokeWidth: 2,
+                              ),
+                            )
+                          : Text(
+                              getCount(titleCount),
+                              style: const TextStyle(
+                                // fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                    ],
                   ),
-                navWidgetModel == null
-                    ? const Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : Text(
-                        getCount(titleCount),
-                        style: const TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.center,
                 ),
-              ],
-            ),
-          ),
-        ),
-          ),
-      ),
-      ),
+              ),
+            ],
+          )),
     );
   }
 }
