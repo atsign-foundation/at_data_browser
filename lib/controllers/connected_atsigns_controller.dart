@@ -5,17 +5,20 @@ import '../data/at_data_repository.dart';
 import '../data/contact_repository.dart';
 
 /// A controller class that controls the UI update when the [AtDataRepository] methods are called.
-class ConnectedAtsignsController extends StateNotifier<AsyncValue<List<AtContact>?>> {
+class ConnectedAtsignsController
+    extends StateNotifier<AsyncValue<List<AtContact>?>> {
   final Ref ref;
 
-  ConnectedAtsignsController({required this.ref}) : super(const AsyncValue.loading()) {
+  ConnectedAtsignsController({required this.ref})
+      : super(const AsyncValue.loading()) {
     getData();
   }
 
   /// Get list of atsigns associated with the current atsign.
   Future<void> getData() async {
     state = const AsyncValue.loading();
-    state = await AsyncValue.guard(() async => await ref.watch(contactRepositoryProvider).getContactList());
+    state = await AsyncValue.guard(() async =>
+        await ref.watch(contactRepositoryProvider).getContactList());
   }
 
   /// Get the count of atsigns associated with the current atsign as a string.
@@ -42,6 +45,6 @@ class ConnectedAtsignsController extends StateNotifier<AsyncValue<List<AtContact
 }
 
 /// A provider that exposes the [ConnectedAtsignsController] to the app.
-final connectedAtsignsControllerProvider =
-    StateNotifierProvider<ConnectedAtsignsController, AsyncValue<List<AtContact>?>>(
-        (ref) => ConnectedAtsignsController(ref: ref));
+final connectedAtsignsControllerProvider = StateNotifierProvider<
+        ConnectedAtsignsController, AsyncValue<List<AtContact>?>>(
+    (ref) => ConnectedAtsignsController(ref: ref));

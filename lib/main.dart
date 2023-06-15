@@ -5,7 +5,6 @@ import 'package:at_contacts_flutter/utils/init_contacts_service.dart';
 import 'package:at_data_browser/screens/apps_screen.dart';
 import 'package:at_data_browser/screens/browse_screen.dart';
 import 'package:at_data_browser/screens/connected_atsigns_screen.dart';
-import 'package:at_data_browser/screens/data_storage_screen.dart';
 import 'package:at_data_browser/screens/home_screen.dart';
 import 'package:at_data_browser/screens/settings_screen.dart';
 import 'package:at_data_browser/utils/sizes.dart';
@@ -16,7 +15,8 @@ import 'package:at_utils/at_logger.dart' show AtSignLogger;
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:path_provider/path_provider.dart' show getApplicationSupportDirectory;
+import 'package:path_provider/path_provider.dart'
+    show getApplicationSupportDirectory;
 
 import './data/navigation_service.dart';
 
@@ -106,7 +106,8 @@ class _MyAppState extends State<MyApp> {
                     padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 24),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40))),
                 onPressed: () async {
-                  AtOnboardingResult onboardingResult = await AtOnboarding.onboard(
+                  AtOnboardingResult onboardingResult =
+                      await AtOnboarding.onboard(
                     context: context,
                     config: AtOnboardingConfig(
                       atClientPreference: await futurePreference,
@@ -117,11 +118,11 @@ class _MyAppState extends State<MyApp> {
                   );
                   switch (onboardingResult.status) {
                     case AtOnboardingResultStatus.success:
-                      if (context.mounted) _goLocalData(context);
+                      if (mounted) _goLocalData(context);
                       initializeContactsService(rootDomain: AtEnv.rootDomain);
                       break;
                     case AtOnboardingResultStatus.error:
-                      if (context.mounted) _handleError(context);
+                      if (mounted) _handleError(context);
                       break;
                     case AtOnboardingResultStatus.cancel:
                       break;
@@ -142,7 +143,7 @@ class _MyAppState extends State<MyApp> {
       }),
       routes: {
         HomeScreen.route: (_) => const HomeScreen(),
-        DataStorageScreen.route: (_) => const DataStorageScreen(),
+        // DataStorageScreen.route: (_) => const DataStorageScreen(),
         ConnectedAtsignsScreen.route: (_) => const ConnectedAtsignsScreen(),
         AppsScreen.route: (_) => const AppsScreen(),
         BrowseScreen.route: (_) => const BrowseScreen(),
@@ -152,7 +153,8 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _goLocalData(context) {
-    Navigator.push(context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+    Navigator.push(
+        context, MaterialPageRoute(builder: (_) => const HomeScreen()));
   }
 
   void _handleError(context) {

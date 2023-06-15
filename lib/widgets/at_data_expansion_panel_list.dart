@@ -15,10 +15,12 @@ class AtDataExpansionPanelList extends ConsumerStatefulWidget {
   final AtData atData;
 
   @override
-  ConsumerState<AtDataExpansionPanelList> createState() => _AtDataExpansionPanelListState();
+  ConsumerState<AtDataExpansionPanelList> createState() =>
+      _AtDataExpansionPanelListState();
 }
 
-class _AtDataExpansionPanelListState extends ConsumerState<AtDataExpansionPanelList> {
+class _AtDataExpansionPanelListState
+    extends ConsumerState<AtDataExpansionPanelList> {
   List<bool> isExpandPanel = [false, false, false];
 
   bool isDeletable(String key) {
@@ -40,7 +42,10 @@ class _AtDataExpansionPanelListState extends ConsumerState<AtDataExpansionPanelL
       });
       return data;
     } catch (e) {
-      return [AtDataProperty(title: 'Value', value: widget.atData.atValue.value.toString())];
+      return [
+        AtDataProperty(
+            title: 'Value', value: widget.atData.atValue.value.toString())
+      ];
     }
   }
 
@@ -69,7 +74,9 @@ class _AtDataExpansionPanelListState extends ConsumerState<AtDataExpansionPanelL
                     alignment: Alignment.centerLeft,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
-                      color: ref.watch(atDataExpansionPanelModelProvider).primaryColor,
+                      color: ref
+                          .watch(atDataExpansionPanelModelProvider)
+                          .primaryColor,
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 16.0),
@@ -126,7 +133,9 @@ class _AtDataExpansionPanelListState extends ConsumerState<AtDataExpansionPanelL
                     alignment: Alignment.centerLeft,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
-                      color: ref.watch(atDataExpansionPanelModelProvider).primaryColor,
+                      color: ref
+                          .watch(atDataExpansionPanelModelProvider)
+                          .primaryColor,
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 16.0),
@@ -165,7 +174,8 @@ class _AtDataExpansionPanelListState extends ConsumerState<AtDataExpansionPanelL
                     ),
                     AtDataProperty(
                       title: 'availableAt',
-                      value: widget.atData.atKey.metadata!.availableAt.toString(),
+                      value:
+                          widget.atData.atKey.metadata!.availableAt.toString(),
                     ),
                     AtDataProperty(
                       title: 'expiresAt',
@@ -189,7 +199,8 @@ class _AtDataExpansionPanelListState extends ConsumerState<AtDataExpansionPanelL
                     ),
                     AtDataProperty(
                       title: 'isEncrypted',
-                      value: widget.atData.atKey.metadata!.isEncrypted.toString(),
+                      value:
+                          widget.atData.atKey.metadata!.isEncrypted.toString(),
                     ),
                     AtDataProperty(
                       title: 'isCached',
@@ -197,15 +208,18 @@ class _AtDataExpansionPanelListState extends ConsumerState<AtDataExpansionPanelL
                     ),
                     AtDataProperty(
                       title: 'dataSignature',
-                      value: widget.atData.atKey.metadata!.dataSignature.toString(),
+                      value: widget.atData.atKey.metadata!.dataSignature
+                          .toString(),
                     ),
                     AtDataProperty(
                       title: 'sharedKeyStatus',
-                      value: widget.atData.atKey.metadata!.sharedKeyStatus.toString(),
+                      value: widget.atData.atKey.metadata!.sharedKeyStatus
+                          .toString(),
                     ),
                     AtDataProperty(
                       title: 'sharedKeyEnc',
-                      value: widget.atData.atKey.metadata!.sharedKeyEnc.toString(),
+                      value:
+                          widget.atData.atKey.metadata!.sharedKeyEnc.toString(),
                     ),
                     AtDataProperty(
                       title: 'pubKeyCS',
@@ -217,7 +231,8 @@ class _AtDataExpansionPanelListState extends ConsumerState<AtDataExpansionPanelL
                     ),
                     AtDataProperty(
                       title: 'encKeyName',
-                      value: widget.atData.atKey.metadata!.encKeyName.toString(),
+                      value:
+                          widget.atData.atKey.metadata!.encKeyName.toString(),
                     ),
                     AtDataProperty(
                       title: 'encAlgo',
@@ -229,11 +244,13 @@ class _AtDataExpansionPanelListState extends ConsumerState<AtDataExpansionPanelL
                     ),
                     AtDataProperty(
                       title: 'skeEncKeyName',
-                      value: widget.atData.atKey.metadata!.skeEncKeyName.toString(),
+                      value: widget.atData.atKey.metadata!.skeEncKeyName
+                          .toString(),
                     ),
                     AtDataProperty(
                       title: 'skeEncAlgo',
-                      value: widget.atData.atKey.metadata!.skeEncAlgo.toString(),
+                      value:
+                          widget.atData.atKey.metadata!.skeEncAlgo.toString(),
                     ),
                   ],
                 ),
@@ -247,7 +264,9 @@ class _AtDataExpansionPanelListState extends ConsumerState<AtDataExpansionPanelL
                     alignment: Alignment.centerLeft,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
-                      color: ref.watch(atDataExpansionPanelModelProvider).primaryColor,
+                      color: ref
+                          .watch(atDataExpansionPanelModelProvider)
+                          .primaryColor,
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 16.0),
@@ -267,7 +286,9 @@ class _AtDataExpansionPanelListState extends ConsumerState<AtDataExpansionPanelL
           isDeletable(widget.atData.atKey.toString())
               ? ElevatedButton(
                   onPressed: () async {
-                    await ref.read(atDataControllerProvider.notifier).delete(widget.atData);
+                    await ref
+                        .read(atDataControllerProvider.notifier)
+                        .delete(widget.atData);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,

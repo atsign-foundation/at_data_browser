@@ -54,7 +54,11 @@ SPEC CHECKSUMS:
   at_file_saver: 1fc6ed722f17c7a20ce79cce168d1100fcad4b95
   biometric_storage: 43caa6e7ef00e8e19c074216e7e1786dacda9e76
   file_selector_macos: f1b08a781e66103e3ba279fd5d4024a2478b3af6
+<<<<<<< HEAD
   FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
+=======
+  FlutterMacOS: ae6af50a8ea7d6103d888583d46bd8328a7e9811
+>>>>>>> kelvin-storage-screen
   package_info_plus_macos: f010621b07802a241d96d01876d6705f15e77c1c
   path_provider_foundation: eaf5b3e458fc0e5fbb9940fb09980e853fe058b8
   share_plus_macos: 853ee48e7dce06b633998ca0735d482dd671ade4

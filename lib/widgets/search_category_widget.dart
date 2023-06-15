@@ -1,11 +1,9 @@
 import 'dart:developer';
-
 import 'package:at_data_browser/utils/sizes.dart';
 import 'package:at_data_browser/widgets/search_field_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../controllers/at_data_controller.dart';
 import '../controllers/filter_form_controller.dart';
 
@@ -13,7 +11,8 @@ class SearchCategoryWidget extends ConsumerStatefulWidget {
   const SearchCategoryWidget({required this.index, super.key});
   final int index;
   @override
-  ConsumerState<SearchCategoryWidget> createState() => _SearchCategroyWidgetState();
+  ConsumerState<SearchCategoryWidget> createState() =>
+      _SearchCategroyWidgetState();
 }
 
 class _SearchCategroyWidgetState extends ConsumerState<SearchCategoryWidget> {
@@ -43,15 +42,23 @@ class _SearchCategroyWidgetState extends ConsumerState<SearchCategoryWidget> {
       textEditingController.text = '';
     }
 
-    return SearchFieldContainer(
+    return CategoryContainer(
       child: TextField(
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.symmetric(
-            vertical: Sizes.p8,
-          ),
-          hintText: AppLocalizations.of(context)!.search,
+          contentPadding: const EdgeInsets.all(Sizes.p8),
+          isCollapsed: true,
           border: InputBorder.none,
-          suffixIcon: const Icon(Icons.search),
+          hintText: AppLocalizations.of(context)!.search,
+          alignLabelWithHint: true,
+          hintStyle: Theme.of(context)
+              .textTheme
+              .labelMedium!
+              .copyWith(color: Colors.black.withOpacity(.5), fontSize: 14),
+          suffixIcon: const Icon(
+            Icons.search,
+            size:
+                14, //todo(kzawadi): icon size of 13.34 seems so small but that how its specified in figma document.
+          ),
         ),
         controller: textEditingController,
         onChanged: (value) {

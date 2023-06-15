@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../controllers/apps_controller.dart';
 import '../controllers/at_data_controller.dart';
 import '../controllers/filter_form_controller.dart';
@@ -21,14 +20,16 @@ class AppsScreen extends ConsumerStatefulWidget {
 class _DataStorageScreenState extends ConsumerState<AppsScreen> {
   @override
   void initState() {
-    WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) async {
+    WidgetsFlutterBinding.ensureInitialized()
+        .addPostFrameCallback((timeStamp) async {
       await ref.watch(appsController.notifier).getData();
     });
     super.initState();
   }
 
   /// Navigate to browse screen showing atkeys filtered by the selected apps.
-  Future<void> _onTap({required AsyncValue<List<String>> state, required int index}) async {
+  Future<void> _onTap(
+      {required AsyncValue<List<String>> state, required int index}) async {
     // set the search request to the selected app
     ref.watch(searchFormProvider).searchRequest[0] = state.value![index];
     // set the filter to apps
@@ -36,11 +37,11 @@ class _DataStorageScreenState extends ConsumerState<AppsScreen> {
     // filter atData by conditions set in searchFormProvider
     ref.watch(filterControllerProvider.notifier).getFilteredAtData();
 
-    if (context.mounted) {
+    if (mounted) {
       await Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => const BrowseScreen(
-            appBarColor: Colors.white,
+            appBarColor: kAppsFadedColor,
             backgroundColor: kAppsFadedColor,
             textColor: Colors.black,
           ),
@@ -56,8 +57,14 @@ class _DataStorageScreenState extends ConsumerState<AppsScreen> {
     return Scaffold(
       backgroundColor: kAppsFadedColor,
       appBar: AppBar(
-          titleTextStyle: Theme.of(context).textTheme.titleLarge!.copyWith(color: Colors.white),
-          toolbarTextStyle: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.white),
+          titleTextStyle: Theme.of(context)
+              .textTheme
+              .titleLarge!
+              .copyWith(color: Colors.white),
+          toolbarTextStyle: Theme.of(context)
+              .textTheme
+              .titleMedium!
+              .copyWith(color: Colors.white),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(20),

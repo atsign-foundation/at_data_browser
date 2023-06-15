@@ -37,7 +37,8 @@ class AppController extends StateNotifier<AsyncValue<List<String>>> {
 
   /// Get the number of apps/namespaces associated with the current atsign as a string.
   String getNameSpacesCountString(List<AtData> atDataList) {
-    return state.value?.length.toString() ?? AppLocalizations.of(NavigationService.navKey.currentContext!)!.na;
+    return state.value?.length.toString() ??
+        AppLocalizations.of(NavigationService.navKey.currentContext!)!.na;
   }
 
   /// Get the apps/namespaces associated with the current atsign that contains the input.
@@ -55,4 +56,6 @@ class AppController extends StateNotifier<AsyncValue<List<String>>> {
 }
 
 /// A provider that exposes the [AppController] to the app.
-final appsController = StateNotifierProvider<AppController, AsyncValue<List<String>>>((ref) => AppController(ref: ref));
+final appsController =
+    StateNotifierProvider<AppController, AsyncValue<List<String>>>(
+        (ref) => AppController(ref: ref));

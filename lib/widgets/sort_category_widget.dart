@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recase/recase.dart';
-
 import '../controllers/at_data_controller.dart';
 import '../controllers/filter_form_controller.dart';
 import '../utils/enums.dart';
@@ -26,14 +25,24 @@ class _SortCategoryWidgetState extends ConsumerState<SortCategoryWidget> {
       child: DropdownButton<String>(
         isExpanded: true,
         underline: const SizedBox(),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(5.0),
+        ),
         value: searchList.isNotEmpty ? searchList[widget.index] : null,
         hint: Text(strings.sortBy),
+        style: Theme.of(context)
+            .textTheme
+            .labelMedium!
+            .copyWith(color: Colors.black.withOpacity(.5), fontSize: 14),
         items: SortOptions.values
             .map(
               (e) => DropdownMenuItem(
                 value: e.name,
                 child: Center(
-                  child: Text(e.name.titleCase),
+                  child: Text(
+                    e.name.titleCase,
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
                 ),
               ),
             )

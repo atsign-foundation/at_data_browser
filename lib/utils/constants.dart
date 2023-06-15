@@ -10,6 +10,8 @@ const kBrowserColor = Color(0xFF363636);
 const kBrowserFadedColor = Color(0xFFA4A4A4);
 const kPrimaryColor = Color(0xFFF9F9F9);
 const kSearchFieldColor = Color(0xFFF4F4F4);
+const kCardColor = Color(0xFFF4F4F4);
+
 
 // const kAppsFaded = Color(0xFF);
 
