@@ -26,7 +26,10 @@ class _SortCategoryWidgetState extends ConsumerState<KeyTypesCategoryWidget> {
         isExpanded: true,
         underline: const SizedBox(),
         value: searchList.isNotEmpty ? searchList[widget.index] : null,
-        hint: Text(AppLocalizations.of(context)!.keyType),
+        hint: Text(AppLocalizations.of(context)!.selectKeyType),
+        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              color: Colors.black.withOpacity(.5),
+            ),
         items: KeyType.values
             .map(
               (e) => DropdownMenuItem(

@@ -11,7 +11,7 @@ class SearchFieldContainer extends StatelessWidget {
     return Container(
       height: 48,
       width: 152,
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: kSearchFieldColor,
         borderRadius: BorderRadius.circular(5),

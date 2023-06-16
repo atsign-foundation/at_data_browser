@@ -25,7 +25,10 @@ class _SortCategoryWidgetState extends ConsumerState<AppCategoryWidget> {
         isExpanded: true,
         underline: const SizedBox(),
         value: searchList.isNotEmpty ? searchList[widget.index] : null,
-        hint: Text(AppLocalizations.of(context)!.apps),
+        hint: Text(AppLocalizations.of(context)!.selectNamespaces),
+        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              color: Colors.black.withOpacity(.5),
+            ),
         items: ref
             .watch(atDataControllerProvider.notifier.select((value) => value.apps))
             .map(
