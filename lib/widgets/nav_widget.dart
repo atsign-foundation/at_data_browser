@@ -29,7 +29,7 @@ class _NavWidgetState extends ConsumerState<NavWidget> {
   @override
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context)!;
-    final navWidgetModel = ref.watch(navWidgetController).value;
+    final navWidgetModel = ref.watch(navWidgetController);
     return SizedBox(
       height: 270,
       width: MediaQuery.of(context).size.width,
@@ -41,10 +41,10 @@ class _NavWidgetState extends ConsumerState<NavWidget> {
             child: NavContainer(
               name: strings.dataStorage,
               titleCount: strings.itemsStored,
-              navWidgetModel: navWidgetModel,
+              navWidgetModel: navWidgetModel.isLoading ? null : navWidgetModel.asData?.value,
               color: kDataStorageColor,
               onTap: () {
-                Navigator.pushNamed(context, BrowseScreen.route);
+                if (navWidgetModel.hasValue) Navigator.pushNamed(context, BrowseScreen.route);
               },
             ),
           ),
@@ -53,10 +53,10 @@ class _NavWidgetState extends ConsumerState<NavWidget> {
             child: NavContainer(
               name: strings.atSigns,
               titleCount: strings.connectedAtsigns,
-              navWidgetModel: navWidgetModel,
+              navWidgetModel: navWidgetModel.isLoading ? null : navWidgetModel.asData?.value,
               color: kAtSignColor,
               onTap: () {
-                Navigator.pushNamed(context, ConnectedAtsignsScreen.route);
+                if (navWidgetModel.hasValue) Navigator.pushNamed(context, ConnectedAtsignsScreen.route);
               },
             ),
           ),
@@ -64,10 +64,10 @@ class _NavWidgetState extends ConsumerState<NavWidget> {
             child: NavContainer(
               name: strings.namespaces,
               titleCount: strings.namespaces,
-              navWidgetModel: navWidgetModel,
+              navWidgetModel: navWidgetModel.isLoading ? null : navWidgetModel.asData?.value,
               color: kAppsColor,
               onTap: () {
-                Navigator.pushNamed(context, AppsScreen.route);
+                if (navWidgetModel.hasValue) Navigator.pushNamed(context, AppsScreen.route);
               },
             ),
           ),
