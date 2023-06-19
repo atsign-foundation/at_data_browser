@@ -34,6 +34,13 @@ class _SortCategoryWidgetState extends ConsumerState<SortCategoryWidget> {
         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               color: Colors.black.withOpacity(.5),
             ),
+        selectedItemBuilder: (context) => SortOptions.values
+            .map(
+              (e) => Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(e.name.titleCase, style: Theme.of(context).textTheme.bodyMedium!)),
+            )
+            .toList(),
         items: SortOptions.values
             .map(
               (e) => DropdownMenuItem(

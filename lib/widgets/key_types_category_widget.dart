@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:at_client_mobile/at_client_mobile.dart';
 import 'package:at_data_browser/widgets/search_field_container.dart';
 import 'package:flutter/material.dart';
@@ -30,11 +32,32 @@ class _SortCategoryWidgetState extends ConsumerState<KeyTypesCategoryWidget> {
         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               color: Colors.black.withOpacity(.5),
             ),
+        selectedItemBuilder: (context) => KeyType.values
+            .map(
+              (e) => Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(e.name.titleCase, style: Theme.of(context).textTheme.bodyMedium!)),
+            )
+            .toList(),
         items: KeyType.values
             .map(
               (e) => DropdownMenuItem(
                 value: e.name,
-                child: Text(e.name.titleCase),
+                child: Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.zero,
+                  margin: EdgeInsets.zero,
+                  alignment: Alignment.center,
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+
+                          //     color: Theme.of(context).colorScheme.onBackground,
+                          ),
+                    ),
+                  ),
+                  child: Text(e.name.titleCase, style: Theme.of(context).textTheme.bodyMedium!),
+                ),
               ),
             )
             .toList(),
@@ -47,6 +70,7 @@ class _SortCategoryWidgetState extends ConsumerState<KeyTypesCategoryWidget> {
             }
           });
           ref.watch(filterControllerProvider.notifier).getFilteredAtData();
+          log('searchList: $searchList');
         },
       ),
     );

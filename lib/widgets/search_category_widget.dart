@@ -76,13 +76,14 @@ class _SearchCategoryWidgetState extends ConsumerState<SearchCategoryWidget> {
           }
           searchRequest[widget.index] = value;
           ref.watch(filterControllerProvider.notifier).getFilteredAtData();
+          log('searchRequest: $searchRequest');
         },
         onTap: () {
-          setState(() {
-            if (!widget.readOnly) {
+          if (!widget.readOnly && !showClearIcon) {
+            setState(() {
               showClearIcon = true;
-            }
-          });
+            });
+          }
         },
       ),
     );

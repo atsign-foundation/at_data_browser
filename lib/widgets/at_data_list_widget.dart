@@ -27,6 +27,7 @@ class _AtDataListWidgetState extends State<AtDataListWidget> {
           return const Center(child: CircularProgressIndicator());
         } else {
           return Card(
+            margin: EdgeInsets.zero,
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20),
@@ -51,24 +52,18 @@ class _AtDataListWidgetState extends State<AtDataListWidget> {
                             value: builderIndex,
                             canTapOnHeader: true,
                             backgroundColor: Colors.transparent,
-                            headerBuilder:
-                                (BuildContext context, bool isExpanded) {
+                            headerBuilder: (BuildContext context, bool isExpanded) {
                               // isExpandPanel[0] = isExpanded;
 
                               return Center(
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                      widget.state.value![builderIndex].atKey
-                                          .toString(),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall),
+                                  child: Text(widget.state.value![builderIndex].atKey.toString(),
+                                      style: Theme.of(context).textTheme.titleSmall),
                                 ),
                               );
                             },
-                            body: AtDataExpansionPanelList(
-                                atData: widget.state.value![builderIndex]),
+                            body: AtDataExpansionPanelList(atData: widget.state.value![builderIndex]),
                             // isExpanded: isExpandPanel[0],
                           ),
                         ],

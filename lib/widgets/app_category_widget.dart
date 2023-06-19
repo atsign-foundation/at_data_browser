@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:at_data_browser/widgets/search_field_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -34,7 +36,21 @@ class _SortCategoryWidgetState extends ConsumerState<AppCategoryWidget> {
             .map(
               (e) => DropdownMenuItem(
                 value: e,
-                child: Text(e),
+                child: Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.zero,
+                  margin: EdgeInsets.zero,
+                  alignment: Alignment.center,
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+
+                          //     color: Theme.of(context).colorScheme.onBackground,
+                          ),
+                    ),
+                  ),
+                  child: Text(e, style: Theme.of(context).textTheme.bodyMedium!),
+                ),
               ),
             )
             .toList(),
@@ -49,6 +65,7 @@ class _SortCategoryWidgetState extends ConsumerState<AppCategoryWidget> {
 
           // filter atData by conditions set in searchFormProvider
           ref.watch(filterControllerProvider.notifier).getFilteredAtData();
+          log('searchList: $searchList');
         },
       ),
     );
