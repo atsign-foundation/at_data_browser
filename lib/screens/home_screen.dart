@@ -106,14 +106,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 gapH64,
                 NotificationListTile.notify(
                   subTitle:
-                      '${!homeScreenControllerModel.isLoading ? homeScreenControllerModel.asData?.value.workingKeys.length : 0} ${strings.validKeyMessage}',
+                      '${homeScreenControllerModel.asData != null ? homeScreenControllerModel.asData?.value.workingKeys.length : '-'} ${strings.validKeyMessage}',
                 ),
                 gapH16,
                 GestureDetector(
                   onTap: () async => _navigateToInvalidKey(),
                   child: NotificationListTile.warning(
                     subTitle:
-                        '${!homeScreenControllerModel.isLoading ? homeScreenControllerModel.asData?.value.malformedKeys.length : 0} ${strings.invalidKeyMessage}',
+                        '${homeScreenControllerModel.asData != null ? homeScreenControllerModel.asData?.value.malformedKeys.length : '-'} ${strings.invalidKeyMessage}',
                   ),
                 ),
                 gapH64,
