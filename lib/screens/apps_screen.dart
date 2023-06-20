@@ -1,9 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../controllers/apps_controller.dart';
-import '../controllers/at_data_controller.dart';
 import '../controllers/filter_form_controller.dart';
 import '../utils/constants.dart';
 import '../utils/enums.dart';
@@ -30,19 +31,26 @@ class _DataStorageScreenState extends ConsumerState<AppsScreen> {
   /// Navigate to browse screen showing atkeys filtered by the selected apps.
   Future<void> _onTap({required AsyncValue<List<String>> state, required int index}) async {
     // set the search request to the selected app
-    ref.watch(searchFormProvider).searchRequest[0] = state.value![index];
+    try {
+      ref.watch(searchFormProvider).searchRequest[0] = state.value![index];
+      log('search request is: ${ref.read(searchFormProvider).searchRequest}');
+    } catch (e) {
+      ref.watch(searchFormProvider).searchRequest.add(state.value![index]);
+      log('search request is: ${ref.read(searchFormProvider).searchRequest}');
+    }
     // set the filter to apps
-    ref.watch(searchFormProvider).filter[0] = Categories.namespaces;
-    // filter atData by conditions set in searchFormProvider
-    ref.watch(filterControllerProvider.notifier).getFilteredAtData();
+    try {
+      ref.watch(searchFormProvider).filter[0] = Categories.namespaces;
+    } catch (e) {
+      ref.watch(searchFormProvider).filter.add(Categories.namespaces);
+    }
 
     if (mounted) {
       await Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => const BrowseScreen(
-            appBarColor: kAppsFadedColor,
-            backgroundColor: kAppsFadedColor,
             textColor: Colors.black,
+            isResetSearchForm: false,
           ),
         ),
       );
@@ -56,8 +64,9 @@ class _DataStorageScreenState extends ConsumerState<AppsScreen> {
     return Scaffold(
       backgroundColor: kAppsFadedColor,
       appBar: AppBar(
-          titleTextStyle: Theme.of(context).textTheme.titleLarge!.copyWith(color: Colors.white),
-          toolbarTextStyle: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.white),
+          iconTheme: Theme.of(context).iconTheme,
+          titleTextStyle: Theme.of(context).textTheme.titleLarge!,
+          toolbarTextStyle: Theme.of(context).textTheme.titleMedium!,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(20),
@@ -90,6 +99,7 @@ class _DataStorageScreenState extends ConsumerState<AppsScreen> {
                     return const Center(child: CircularProgressIndicator());
                   } else {
                     return Card(
+                      margin: EdgeInsets.zero,
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),

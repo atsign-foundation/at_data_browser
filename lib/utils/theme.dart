@@ -145,13 +145,14 @@ class AppTheme {
         surfaceTintColor: kPrimaryColor,
       ),
       cardTheme: CardTheme(
-          elevation: 0,
-          surfaceTintColor: kPrimaryColor,
-          color: const Color(0xFFF4F4F4),
-          shape: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5),
-            borderSide: BorderSide.none,
-          )),
+        elevation: 0,
+        surfaceTintColor: kPrimaryColor,
+        color: const Color(0xFFF4F4F4),
+        shape: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5),
+          borderSide: BorderSide.none,
+        ),
+      ),
     );
   }
 

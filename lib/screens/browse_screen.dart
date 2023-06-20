@@ -20,11 +20,14 @@ class BrowseScreen extends ConsumerStatefulWidget {
       {this.appBarColor = kDataStorageColor,
       this.backgroundColor = kDataStorageFadedColor,
       this.textColor = Colors.black,
+      this.isResetSearchForm = true,
       super.key});
 
   final Color appBarColor;
   final Color backgroundColor;
   final Color textColor;
+  // Decide whether to reset the search form or not
+  final bool isResetSearchForm;
 
   @override
   ConsumerState<BrowseScreen> createState() => _DataStorageScreenState();
@@ -42,9 +45,17 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
     super.initState();
     WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) {
       ref.read(filterControllerProvider.notifier).getData();
+      //Apply filter if search request is not empty. i.e. if user has navigated from another screen and has set isResetForm to false.
+      if (!widget.isResetSearchForm) {
+        ref.read(filterControllerProvider.notifier).getFilteredAtData();
+      }
+    });
+
+    // Reset search form if user navigates to this screen from another screen i.e home screen and isResetForm is true.
+    if (widget.isResetSearchForm) {
       ref.read(searchFormProvider).searchRequest = [];
       ref.read(searchFormProvider).filter = [];
-    });
+    }
   }
 
   @override

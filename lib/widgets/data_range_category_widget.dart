@@ -77,8 +77,8 @@ class _DateRangeCategoryWidgetState extends ConsumerState<DateRangeCategoryWidge
       child: TextFormField(
         style: Theme.of(context).textTheme.labelMedium!.copyWith(),
         readOnly: true,
-        // textAlign: TextAlign.center,
-        // textAlignVertical: TextAlignVertical.top,
+        textAlign: TextAlign.center,
+        textAlignVertical: TextAlignVertical.top,
         // focusNode: widget.state.dateOfBirthFocusNode,
         controller: dateController,
         // validator: widget.validator,
@@ -86,11 +86,11 @@ class _DateRangeCategoryWidgetState extends ConsumerState<DateRangeCategoryWidge
         onChanged: (value) {},
         decoration: const InputDecoration(
           border: InputBorder.none,
-          suffixIcon: Icon(
-            Icons.calendar_month_outlined,
-            size: 14,
-          ),
-          contentPadding: EdgeInsets.all(2),
+          // suffixIcon: Icon(
+          //   Icons.calendar_month_outlined,
+          //   size: 14,
+          // ),
+          contentPadding: EdgeInsets.only(bottom: 14),
           floatingLabelBehavior: FloatingLabelBehavior.never,
         ),
         onTap: _showDatePicker,

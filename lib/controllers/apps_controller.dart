@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:at_data_browser/controllers/at_data_controller.dart';
 import 'package:at_data_browser/data/navigation_service.dart';
 import 'package:at_data_browser/domain.dart/at_data.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -19,7 +20,7 @@ class AppController extends StateNotifier<AsyncValue<List<String>>> {
   Future<void> getData() async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
-      final atDataList = await ref.watch(dataRepositoryProvider).getData();
+      final atDataList = ref.watch(atDataControllerProvider).asData!.value;
       List<String> nameSpaces = [];
       for (var atData in atDataList) {
         if (atData.atKey.namespace != null) {
@@ -37,8 +38,7 @@ class AppController extends StateNotifier<AsyncValue<List<String>>> {
 
   /// Get the number of apps/namespaces associated with the current atsign as a string.
   String getNameSpacesCountString(List<AtData> atDataList) {
-    return state.value?.length.toString() ??
-        AppLocalizations.of(NavigationService.navKey.currentContext!)!.na;
+    return state.value?.length.toString() ?? AppLocalizations.of(NavigationService.navKey.currentContext!)!.na;
   }
 
   /// Get the apps/namespaces associated with the current atsign that contains the input.
@@ -56,6 +56,4 @@ class AppController extends StateNotifier<AsyncValue<List<String>>> {
 }
 
 /// A provider that exposes the [AppController] to the app.
-final appsController =
-    StateNotifierProvider<AppController, AsyncValue<List<String>>>(
-        (ref) => AppController(ref: ref));
+final appsController = StateNotifierProvider<AppController, AsyncValue<List<String>>>((ref) => AppController(ref: ref));

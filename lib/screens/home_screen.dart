@@ -57,8 +57,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget build(BuildContext context) {
     final atsign = ref.watch(authenticationRepositoryProvider).getCurrentAtSign();
     final strings = AppLocalizations.of(context)!;
-
     var homeScreenControllerModel = ref.watch(homeScreenControllerProvider);
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -105,15 +105,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
                 gapH64,
                 NotificationListTile.notify(
-                  subTitle:
-                      '${homeScreenControllerModel.asData != null ? homeScreenControllerModel.asData?.value.workingKeys.length : '-'} ${strings.validKeyMessage}',
+                  subTitle: strings.validKeyMessage(homeScreenControllerModel.asData?.value.workingKeys.length ?? 0),
                 ),
                 gapH16,
                 GestureDetector(
                   onTap: () async => _navigateToInvalidKey(),
                   child: NotificationListTile.warning(
                     subTitle:
-                        '${homeScreenControllerModel.asData != null ? homeScreenControllerModel.asData?.value.malformedKeys.length : '-'} ${strings.invalidKeyMessage}',
+                        strings.invalidKeyMessage(homeScreenControllerModel.asData?.value.malformedKeys.length ?? 0),
                   ),
                 ),
                 gapH64,

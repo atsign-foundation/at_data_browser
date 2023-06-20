@@ -3,8 +3,26 @@
     "onboardAnAtsign" : "Browse my data",
     "anErrorHasOccurred" : "An error has occurred",
     "na": "NA",
-    "validKeyMessage" : "keys successfully added",
-    "invalidKeyMessage" : "keys require your attention",
+    "validKeyMessage" : "{keyCount} keys successfully added",
+    "@validKeyMessage" : {
+        "description" : "A valid key message with key count",
+        "placeholders" : {
+            "keyCount" : {
+                "type" : "int",
+                "example" : "29"
+            }
+        }
+    },
+    "invalidKeyMessage" : "{keyCount} keys require your attention",
+    "@invalidKeyMessage" : {
+        "description" : "A invalid key message with key count",
+        "placeholders" : {
+            "keyCount" : {
+                "type" : "int",
+                "example" : "8"
+            }
+        }
+    },
     "dataStorage" : "Data Storage",
     "itemsStored" : "Items Stored",
     "atSigns" : "atSigns",

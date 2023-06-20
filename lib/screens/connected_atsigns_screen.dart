@@ -2,6 +2,7 @@ import 'package:at_contact/at_contact.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:recase/recase.dart';
 
 import '../controllers/at_data_controller.dart';
 import '../controllers/connected_atsigns_controller.dart';
@@ -16,36 +17,39 @@ class ConnectedAtsignsScreen extends ConsumerStatefulWidget {
   const ConnectedAtsignsScreen({super.key});
 
   @override
-  ConsumerState<ConnectedAtsignsScreen> createState() =>
-      _DataStorageScreenState();
+  ConsumerState<ConnectedAtsignsScreen> createState() => _DataStorageScreenState();
 }
 
 class _DataStorageScreenState extends ConsumerState<ConnectedAtsignsScreen> {
   @override
   void initState() {
-    WidgetsFlutterBinding.ensureInitialized()
-        .addPostFrameCallback((timeStamp) async {
+    WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) async {
       await ref.watch(connectedAtsignsControllerProvider.notifier).getData();
     });
     super.initState();
   }
 
   /// Navigate to browse screen showing atkeys filtered by the selected atsign.
-  Future<void> _onTap(
-      {required AsyncValue<List<AtContact>?> state, required int index}) async {
+  Future<void> _onTap({required AsyncValue<List<AtContact>?> state, required int index}) async {
     // set the search request to the selected app
-    ref.watch(searchFormProvider).searchRequest[0] = state.value![index].atSign;
+    try {
+      ref.watch(searchFormProvider).searchRequest[0] = state.value![index].atSign;
+    } catch (e) {
+      ref.watch(searchFormProvider).searchRequest.add(state.value![index].atSign);
+    }
 
     // set the filter to apps
-    ref.watch(searchFormProvider).filter[0] = Categories.atsign;
+    try {
+      ref.watch(searchFormProvider).filter[0] = Categories.atsign;
+    } catch (e) {
+      ref.watch(searchFormProvider).filter.add(Categories.atsign);
+    }
     // filter atData by conditions set in searchFormProvider
     ref.watch(filterControllerProvider.notifier).getFilteredAtData();
 
     if (mounted) {
       await Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => const BrowseScreen(
-                appBarColor: Color(0Xff57A8B5),
-                backgroundColor: kAtSignFadedColor,
                 textColor: Colors.black,
               )));
     }
@@ -58,21 +62,16 @@ class _DataStorageScreenState extends ConsumerState<ConnectedAtsignsScreen> {
     return Scaffold(
       backgroundColor: kAtSignFadedColor,
       appBar: AppBar(
-          titleTextStyle: Theme.of(context)
-              .textTheme
-              .titleLarge!
-              .copyWith(color: Colors.white),
-          toolbarTextStyle: Theme.of(context)
-              .textTheme
-              .titleMedium!
-              .copyWith(color: Colors.white),
+          iconTheme: Theme.of(context).iconTheme,
+          titleTextStyle: Theme.of(context).textTheme.titleLarge!,
+          toolbarTextStyle: Theme.of(context).textTheme.titleMedium!,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(20),
             ),
           ),
           backgroundColor: kAtSignColor,
-          title: Text(strings.atSigns),
+          title: Text(strings.atSigns.titleCase.replaceFirst(' ', '')),
           actions: [
             FittedBox(
               child: Column(
@@ -98,6 +97,7 @@ class _DataStorageScreenState extends ConsumerState<ConnectedAtsignsScreen> {
                     return const Center(child: CircularProgressIndicator());
                   } else {
                     return Card(
+                      margin: EdgeInsets.zero,
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
@@ -109,11 +109,9 @@ class _DataStorageScreenState extends ConsumerState<ConnectedAtsignsScreen> {
                                 children: [
                                   GestureDetector(
                                     child: ListTile(
-                                      title: Text(
-                                          state.value![index].atSign ?? ''),
+                                      title: Text(state.value![index].atSign ?? ''),
                                     ),
-                                    onTap: () =>
-                                        _onTap(state: state, index: index),
+                                    onTap: () => _onTap(state: state, index: index),
                                   ),
                                   Divider(
                                     color: Colors.grey.withOpacity(0.2),

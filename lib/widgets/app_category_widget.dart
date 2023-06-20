@@ -31,6 +31,13 @@ class _SortCategoryWidgetState extends ConsumerState<AppCategoryWidget> {
         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               color: Colors.black.withOpacity(.5),
             ),
+        selectedItemBuilder: (context) => ref
+            .watch(atDataControllerProvider.notifier.select((value) => value.apps))
+            .map(
+              (e) => Align(
+                  alignment: Alignment.centerLeft, child: Text(e, style: Theme.of(context).textTheme.bodyMedium!)),
+            )
+            .toList(),
         items: ref
             .watch(atDataControllerProvider.notifier.select((value) => value.apps))
             .map(

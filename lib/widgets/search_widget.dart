@@ -17,6 +17,15 @@ class SearchWidget extends ConsumerStatefulWidget {
 }
 
 class _SearchWidgetState extends ConsumerState<SearchWidget> {
+  bool showClearIcon = false;
+  TextEditingController textEditingController = TextEditingController();
+
+  @override
+  void dispose() {
+    textEditingController.dispose();
+    super.dispose();
+  }
+
   Future<void> _onChanged(String value) async {
     switch (widget.filter) {
       case SearchWidgetFilter.apps:
@@ -32,24 +41,39 @@ class _SearchWidgetState extends ConsumerState<SearchWidget> {
     ref.watch(filterControllerProvider.notifier).getFilteredAtData();
   }
 
+  void _onTap() {
+    if (!showClearIcon) {
+      setState(() {
+        showClearIcon = true;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(18.0),
       child: Card(
         child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: AppLocalizations.of(context)!.search,
-                border: InputBorder.none,
-                suffixIcon: IconButton(
-                  icon: const Icon(Icons.search),
-                  onPressed: _onPressed,
-                ),
-              ),
-              onChanged: _onChanged,
-            )),
+          padding: const EdgeInsets.all(8.0),
+          child: TextField(
+            controller: textEditingController,
+            decoration: InputDecoration(
+              hintText: AppLocalizations.of(context)!.search,
+              border: InputBorder.none,
+              suffixIcon: showClearIcon
+                  ? IconButton(
+                      onPressed: () {
+                        textEditingController.clear();
+                      },
+                      icon: const Icon(Icons.clear),
+                    )
+                  : const Icon(Icons.search),
+            ),
+            onChanged: _onChanged,
+            onTap: _onTap,
+          ),
+        ),
       ),
     );
   }

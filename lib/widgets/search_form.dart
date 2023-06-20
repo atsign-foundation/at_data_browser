@@ -32,7 +32,7 @@ class _SearchFormState extends ConsumerState<SearchForm> {
     final searchRequest = ref.watch(searchFormProvider).searchRequest;
     // clear search request
     if (searchRequest.isNotEmpty) {
-      searchRequest[widget.index] = null;
+      // searchRequest[widget.index] = null;
     }
     switch (category) {
       case Categories.sort:
