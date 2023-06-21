@@ -18,10 +18,26 @@ class SortCategoryWidget extends ConsumerStatefulWidget {
 }
 
 class _SortCategoryWidgetState extends ConsumerState<SortCategoryWidget> {
+  String? getValue(List<String?> searchList) {
+    try {
+      if (searchList.isEmpty ||
+          !SortOptions.values
+              .contains(SortOptions.values.firstWhere((element) => element.name == searchList[widget.index]))) {
+        return null;
+      } else {
+        return searchList[widget.index];
+      }
+    } on StateError {
+      // searchList[widget.index] is equal to a value that is not in the SortOption enum
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final searchList = ref.watch(searchFormProvider).searchRequest;
     final strings = AppLocalizations.of(context)!;
+
     return SearchFieldContainer(
       child: DropdownButton<String>(
         isExpanded: true,
@@ -29,7 +45,8 @@ class _SortCategoryWidgetState extends ConsumerState<SortCategoryWidget> {
         borderRadius: const BorderRadius.all(
           Radius.circular(5.0),
         ),
-        value: searchList.isNotEmpty ? searchList[widget.index] : null,
+        // only set value if searchList is not empty and items list contains a search list index
+        value: getValue(searchList),
         hint: Text(strings.sortBy),
         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               color: Colors.black.withOpacity(.5),

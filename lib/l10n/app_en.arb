@@ -81,6 +81,7 @@
     "resetErrorText":"Please select atleast one atSign to reset",
     "resetWarningText":"Warning: This action cannot be undone",
     "removeButton":"Remove",
-    "cancelButton":"Cancel"
+    "cancelButton":"Cancel",
+    "noData" : "No Data"
 
 }

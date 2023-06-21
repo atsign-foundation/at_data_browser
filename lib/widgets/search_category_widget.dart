@@ -40,7 +40,7 @@ class _SearchCategoryWidgetState extends ConsumerState<SearchCategoryWidget> {
       textEditingController.text = searchRequest[widget.index]!;
     } else {
       log('searchRequest is empty');
-      searchRequest.add('');
+      // searchRequest.add('');
       log(searchRequest.toString());
       textEditingController.text = '';
     }

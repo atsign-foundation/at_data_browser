@@ -20,14 +20,30 @@ class KeyTypesCategoryWidget extends ConsumerStatefulWidget {
 }
 
 class _SortCategoryWidgetState extends ConsumerState<KeyTypesCategoryWidget> {
+  String? getValue(List<String?> searchList) {
+    try {
+      if (searchList.isEmpty ||
+          !KeyType.values.contains(KeyType.values.firstWhere((element) => element.name == searchList[widget.index]))) {
+        return null;
+      } else {
+        return searchList[widget.index];
+      }
+    } on StateError {
+      // searchList[widget.index] is equal to a value that is not in the KeyType enum
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final searchList = ref.watch(searchFormProvider).searchRequest;
+
     return SearchFieldContainer(
       child: DropdownButton<String>(
         isExpanded: true,
         underline: const SizedBox(),
-        value: searchList.isNotEmpty ? searchList[widget.index] : null,
+        // only set value if searchList is not empty and items list contains a search list index
+        value: getValue(searchList),
         hint: Text(AppLocalizations.of(context)!.selectKeyType),
         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               color: Colors.black.withOpacity(.5),

@@ -21,12 +21,19 @@ class _SortCategoryWidgetState extends ConsumerState<AppCategoryWidget> {
   @override
   Widget build(BuildContext context) {
     final searchList = ref.watch(searchFormProvider).searchRequest;
-
+    log('search list state:$searchList');
+    log('search list is empty:${searchList.isEmpty} ');
     return SearchFieldContainer(
       child: DropdownButton<String>(
         isExpanded: true,
         underline: const SizedBox(),
-        value: searchList.isNotEmpty ? searchList[widget.index] : null,
+        // only set value if searchList is not empty and searchList contains a value found in the items list
+        value: searchList.isEmpty ||
+                !ref
+                    .watch(atDataControllerProvider.notifier.select((value) => value.apps))
+                    .contains(searchList[widget.index])
+            ? null
+            : searchList[widget.index],
         hint: Text(AppLocalizations.of(context)!.selectNamespaces),
         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               color: Colors.black.withOpacity(.5),

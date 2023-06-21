@@ -13,7 +13,7 @@ class NotificationListTile extends StatelessWidget {
   const NotificationListTile.notify({
     Key? key,
     required this.subTitle,
-    this.title = 'New Keys',
+    this.title = 'Valid Keys',
     this.icon,
     this.color = Colors.black,
     this.titleColor = Colors.black,
@@ -22,7 +22,7 @@ class NotificationListTile extends StatelessWidget {
   const NotificationListTile.warning({
     Key? key,
     required this.subTitle,
-    this.title = 'Broken Keys',
+    this.title = 'Invalid Keys',
     this.icon = const Icon(
       Icons.warning_rounded,
       color: Colors.red,

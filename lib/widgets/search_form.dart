@@ -22,6 +22,7 @@ class SearchForm extends ConsumerStatefulWidget {
     super.key,
   });
   final int index;
+
   @override
   ConsumerState<SearchForm> createState() => _SearchFormState();
 }
@@ -31,9 +32,9 @@ class _SearchFormState extends ConsumerState<SearchForm> {
     // clear search request
     final searchRequest = ref.watch(searchFormProvider).searchRequest;
     // clear search request
-    if (searchRequest.isNotEmpty) {
-      // searchRequest[widget.index] = null;
-    }
+    // if (searchRequest.isNotEmpty) {
+    //   searchRequest[widget.index] = null;
+    // }
     switch (category) {
       case Categories.sort:
         return SortCategoryWidget(

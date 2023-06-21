@@ -4,7 +4,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recase/recase.dart';
 
-import '../controllers/at_data_controller.dart';
 import '../controllers/connected_atsigns_controller.dart';
 import '../controllers/filter_form_controller.dart';
 import '../utils/constants.dart';
@@ -34,24 +33,26 @@ class _DataStorageScreenState extends ConsumerState<ConnectedAtsignsScreen> {
     // set the search request to the selected app
     try {
       ref.watch(searchFormProvider).searchRequest[0] = state.value![index].atSign;
-    } catch (e) {
+    } on RangeError {
       ref.watch(searchFormProvider).searchRequest.add(state.value![index].atSign);
     }
 
     // set the filter to apps
     try {
       ref.watch(searchFormProvider).filter[0] = Categories.atsign;
-    } catch (e) {
+    } on RangeError {
       ref.watch(searchFormProvider).filter.add(Categories.atsign);
     }
-    // filter atData by conditions set in searchFormProvider
-    ref.watch(filterControllerProvider.notifier).getFilteredAtData();
 
     if (mounted) {
-      await Navigator.of(context).push(MaterialPageRoute(
+      await Navigator.of(context).push(
+        MaterialPageRoute(
           builder: (context) => const BrowseScreen(
-                textColor: Colors.black,
-              )));
+            textColor: Colors.black,
+            isResetSearchForm: false,
+          ),
+        ),
+      );
     }
   }
 

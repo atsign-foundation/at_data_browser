@@ -34,14 +34,14 @@ class _DataStorageScreenState extends ConsumerState<AppsScreen> {
     try {
       ref.watch(searchFormProvider).searchRequest[0] = state.value![index];
       log('search request is: ${ref.read(searchFormProvider).searchRequest}');
-    } catch (e) {
+    } on RangeError {
       ref.watch(searchFormProvider).searchRequest.add(state.value![index]);
       log('search request is: ${ref.read(searchFormProvider).searchRequest}');
     }
     // set the filter to apps
     try {
       ref.watch(searchFormProvider).filter[0] = Categories.namespaces;
-    } catch (e) {
+    } on RangeError {
       ref.watch(searchFormProvider).filter.add(Categories.namespaces);
     }
 

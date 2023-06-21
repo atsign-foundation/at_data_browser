@@ -35,11 +35,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   /// Navigate to screen to see invalid keys.
   Future<void> _navigateToInvalidKey() async {
     // set the search request to the selected app
-    ref.watch(searchFormProvider).searchRequest[0] = KeyType.invalidKey.name;
+    try {
+      ref.watch(searchFormProvider).searchRequest[0] = KeyType.invalidKey.name;
+    } on RangeError {
+      ref.watch(searchFormProvider).searchRequest.add(KeyType.invalidKey.name);
+    }
+
     // set the filter to apps
-    ref.watch(searchFormProvider).filter[0] = Categories.keyTypes;
-    // filter atData by conditions set in searchFormProvider
-    ref.watch(filterControllerProvider.notifier).getFilteredAtData();
+    try {
+      ref.watch(searchFormProvider).filter[0] = Categories.keyTypes;
+    } on RangeError {
+      ref.watch(searchFormProvider).filter.add(Categories.keyTypes);
+    }
 
     if (mounted) {
       await Navigator.of(context).push(
@@ -47,6 +54,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           builder: (context) => const BrowseScreen(
             appBarColor: Color(0Xff57A8B5),
             textColor: Colors.black,
+            isResetSearchForm: false,
           ),
         ),
       );
