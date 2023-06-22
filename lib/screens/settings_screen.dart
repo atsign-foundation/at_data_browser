@@ -112,7 +112,7 @@ class SettingsScreen extends StatelessWidget {
               onTap: () async {
                 Uri emailUri = Uri(
                   scheme: 'mailto',
-                  path: 'atdude@atsign.com',
+                  path: 'atDataBrowser@atsign.com',
                 );
                 if (!await launchUrl(emailUri)) {
                   throw Exception('Could not launch $emailUri');

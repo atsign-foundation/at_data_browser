@@ -85,51 +85,48 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
         ],
       ),
-      body: Stack(children: [
-        Column(
-          children: [
-            Expanded(
-              child: Column(children: [
-                ListTile(
-                  title: Padding(
-                    padding: const EdgeInsets.only(left: 25.0),
-                    child: Row(
-                      children: const [
-                        Text(
-                          'Data',
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-                        ),
-                        Text(
-                          'Browser',
-                          style: TextStyle(fontSize: 30),
-                        ),
-                      ],
-                    ),
-                  ),
-                  subtitle: Padding(
-                    padding: const EdgeInsets.only(left: 25.0),
-                    child: Text(atsign ?? ''),
+      body: Column(
+        children: [
+          Expanded(
+            child: Column(children: [
+              ListTile(
+                title: Padding(
+                  padding: const EdgeInsets.only(left: 25.0),
+                  child: Row(
+                    children: const [
+                      Text(
+                        'Data',
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                      ),
+                      Text(
+                        'Browser',
+                        style: TextStyle(fontSize: 30),
+                      ),
+                    ],
                   ),
                 ),
-                gapH64,
-                NotificationListTile.notify(
-                  subTitle: strings.validKeyMessage(homeScreenControllerModel.asData?.value.workingKeys.length ?? 0),
+                subtitle: Padding(
+                  padding: const EdgeInsets.only(left: 25.0),
+                  child: Text(atsign ?? ''),
                 ),
-                gapH16,
-                GestureDetector(
-                  onTap: () async => _navigateToInvalidKey(),
-                  child: NotificationListTile.warning(
-                    subTitle:
-                        strings.invalidKeyMessage(homeScreenControllerModel.asData?.value.malformedKeys.length ?? 0),
-                  ),
+              ),
+              gapH64,
+              NotificationListTile.notify(
+                subTitle: strings.validKeyMessage(homeScreenControllerModel.asData?.value.workingKeys.length ?? 0),
+              ),
+              gapH16,
+              GestureDetector(
+                onTap: () async => _navigateToInvalidKey(),
+                child: NotificationListTile.warning(
+                  subTitle:
+                      strings.invalidKeyMessage(homeScreenControllerModel.asData?.value.malformedKeys.length ?? 0),
                 ),
-                gapH64,
-              ]),
-            ),
-            const NavWidget(),
-          ],
-        ),
-      ]),
+              ),
+            ]),
+          ),
+          const NavWidget(),
+        ],
+      ),
     );
   }
 }
