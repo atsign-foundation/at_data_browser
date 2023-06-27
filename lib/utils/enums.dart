@@ -8,7 +8,7 @@ enum Categories {
   sort,
   dateCreated,
   dateModified,
-  apps,
+  namespaces,
   atsign,
   keyTypes,
   sharedWith,

@@ -1,7 +1,7 @@
+import 'package:at_data_browser/widgets/search_field_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../controllers/at_data_controller.dart';
 import '../controllers/filter_form_controller.dart';
@@ -25,19 +25,16 @@ class DateRangeCategoryWidget extends ConsumerStatefulWidget {
   final double width;
 
   @override
-  _DateRangeCategoryWidgetState createState() =>
-      _DateRangeCategoryWidgetState();
+  _DateRangeCategoryWidgetState createState() => _DateRangeCategoryWidgetState();
 }
 
-class _DateRangeCategoryWidgetState
-    extends ConsumerState<DateRangeCategoryWidget> {
+class _DateRangeCategoryWidgetState extends ConsumerState<DateRangeCategoryWidget> {
   late TextEditingController dateController;
   @override
   void initState() {
     super.initState();
     dateController = TextEditingController(
-        text:
-            '${DateFormat.yMMMd().format(DateTime.now())} - ${DateFormat().format(DateTime.now())}');
+        text: '${DateFormat.yMMMd().format(DateTime.now())} - ${DateFormat.yMMMd().format(DateTime.now())}');
   }
 
   @override
@@ -50,8 +47,7 @@ class _DateRangeCategoryWidgetState
   void _showDatePicker() {
     showDateRangePicker(
       context: context,
-      initialDateRange:
-          _date ?? DateTimeRange(start: DateTime.now(), end: DateTime.now()),
+      initialDateRange: _date ?? DateTimeRange(start: DateTime.now(), end: DateTime.now()),
       firstDate: DateTime(1920),
       lastDate: DateTime(3000),
       // currentDate: _date,
@@ -59,15 +55,13 @@ class _DateRangeCategoryWidgetState
       (value) {
         if (value != null) {
           setState(() {
-            dateController.text =
-                '${DateFormat.yMMMd().format(value.start)} - ${DateFormat('dd MMM yy').format(value.end)}';
+            dateController.text = '${DateFormat.yMMMd().format(value.start)} - ${DateFormat.yMMMd().format(value.end)}';
 
             _date = value;
           });
 
           setState(() {
-            ref.watch(searchFormProvider).searchRequest[widget.index] =
-                value.toString();
+            ref.watch(searchFormProvider).searchRequest[widget.index] = value.toString();
           });
           ref.watch(filterControllerProvider.notifier).getFilteredAtData();
         }
@@ -77,44 +71,27 @@ class _DateRangeCategoryWidgetState
 
   @override
   Widget build(BuildContext context) {
-    final strings = AppLocalizations.of(context);
-    return Card(
-      color: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5),
-        side: const BorderSide(
-          color: Colors.white,
-          width: 2,
+    return SearchFieldContainer(
+      child: TextFormField(
+        style: Theme.of(context).textTheme.labelMedium!.copyWith(),
+        readOnly: true,
+        textAlign: TextAlign.center,
+        textAlignVertical: TextAlignVertical.top,
+        // focusNode: widget.state.dateOfBirthFocusNode,
+        controller: dateController,
+        // validator: widget.validator,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        onChanged: (value) {},
+        decoration: const InputDecoration(
+          border: InputBorder.none,
+          // suffixIcon: Icon(
+          //   Icons.calendar_month_outlined,
+          //   size: 14,
+          // ),
+          contentPadding: EdgeInsets.only(bottom: 14),
+          floatingLabelBehavior: FloatingLabelBehavior.never,
         ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(1.0),
-        child: TextFormField(
-          style: Theme.of(context).textTheme.labelMedium,
-          readOnly: true,
-          textAlign: TextAlign.center,
-          // focusNode: widget.state.dateOfBirthFocusNode,
-          controller: dateController,
-          // validator: widget.validator,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          onChanged: (value) {},
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            suffixIcon: const Icon(
-              Icons.calendar_month_outlined,
-              size:
-                  14, //todo(kzawadi): icon size of 13.34 seems so small but that how its specified in figma document.
-            ),
-            contentPadding: const EdgeInsets.all(2),
-            floatingLabelBehavior: FloatingLabelBehavior.never,
-            label: Text(
-              strings!.date,
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-            alignLabelWithHint: true,
-          ),
-          onTap: _showDatePicker,
-        ),
+        onTap: _showDatePicker,
       ),
     );
   }

@@ -31,10 +31,8 @@ class SettingsScreen extends StatelessWidget {
           ),
         ),
         iconTheme: Theme.of(context).iconTheme.copyWith(color: kBrowserColor),
-        titleTextStyle: Theme.of(context)
-            .textTheme
-            .titleLarge!
-            .copyWith(color: kBrowserColor, fontWeight: FontWeight.w600),
+        titleTextStyle:
+            Theme.of(context).textTheme.titleLarge!.copyWith(color: kBrowserColor, fontWeight: FontWeight.w600),
         title: Padding(
           padding: const EdgeInsets.symmetric(vertical: Sizes.p20),
           child: Text(
@@ -74,8 +72,7 @@ class SettingsScreen extends StatelessWidget {
               icon: Icons.bookmark_outline,
               title: strings.backupYourKeys,
               onTap: () {
-                BackupKeyWidget(atsign: ContactService().currentAtsign)
-                    .showBackupDialog(context);
+                BackupKeyWidget(atsign: ContactService().currentAtsign).showBackupDialog(context);
               },
             ),
             const SizedBox(
@@ -86,8 +83,7 @@ class SettingsScreen extends StatelessWidget {
               title: strings.switchAtsign,
               onTap: () async {
                 await showModalBottomSheet(
-                    context: NavigationService.navKey.currentContext!,
-                    builder: (context) => const AtSignBottomSheet());
+                    context: NavigationService.navKey.currentContext!, builder: (context) => const AtSignBottomSheet());
               },
             ),
             const SizedBox(
@@ -116,7 +112,7 @@ class SettingsScreen extends StatelessWidget {
               onTap: () async {
                 Uri emailUri = Uri(
                   scheme: 'mailto',
-                  path: 'atdude@atsign.com',
+                  path: 'atDataBrowser@atsign.com',
                 );
                 if (!await launchUrl(emailUri)) {
                   throw Exception('Could not launch $emailUri');
@@ -130,8 +126,7 @@ class SettingsScreen extends StatelessWidget {
               icon: Icons.account_balance_wallet_outlined,
               title: strings.privacyPolicy,
               onTap: () async {
-                final Uri url =
-                    Uri.parse('https://atsign.com/apps/atDude-privacy/');
+                final Uri url = Uri.parse('https://atsign.com/apps/atdatabrowser-privacy-policy/');
                 if (!await launchUrl(url)) {
                   throw Exception('Could not launch $url');
                 }

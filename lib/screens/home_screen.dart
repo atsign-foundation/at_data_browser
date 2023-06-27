@@ -25,9 +25,9 @@ class HomeScreen extends ConsumerStatefulWidget {
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void initState() {
-    WidgetsFlutterBinding.ensureInitialized()
-        .addPostFrameCallback((timeStamp) async {
+    WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) async {
       await ref.read(atDataControllerProvider.notifier).getData();
+      // await ref.read(homeScreenControllerProvider.notifier).getData();
     });
     super.initState();
   }
@@ -35,11 +35,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   /// Navigate to screen to see invalid keys.
   Future<void> _navigateToInvalidKey() async {
     // set the search request to the selected app
-    ref.watch(searchFormProvider).searchRequest[0] = KeyType.invalidKey.name;
+    try {
+      ref.watch(searchFormProvider).searchRequest[0] = KeyType.invalidKey.name;
+    } on RangeError {
+      ref.watch(searchFormProvider).searchRequest.add(KeyType.invalidKey.name);
+    }
+
     // set the filter to apps
-    ref.watch(searchFormProvider).filter[0] = Categories.keyTypes;
-    // filter atData by conditions set in searchFormProvider
-    ref.watch(filterControllerProvider.notifier).getFilteredAtData();
+    try {
+      ref.watch(searchFormProvider).filter[0] = Categories.keyTypes;
+    } on RangeError {
+      ref.watch(searchFormProvider).filter.add(Categories.keyTypes);
+    }
 
     if (mounted) {
       await Navigator.of(context).push(
@@ -47,6 +54,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           builder: (context) => const BrowseScreen(
             appBarColor: Color(0Xff57A8B5),
             textColor: Colors.black,
+            isResetSearchForm: false,
           ),
         ),
       );
@@ -55,12 +63,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final atsign =
-        ref.watch(authenticationRepositoryProvider).getCurrentAtSign();
+    final atsign = ref.watch(authenticationRepositoryProvider).getCurrentAtSign();
     final strings = AppLocalizations.of(context)!;
+    var homeScreenControllerModel = ref.watch(homeScreenControllerProvider);
 
-    var homeScreenControllerModel =
-        ref.watch(homeScreenControllerProvider).value;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -79,53 +85,48 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
         ],
       ),
-      body: Stack(children: [
-        Column(
-          children: [
-            Expanded(
-              child: Column(children: [
-                ListTile(
-                  title: Padding(
-                    padding: const EdgeInsets.only(left: 25.0),
-                    child: Row(
-                      children: const [
-                        Text(
-                          'Data',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 30),
-                        ),
-                        Text(
-                          'Browser',
-                          style: TextStyle(fontSize: 30),
-                        ),
-                      ],
-                    ),
-                  ),
-                  subtitle: Padding(
-                    padding: const EdgeInsets.only(left: 25.0),
-                    child: Text(atsign ?? ''),
+      body: Column(
+        children: [
+          Expanded(
+            child: Column(children: [
+              ListTile(
+                title: const Padding(
+                  padding: EdgeInsets.only(left: 25.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Data',
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                      ),
+                      Text(
+                        'Browser',
+                        style: TextStyle(fontSize: 30),
+                      ),
+                    ],
                   ),
                 ),
-                gapH64,
-                NotificationListTile.notify(
+                subtitle: Padding(
+                  padding: const EdgeInsets.only(left: 25.0),
+                  child: Text(atsign ?? ''),
+                ),
+              ),
+              gapH64,
+              NotificationListTile.notify(
+                subTitle: strings.validKeyMessage(homeScreenControllerModel.asData?.value.workingKeys.length ?? 0),
+              ),
+              gapH16,
+              GestureDetector(
+                onTap: () async => _navigateToInvalidKey(),
+                child: NotificationListTile.warning(
                   subTitle:
-                      '${homeScreenControllerModel?.workingKeys.length ?? 0} ${strings.validKeyMessage}',
+                      strings.invalidKeyMessage(homeScreenControllerModel.asData?.value.malformedKeys.length ?? 0),
                 ),
-                gapH16,
-                GestureDetector(
-                  onTap: () async => _navigateToInvalidKey(),
-                  child: NotificationListTile.warning(
-                    subTitle:
-                        '${homeScreenControllerModel?.malformedKeys.length ?? 0} ${strings.invalidKeyMessage}',
-                  ),
-                ),
-                gapH64,
-              ]),
-            ),
-            const NavWidget(),
-          ],
-        ),
-      ]),
+              ),
+            ]),
+          ),
+          const NavWidget(),
+        ],
+      ),
     );
   }
 }

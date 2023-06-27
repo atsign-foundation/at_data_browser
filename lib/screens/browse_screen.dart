@@ -20,11 +20,14 @@ class BrowseScreen extends ConsumerStatefulWidget {
       {this.appBarColor = kDataStorageColor,
       this.backgroundColor = kDataStorageFadedColor,
       this.textColor = Colors.black,
+      this.isResetSearchForm = true,
       super.key});
 
   final Color appBarColor;
   final Color backgroundColor;
   final Color textColor;
+  // Decide whether to reset the search form or not
+  final bool isResetSearchForm;
 
   @override
   ConsumerState<BrowseScreen> createState() => _DataStorageScreenState();
@@ -40,9 +43,19 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
   @override
   void initState() {
     super.initState();
-    ref.read(filterControllerProvider.notifier).getData();
-    ref.read(searchFormProvider).searchRequest = [];
-    ref.read(searchFormProvider).filter = [];
+    WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) {
+      ref.read(filterControllerProvider.notifier).getData();
+      //Apply filter if search request is not empty. i.e. if user has navigated from another screen and has set isResetForm to false.
+      if (!widget.isResetSearchForm) {
+        ref.read(filterControllerProvider.notifier).getFilteredAtData();
+      }
+    });
+
+    // Reset search form if user navigates to this screen from another screen i.e home screen and isResetForm is true.
+    if (widget.isResetSearchForm) {
+      ref.read(searchFormProvider).searchRequest = [];
+      ref.read(searchFormProvider).filter = [];
+    }
   }
 
   @override
@@ -53,29 +66,18 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
     return Scaffold(
       backgroundColor: widget.backgroundColor,
       appBar: AppBar(
-        iconTheme:
-            Theme.of(context).iconTheme.copyWith(color: widget.textColor),
-        titleTextStyle: Theme.of(context)
-            .textTheme
-            .titleLarge!
-            .copyWith(color: widget.textColor),
-        toolbarTextStyle: Theme.of(context)
-            .textTheme
-            .titleMedium!
-            .copyWith(color: widget.textColor),
+        iconTheme: Theme.of(context).iconTheme.copyWith(color: widget.textColor),
+        titleTextStyle: Theme.of(context).textTheme.titleLarge!.copyWith(color: widget.textColor),
+        toolbarTextStyle: Theme.of(context).textTheme.titleMedium!.copyWith(color: widget.textColor),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(20),
           ),
         ),
         backgroundColor: widget.appBarColor,
+        centerTitle: false,
         title: Text(
           strings.browse,
-          style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                fontSize: 20,
-                fontWeight: FontWeight.w500,
-                height: 30,
-              ),
         ),
         actions: [
           Padding(
@@ -85,27 +87,20 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelMedium!
-                      .copyWith(fontSize: 10, fontWeight: FontWeight.w400),
+                  style: Theme.of(context).textTheme.bodyMedium,
                   strings.itemsStored,
                 ),
                 state.isLoading
-                    ? const Expanded(child: CircularProgressIndicator())
-                    : Text(
-                        state.value!.length.toString(),
-                        style: Theme.of(context)
-                            .textTheme
-                            .labelMedium!
-                            .copyWith(
-                                fontSize: 10, fontWeight: FontWeight.w400),
-                      )
+                    ? const Expanded(
+                        child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: kBrowserColor,
+                      ))
+                    : Text(state.value!.length.toString(), style: Theme.of(context).textTheme.bodyMedium!)
               ],
             ),
           )
         ],
-        leading: const Icon(Icons.menu),
       ),
       body: Column(
         children: [
@@ -126,16 +121,9 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
                           setState(() {
                             var a = searchForms.length;
                             log('search form length: is ${a.toString()}');
-                            ref
-                                .watch(searchFormProvider)
-                                .searchRequest
-                                .add(null);
-                            ref
-                                .watch(searchFormProvider)
-                                .filter
-                                .add(Categories.sort);
-                            searchForms
-                                .add(SearchForm(index: searchForms.length));
+                            ref.watch(searchFormProvider).searchRequest.add(null);
+                            ref.watch(searchFormProvider).filter.add(Categories.sort);
+                            searchForms.add(SearchForm(index: searchForms.length));
                           });
                         },
                         icon: const Icon(Icons.add_circle_outline),
@@ -150,13 +138,12 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
           ),
           Expanded(
             child: RefreshIndicator(
+              color: kDataStorageColor,
               child: AtDataListWidget(state: state),
               onRefresh: () async {
                 //reset atData to show all data.
                 await ref.watch(atDataControllerProvider.notifier).getData();
-                await ref
-                    .watch(homeScreenControllerProvider.notifier)
-                    .getData();
+                await ref.watch(homeScreenControllerProvider.notifier).getData();
                 await ref.watch(navWidgetController.notifier).getData();
               },
             ),

@@ -1,4 +1,3 @@
-import 'package:at_data_browser/screens/apps_screen.dart';
 import 'package:at_data_browser/screens/browse_screen.dart';
 import 'package:at_data_browser/screens/connected_atsigns_screen.dart';
 import 'package:at_data_browser/utils/constants.dart';
@@ -8,6 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../controllers/nav_widget_controller.dart';
+import '../screens/apps_screen.dart';
 
 class NavWidget extends ConsumerStatefulWidget {
   const NavWidget({super.key});
@@ -29,7 +29,7 @@ class _NavWidgetState extends ConsumerState<NavWidget> {
   @override
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context)!;
-    final navWidgetModel = ref.watch(navWidgetController).value;
+    final navWidgetModel = ref.watch(navWidgetController);
     return SizedBox(
       height: 270,
       width: MediaQuery.of(context).size.width,
@@ -37,39 +37,37 @@ class _NavWidgetState extends ConsumerState<NavWidget> {
         alignment: Alignment.bottomLeft,
         children: [
           Positioned(
-            height: 270,
+            bottom: 160,
             child: NavContainer(
               name: strings.dataStorage,
               titleCount: strings.itemsStored,
-              navWidgetModel: navWidgetModel,
+              navWidgetModel: navWidgetModel.isLoading ? null : navWidgetModel.asData?.value,
               color: kDataStorageColor,
               onTap: () {
-                Navigator.pushNamed(context, BrowseScreen.route);
+                if (navWidgetModel.hasValue) Navigator.pushNamed(context, BrowseScreen.route);
               },
             ),
           ),
           Positioned(
-            height: 190,
-            // top: 90,
+            bottom: 80,
             child: NavContainer(
               name: strings.atSigns,
               titleCount: strings.connectedAtsigns,
-              navWidgetModel: navWidgetModel,
+              navWidgetModel: navWidgetModel.isLoading ? null : navWidgetModel.asData?.value,
               color: kAtSignColor,
               onTap: () {
-                Navigator.pushNamed(context, ConnectedAtsignsScreen.route);
+                if (navWidgetModel.hasValue) Navigator.pushNamed(context, ConnectedAtsignsScreen.route);
               },
             ),
           ),
           Positioned(
-            height: 100,
             child: NavContainer(
-              name: strings.apps,
-              titleCount: strings.connectedApps,
-              navWidgetModel: navWidgetModel,
+              name: strings.namespaces,
+              titleCount: strings.namespaces,
+              navWidgetModel: navWidgetModel.isLoading ? null : navWidgetModel.asData?.value,
               color: kAppsColor,
               onTap: () {
-                Navigator.pushNamed(context, AppsScreen.route);
+                if (navWidgetModel.hasValue) Navigator.pushNamed(context, AppsScreen.route);
               },
             ),
           ),

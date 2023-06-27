@@ -3,12 +3,30 @@
     "onboardAnAtsign" : "Browse my data",
     "anErrorHasOccurred" : "An error has occurred",
     "na": "NA",
-    "validKeyMessage" : "keys successfully added",
-    "invalidKeyMessage" : "keys require your attention",
+    "validKeyMessage" : "{keyCount} keys successfully added",
+    "@validKeyMessage" : {
+        "description" : "A valid key message with key count",
+        "placeholders" : {
+            "keyCount" : {
+                "type" : "int",
+                "example" : "29"
+            }
+        }
+    },
+    "invalidKeyMessage" : "{keyCount} keys require your attention",
+    "@invalidKeyMessage" : {
+        "description" : "A invalid key message with key count",
+        "placeholders" : {
+            "keyCount" : {
+                "type" : "int",
+                "example" : "8"
+            }
+        }
+    },
     "dataStorage" : "Data Storage",
     "itemsStored" : "Items Stored",
     "atSigns" : "atSigns",
-    "connectedAtsigns" : "Connected atSigns",
+    "connectedAtsigns" : "Connected\natSigns",
     "apps" : "Apps",
     "connectedApps" : "Connected Apps",
     "browse" : "Data Storage",
@@ -24,11 +42,13 @@
     "search" : "Search",
     "category" : "Category",
     "keyType" : "Key Type",
+    "selectKeyType" : "Select Key Type",
     "isRef" : "isRef",
     "key" : "key",
     "hashCodeCustom" : "hashCode",
     "isLocal" : "isLocal",
-    "namespace" : "namespace",
+    "namespaces" : "Namespaces",
+    "selectNamespaces" : "Select Namespace",
     "runTimeType" : "runTimeType",
     "shareBy" : "shareBy",
     "shareWith" : "shareWith",
@@ -61,6 +81,9 @@
     "resetErrorText":"Please select atleast one atSign to reset",
     "resetWarningText":"Warning: This action cannot be undone",
     "removeButton":"Remove",
-    "cancelButton":"Cancel"
+    "cancelButton":"Cancel",
+    "noData" : "No Data",
+    "noNamespaces" : "No Namespaces",
+    "noAtSigns" : "No atSigns"
 
 }

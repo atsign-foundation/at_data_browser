@@ -15,8 +15,7 @@ import 'package:at_utils/at_logger.dart' show AtSignLogger;
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:path_provider/path_provider.dart'
-    show getApplicationSupportDirectory;
+import 'package:path_provider/path_provider.dart' show getApplicationSupportDirectory;
 
 import './data/navigation_service.dart';
 
@@ -75,15 +74,16 @@ class _MyAppState extends State<MyApp> {
           extendBody: true,
           body: Column(
             children: [
-              Container(
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.6,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage(
-                          'assets/images/onboarding.gif',
-                        ))),
+              Expanded(
+                child: Container(
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage(
+                            'assets/images/onboarding.gif',
+                          ))),
+                ),
               ),
               gapH32,
               Text(
@@ -106,8 +106,7 @@ class _MyAppState extends State<MyApp> {
                     padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 24),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40))),
                 onPressed: () async {
-                  AtOnboardingResult onboardingResult =
-                      await AtOnboarding.onboard(
+                  AtOnboardingResult onboardingResult = await AtOnboarding.onboard(
                     context: context,
                     config: AtOnboardingConfig(
                       atClientPreference: await futurePreference,
@@ -136,7 +135,8 @@ class _MyAppState extends State<MyApp> {
               gapH16,
               const ResetAppButton(
                 isOnboardingScreen: true,
-              )
+              ),
+              gapH16,
             ],
           ),
         );
@@ -153,8 +153,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _goLocalData(context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+    Navigator.push(context, MaterialPageRoute(builder: (_) => const HomeScreen()));
   }
 
   void _handleError(context) {

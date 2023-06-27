@@ -116,9 +116,7 @@ class AppTheme {
         ),
       ),
       appBarTheme: AppBarTheme(
-          foregroundColor: Colors.white,
-          backgroundColor: kPrimaryColor,
-          titleTextStyle: lightTextTheme.bodyMedium),
+          foregroundColor: Colors.white, backgroundColor: kPrimaryColor, titleTextStyle: lightTextTheme.bodyMedium),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         foregroundColor: Color(0xFFF8C630),
         backgroundColor: Colors.black,
@@ -139,23 +137,22 @@ class AppTheme {
               borderRadius: BorderRadius.circular(18.0),
             ),
           ),
-          backgroundColor:
-              MaterialStateProperty.all<Color>(const Color(0xFF12DE26)),
-          foregroundColor:
-              MaterialStateProperty.all<Color>(const Color(0xFFFFFFFF)),
+          backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF12DE26)),
+          foregroundColor: MaterialStateProperty.all<Color>(const Color(0xFFFFFFFF)),
         ),
       ),
       dialogTheme: const DialogTheme(
         surfaceTintColor: kPrimaryColor,
       ),
       cardTheme: CardTheme(
-          elevation: 0,
-          surfaceTintColor: kPrimaryColor,
-          color: const Color(0xFFF4F4F4),
-          shape: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5),
-            borderSide: BorderSide.none,
-          )),
+        elevation: 0,
+        surfaceTintColor: kPrimaryColor,
+        color: const Color(0xFFF4F4F4),
+        shape: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5),
+          borderSide: BorderSide.none,
+        ),
+      ),
     );
   }
 
