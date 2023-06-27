@@ -82,6 +82,8 @@
     "resetWarningText":"Warning: This action cannot be undone",
     "removeButton":"Remove",
     "cancelButton":"Cancel",
-    "noData" : "No Data"
+    "noData" : "No Data",
+    "noNamespaces" : "No Namespaces",
+    "noAtSigns" : "No atSigns"
 
 }

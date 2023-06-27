@@ -97,29 +97,53 @@ class _DataStorageScreenState extends ConsumerState<ConnectedAtsignsScreen> {
                   if (state.isLoading) {
                     return const Center(child: CircularProgressIndicator());
                   } else {
-                    return Card(
-                      margin: EdgeInsets.zero,
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                      )),
-                      child: ListView.builder(
-                          itemCount: state.value!.length,
-                          itemBuilder: (context, index) => Column(
-                                children: [
-                                  GestureDetector(
-                                    child: ListTile(
-                                      title: Text(state.value![index].atSign ?? ''),
-                                    ),
-                                    onTap: () => _onTap(state: state, index: index),
-                                  ),
-                                  Divider(
-                                    color: Colors.grey.withOpacity(0.2),
-                                  )
-                                ],
-                              )),
-                    );
+                    return state.value!.isNotEmpty
+                        ? Card(
+                            margin: EdgeInsets.zero,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20),
+                            )),
+                            child: ListView.builder(
+                                itemCount: state.value!.length,
+                                itemBuilder: (context, index) => Column(
+                                      children: [
+                                        GestureDetector(
+                                          child: ListTile(
+                                            title: Text(state.value![index].atSign ?? ''),
+                                          ),
+                                          onTap: () => _onTap(state: state, index: index),
+                                        ),
+                                        Divider(
+                                          color: Colors.grey.withOpacity(0.2),
+                                        )
+                                      ],
+                                    )),
+                          )
+                        : Card(
+                            margin: EdgeInsets.zero,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                              ),
+                            ),
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                                const Image(
+                                  image: AssetImage('assets/images/empty.png'),
+                                ),
+                                Text(
+                                  AppLocalizations.of(context)!.noAtSigns,
+                                  style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                                        color: Colors.grey,
+                                      ),
+                                ),
+                              ]),
+                            ),
+                          );
                   }
                 },
               ))
