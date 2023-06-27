@@ -9,7 +9,7 @@ dependencies:
   at_app_flutter: ^5.0.1
   at_client_mobile: ^3.2.9
   at_common_flutter: ^2.0.11
-  at_contact: 3.0.6
+  at_contact: ^3.0.6
   at_contacts_flutter: ^4.0.9
   at_onboarding_flutter: ^6.0.3
   at_utils: ^3.0.11
@@ -22,7 +22,7 @@ dependencies:
   flutter_riverpod: ^2.3.4
   hive: ^2.2.3
   intl: any
-  package_info_plus_windows: ^2.1.0
+  # package_info_plus_windows: ^2.1.0
   path_provider: ^2.0.11
   recase: ^4.1.0
   shared_preferences: ^2.1.0
@@ -36,8 +36,8 @@ dev_dependencies:
     sdk: flutter
 
 dependency_overrides:
-  at_contact: 3.0.6
-  intl: 0.18.1
+  # at_contact: 3.0.6
+  # intl: 0.18.1
   # image: ^4.0.15
 
 flutter:

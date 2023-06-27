@@ -1,6 +1,5 @@
 import 'package:at_data_browser/widgets/search_field_container.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
@@ -72,7 +71,6 @@ class _DateRangeCategoryWidgetState extends ConsumerState<DateRangeCategoryWidge
 
   @override
   Widget build(BuildContext context) {
-    final strings = AppLocalizations.of(context);
     return SearchFieldContainer(
       child: TextFormField(
         style: Theme.of(context).textTheme.labelMedium!.copyWith(),

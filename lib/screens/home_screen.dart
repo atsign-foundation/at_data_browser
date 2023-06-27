@@ -90,10 +90,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           Expanded(
             child: Column(children: [
               ListTile(
-                title: Padding(
-                  padding: const EdgeInsets.only(left: 25.0),
+                title: const Padding(
+                  padding: EdgeInsets.only(left: 25.0),
                   child: Row(
-                    children: const [
+                    children: [
                       Text(
                         'Data',
                         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),

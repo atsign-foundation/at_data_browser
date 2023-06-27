@@ -29,12 +29,6 @@ class SearchForm extends ConsumerStatefulWidget {
 
 class _SearchFormState extends ConsumerState<SearchForm> {
   Future<Widget> getCategoryWidget(Categories category) async {
-    // clear search request
-    final searchRequest = ref.watch(searchFormProvider).searchRequest;
-    // clear search request
-    // if (searchRequest.isNotEmpty) {
-    //   searchRequest[widget.index] = null;
-    // }
     switch (category) {
       case Categories.sort:
         return SortCategoryWidget(
