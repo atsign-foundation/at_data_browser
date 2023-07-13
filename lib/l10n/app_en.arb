@@ -82,8 +82,21 @@
     "resetWarningText":"Warning: This action cannot be undone",
     "removeButton":"Remove",
     "cancelButton":"Cancel",
+    "deleteButton" : "Delete",
     "noData" : "No Data",
     "noNamespaces" : "No Namespaces",
-    "noAtSigns" : "No atSigns"
-
+    "noAtSigns" : "No atSigns",
+    "warning": "Warnings",
+    "warningMessage" : " Are you sure you want to delete {atKey} ?",
+    "@warningMessage" : {
+        "description" : "A warning message about deleting atKeys",
+        "placeholders" : {
+            "atKey" : {
+                "type" : "String",
+                "example" : "n@bob:52984fc7-a349-89e1-afcf-daa86g602c4d.at_dude@alice"
+            }
+        }
+    },
+    "note" : "Note",
+    "noteMessage" : ": You cannot undo this action."
 }
