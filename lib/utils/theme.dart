@@ -86,7 +86,7 @@ class AppTheme {
       scaffoldBackgroundColor: kPrimaryColor,
       // primaryColor: kPrimaryColor,
       brightness: Brightness.light,
-      colorScheme: const ColorScheme.light().copyWith(
+      colorScheme: const ColorScheme.light().copyWith(primary: kDataStorageColor
           // primary: kPrimaryColor,
           // onPrimary: kOnPrimaryColor,
           // primaryContainer: kPrimaryContainer,
@@ -152,6 +152,11 @@ class AppTheme {
           borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide.none,
         ),
+      ),
+
+      progressIndicatorTheme: const ProgressIndicatorThemeData(
+        color: kDataStorageColor,
+        circularTrackColor: kDataStorageColor,
       ),
     );
   }
