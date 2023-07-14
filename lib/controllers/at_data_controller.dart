@@ -127,6 +127,7 @@ class FilterController extends StateNotifier<AsyncValue<List<AtData>>> {
                   final createdAt = _getDate(element.atKey.metadata!.createdAt!);
 
                   log(createdAt.toString());
+
                   final startDate = _getDate(DateTime.parse(searchContent.split(' - ')[0]));
                   log(startDate.toString());
                   final endDate = _getDate(DateTime.parse(searchContent.split(' - ')[1]));

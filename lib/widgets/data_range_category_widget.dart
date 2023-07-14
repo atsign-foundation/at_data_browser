@@ -33,8 +33,7 @@ class _DateRangeCategoryWidgetState extends ConsumerState<DateRangeCategoryWidge
   @override
   void initState() {
     super.initState();
-    dateController = TextEditingController(
-        text: '${DateFormat.yMMMd().format(DateTime.now())} - ${DateFormat.yMMMd().format(DateTime.now())}');
+    dateController = TextEditingController();
   }
 
   @override

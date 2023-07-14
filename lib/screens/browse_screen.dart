@@ -105,7 +105,7 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
           ...searchForms,
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: Sizes.p32),
-            child: searchRequest.isNotEmpty
+            child: searchRequest.isNotEmpty && searchRequest.last != null
                 ? Row(children: [
                     const Expanded(
                       child: Divider(
