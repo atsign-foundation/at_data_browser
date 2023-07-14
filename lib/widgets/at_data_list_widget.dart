@@ -1,4 +1,5 @@
 import 'package:at_data_browser/utils/constants.dart';
+import 'package:at_data_browser/utils/sizes.dart';
 import 'package:at_data_browser/widgets/at_data_expansion_panel_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -25,7 +26,7 @@ class _AtDataListWidgetState extends State<AtDataListWidget> {
     return Builder(
       builder: (BuildContext context) {
         if (widget.state.isLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: gap0);
         } else {
           return widget.state.value!.isNotEmpty
               ? Card(

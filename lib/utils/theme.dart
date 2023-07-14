@@ -153,11 +153,6 @@ class AppTheme {
           borderSide: BorderSide.none,
         ),
       ),
-
-      progressIndicatorTheme: const ProgressIndicatorThemeData(
-        color: kDataStorageColor,
-        circularTrackColor: kDataStorageColor,
-      ),
     );
   }
 

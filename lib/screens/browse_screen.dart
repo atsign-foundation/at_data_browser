@@ -91,11 +91,8 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
                   strings.itemsStored,
                 ),
                 state.isLoading
-                    ? const Expanded(
-                        child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        color: kBrowserColor,
-                      ))
+                    ? Text(strings.itemsStored,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: kDataStorageColor))
                     : Text(state.value!.length.toString(), style: Theme.of(context).textTheme.bodyMedium!)
               ],
             ),
