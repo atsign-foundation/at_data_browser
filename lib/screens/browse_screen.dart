@@ -105,6 +105,7 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
           ...searchForms,
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: Sizes.p32),
+            // onlys show filter button if search request contains a value and the last value is not null.
             child: searchRequest.isNotEmpty && searchRequest.last != null
                 ? Row(children: [
                     const Expanded(
