@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../controllers/at_data_expansion_panel_controller.dart';
+import '../utils/sizes.dart';
 
 class AtDataExpansionPanelBody extends ConsumerWidget {
   const AtDataExpansionPanelBody({required this.properties, super.key});
@@ -43,10 +44,12 @@ class AtDataProperty extends StatelessWidget {
     return ListTile(
       title: Text(
         title,
-        style: Theme.of(context).textTheme.titleSmall!.copyWith(color: kAtDataPropertyTitleColor),
+        style: Theme.of(context).textTheme.titleSmall!.copyWith(color: kAtDataPropertyTitleColor, fontSize: Sizes.p12),
       ),
       subtitle: Text(value,
-          style: Theme.of(context).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w400, fontSize: 18)),
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                fontWeight: FontWeight.w400,
+              )),
     );
   }
 }
