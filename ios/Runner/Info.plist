@@ -53,5 +53,7 @@
 		<string>This app requires access to the photo library.</string>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<key>ITSAppUsesNonExemptEncryption</key>
+		<false/>
 	</dict>
 </plist>

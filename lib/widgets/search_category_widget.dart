@@ -47,6 +47,7 @@ class _SearchCategoryWidgetState extends ConsumerState<SearchCategoryWidget> {
 
     return SearchFieldContainer(
       child: TextField(
+        style: Theme.of(context).textTheme.bodyMedium!,
         readOnly: widget.readOnly,
         decoration: InputDecoration(
           // contentPadding: const EdgeInsets.all(Sizes.p8),

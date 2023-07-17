@@ -33,8 +33,7 @@ class _DateRangeCategoryWidgetState extends ConsumerState<DateRangeCategoryWidge
   @override
   void initState() {
     super.initState();
-    dateController = TextEditingController(
-        text: '${DateFormat.yMMMd().format(DateTime.now())} - ${DateFormat.yMMMd().format(DateTime.now())}');
+    dateController = TextEditingController();
   }
 
   @override
@@ -73,7 +72,7 @@ class _DateRangeCategoryWidgetState extends ConsumerState<DateRangeCategoryWidge
   Widget build(BuildContext context) {
     return SearchFieldContainer(
       child: TextFormField(
-        style: Theme.of(context).textTheme.labelMedium!.copyWith(),
+        style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
         readOnly: true,
         textAlign: TextAlign.center,
         textAlignVertical: TextAlignVertical.top,

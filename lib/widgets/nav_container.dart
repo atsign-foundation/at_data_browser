@@ -86,11 +86,12 @@ class NavContainer extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                       navWidgetModel == null
-                          ? const SizedBox(
+                          ? SizedBox(
                               height: 12,
                               width: 12,
                               child: CircularProgressIndicator(
                                 color: kBrowserColor,
+                                backgroundColor: color,
                                 strokeWidth: 2,
                               ),
                             )

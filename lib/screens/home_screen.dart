@@ -70,7 +70,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white54,
         actions: [
           Container(
             margin: const EdgeInsets.only(right: 16.0),

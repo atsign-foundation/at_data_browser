@@ -1,11 +1,12 @@
 import 'dart:convert';
 
 import 'package:at_client_mobile/at_client_mobile.dart';
-import 'package:at_data_browser/controllers/at_data_controller.dart';
 import 'package:at_data_browser/controllers/at_data_expansion_panel_controller.dart';
 import 'package:at_data_browser/utils/sizes.dart';
 import 'package:at_data_browser/widgets/at_data_expansion_panel_body.dart';
+import 'package:at_data_browser/widgets/delete_alert_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../domain.dart/at_data.dart';
@@ -15,12 +16,10 @@ class AtDataExpansionPanelList extends ConsumerStatefulWidget {
   final AtData atData;
 
   @override
-  ConsumerState<AtDataExpansionPanelList> createState() =>
-      _AtDataExpansionPanelListState();
+  ConsumerState<AtDataExpansionPanelList> createState() => _AtDataExpansionPanelListState();
 }
 
-class _AtDataExpansionPanelListState
-    extends ConsumerState<AtDataExpansionPanelList> {
+class _AtDataExpansionPanelListState extends ConsumerState<AtDataExpansionPanelList> {
   List<bool> isExpandPanel = [false, false, false];
 
   bool isDeletable(String key) {
@@ -42,15 +41,13 @@ class _AtDataExpansionPanelListState
       });
       return data;
     } catch (e) {
-      return [
-        AtDataProperty(
-            title: 'Value', value: widget.atData.atValue.value.toString())
-      ];
+      return [AtDataProperty(title: 'Value', value: widget.atData.atValue.value.toString())];
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
       child: Column(
@@ -70,19 +67,21 @@ class _AtDataExpansionPanelListState
                 canTapOnHeader: true,
                 backgroundColor: Colors.transparent,
                 headerBuilder: (BuildContext context, bool isExpanded) {
-                  return Container(
-                    alignment: Alignment.centerLeft,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: ref
-                          .watch(atDataExpansionPanelModelProvider)
-                          .primaryColor,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 16.0),
-                      child: Text(
-                        'atKey',
-                        style: Theme.of(context).textTheme.titleSmall,
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: Sizes.p16),
+                    child: Container(
+                      height: 40,
+                      alignment: Alignment.centerLeft,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: ref.watch(atDataExpansionPanelModelProvider).primaryColor,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: Text(
+                          'atKey',
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ),
                       ),
                     ),
                   );
@@ -129,19 +128,21 @@ class _AtDataExpansionPanelListState
                 canTapOnHeader: true,
                 backgroundColor: Colors.transparent,
                 headerBuilder: (BuildContext context, bool isExpanded) {
-                  return Container(
-                    alignment: Alignment.centerLeft,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: ref
-                          .watch(atDataExpansionPanelModelProvider)
-                          .primaryColor,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 16.0),
-                      child: Text(
-                        'metadata',
-                        style: Theme.of(context).textTheme.titleSmall,
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: Sizes.p16),
+                    child: Container(
+                      height: Sizes.p40,
+                      alignment: Alignment.centerLeft,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: ref.watch(atDataExpansionPanelModelProvider).primaryColor,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: Text(
+                          'metadata',
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ),
                       ),
                     ),
                   );
@@ -174,8 +175,7 @@ class _AtDataExpansionPanelListState
                     ),
                     AtDataProperty(
                       title: 'availableAt',
-                      value:
-                          widget.atData.atKey.metadata!.availableAt.toString(),
+                      value: widget.atData.atKey.metadata!.availableAt.toString(),
                     ),
                     AtDataProperty(
                       title: 'expiresAt',
@@ -199,8 +199,7 @@ class _AtDataExpansionPanelListState
                     ),
                     AtDataProperty(
                       title: 'isEncrypted',
-                      value:
-                          widget.atData.atKey.metadata!.isEncrypted.toString(),
+                      value: widget.atData.atKey.metadata!.isEncrypted.toString(),
                     ),
                     AtDataProperty(
                       title: 'isCached',
@@ -208,18 +207,15 @@ class _AtDataExpansionPanelListState
                     ),
                     AtDataProperty(
                       title: 'dataSignature',
-                      value: widget.atData.atKey.metadata!.dataSignature
-                          .toString(),
+                      value: widget.atData.atKey.metadata!.dataSignature.toString(),
                     ),
                     AtDataProperty(
                       title: 'sharedKeyStatus',
-                      value: widget.atData.atKey.metadata!.sharedKeyStatus
-                          .toString(),
+                      value: widget.atData.atKey.metadata!.sharedKeyStatus.toString(),
                     ),
                     AtDataProperty(
                       title: 'sharedKeyEnc',
-                      value:
-                          widget.atData.atKey.metadata!.sharedKeyEnc.toString(),
+                      value: widget.atData.atKey.metadata!.sharedKeyEnc.toString(),
                     ),
                     AtDataProperty(
                       title: 'pubKeyCS',
@@ -231,8 +227,7 @@ class _AtDataExpansionPanelListState
                     ),
                     AtDataProperty(
                       title: 'encKeyName',
-                      value:
-                          widget.atData.atKey.metadata!.encKeyName.toString(),
+                      value: widget.atData.atKey.metadata!.encKeyName.toString(),
                     ),
                     AtDataProperty(
                       title: 'encAlgo',
@@ -244,13 +239,11 @@ class _AtDataExpansionPanelListState
                     ),
                     AtDataProperty(
                       title: 'skeEncKeyName',
-                      value: widget.atData.atKey.metadata!.skeEncKeyName
-                          .toString(),
+                      value: widget.atData.atKey.metadata!.skeEncKeyName.toString(),
                     ),
                     AtDataProperty(
                       title: 'skeEncAlgo',
-                      value:
-                          widget.atData.atKey.metadata!.skeEncAlgo.toString(),
+                      value: widget.atData.atKey.metadata!.skeEncAlgo.toString(),
                     ),
                   ],
                 ),
@@ -260,19 +253,21 @@ class _AtDataExpansionPanelListState
                 canTapOnHeader: true,
                 backgroundColor: Colors.transparent,
                 headerBuilder: (BuildContext context, bool isExpanded) {
-                  return Container(
-                    alignment: Alignment.centerLeft,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: ref
-                          .watch(atDataExpansionPanelModelProvider)
-                          .primaryColor,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 16.0),
-                      child: Text(
-                        'atValue',
-                        style: Theme.of(context).textTheme.titleSmall,
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: Sizes.p24),
+                    child: Container(
+                      height: Sizes.p40,
+                      alignment: Alignment.centerLeft,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: ref.watch(atDataExpansionPanelModelProvider).primaryColor,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: Text(
+                          'atValue',
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ),
                       ),
                     ),
                   );
@@ -286,17 +281,23 @@ class _AtDataExpansionPanelListState
           isDeletable(widget.atData.atKey.toString())
               ? ElevatedButton(
                   onPressed: () async {
-                    await ref
-                        .read(atDataControllerProvider.notifier)
-                        .delete(widget.atData);
+                    showDialog<void>(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context) => DeleteAlertDialog(
+                        atData: widget.atData,
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,
-                    // shape: RoundedRectangleBorder(
-                    //   borderRadius: BorderRadius.circular(5),
-                    // ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(Sizes.p52),
+                    ),
                   ),
-                  child: const Text('Delete'),
+                  child: Text(
+                    strings.deleteButton,
+                  ),
                 )
               : gap0,
         ],

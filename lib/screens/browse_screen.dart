@@ -91,11 +91,8 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
                   strings.itemsStored,
                 ),
                 state.isLoading
-                    ? const Expanded(
-                        child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        color: kBrowserColor,
-                      ))
+                    ? Text(strings.itemsStored,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: kDataStorageColor))
                     : Text(state.value!.length.toString(), style: Theme.of(context).textTheme.bodyMedium!)
               ],
             ),
@@ -108,7 +105,8 @@ class _DataStorageScreenState extends ConsumerState<BrowseScreen> {
           ...searchForms,
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: Sizes.p32),
-            child: searchRequest.isNotEmpty
+            // onlys show filter button if search request contains a value and the last value is not null.
+            child: searchRequest.isNotEmpty && searchRequest.last != null
                 ? Row(children: [
                     const Expanded(
                       child: Divider(
